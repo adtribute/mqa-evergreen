@@ -9,22 +9,22 @@ var pseudoSelectors = {};
 var internalStyles = {};
 var Icon = /*#__PURE__*/forwardRef(function Icon(_ref, ref) {
   var className = _ref.className,
-    _ref$color = _ref.color,
-    color = _ref$color === void 0 ? 'currentColor' : _ref$color,
-    name = _ref.name,
-    _ref$size = _ref.size,
-    size = _ref$size === void 0 ? 16 : _ref$size,
-    svgPaths16 = _ref.svgPaths16,
-    svgPaths20 = _ref.svgPaths20,
-    title = _ref.title,
-    svgProps = _objectWithoutProperties(_ref, _excluded);
+      _ref$color = _ref.color,
+      color = _ref$color === void 0 ? 'currentColor' : _ref$color,
+      name = _ref.name,
+      _ref$size = _ref.size,
+      size = _ref$size === void 0 ? 16 : _ref$size,
+      svgPaths16 = _ref.svgPaths16,
+      svgPaths20 = _ref.svgPaths20,
+      title = _ref.title,
+      svgProps = _objectWithoutProperties(_ref, _excluded);
+
   var themedProps = useStyleConfig('Icon', {
     color: color
   }, pseudoSelectors, internalStyles);
   var SIZE_STANDARD = 16;
-  var SIZE_LARGE = 20;
+  var SIZE_LARGE = 20; // Choose which pixel grid is most appropriate for given icon size
 
-  // Choose which pixel grid is most appropriate for given icon size
   var pixelGridSize = size >= SIZE_LARGE ? SIZE_LARGE : SIZE_STANDARD;
   var pathStrings = pixelGridSize === SIZE_STANDARD ? svgPaths16 : svgPaths20;
   var paths = pathStrings.map(function (d, i) {
@@ -56,20 +56,24 @@ Icon.propTypes = {
    * Only use if you know what you are doing.
    */
   className: PropTypes.string,
+
   /**
    * Color of icon. Equivalent to setting CSS `fill` property.
    */
   color: PropTypes.string,
+
   /**
    * Size of the icon, in pixels.
    * Blueprint contains 16px and 20px SVG icon images,
    * and chooses the appropriate resolution based on this prop.
    */
   size: PropTypes.number,
+
   /**
    * Name of the icon
    */
   name: PropTypes.string,
+
   /**
    * Description string.
    * Browsers usually render this as a tooltip on hover, whereas screen

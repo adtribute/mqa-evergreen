@@ -28,9 +28,11 @@ var colorMap = {
     current: 'colors.green100'
   }
 };
+
 var getBackgroundForIntentAndState = function getBackgroundForIntentAndState(intent, state) {
   return colorMap[intent][state];
 };
+
 var baseStyle = {
   outline: 'none',
   textDecoration: 'none',

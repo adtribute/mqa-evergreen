@@ -3,7 +3,6 @@
  * backwards-compat height behavior with the previous Evergreen.
  * @param {number} height
  */
-
 var text = {
   500: {
     fontSize: '16px',

@@ -2,9 +2,12 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["fill", "size"],
-  _excluded2 = ["id", "name", "label", "disabled", "isInvalid", "checked", "onChange", "value", "size", "isRequired", "appearance"];
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+    _excluded2 = ["id", "name", "label", "disabled", "isInvalid", "checked", "onChange", "value", "size", "isRequired", "appearance"];
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box, { spacing, position, layout, dimensions } from 'ui-box';
@@ -12,9 +15,10 @@ import { useStyleConfig } from '../../hooks';
 import { Text } from '../../typography';
 var CircleIcon = /*#__PURE__*/memo(function CircleIcon(_ref) {
   var _ref$fill = _ref.fill,
-    fill = _ref$fill === void 0 ? 'currentColor' : _ref$fill,
-    size = _ref.size,
-    props = _objectWithoutProperties(_ref, _excluded);
+      fill = _ref$fill === void 0 ? 'currentColor' : _ref$fill,
+      size = _ref.size,
+      props = _objectWithoutProperties(_ref, _excluded);
+
   return /*#__PURE__*/React.createElement("svg", _extends({
     width: size,
     height: size,
@@ -30,7 +34,9 @@ CircleIcon.propTypes = {
   fill: PropTypes.string,
   size: PropTypes.number
 };
+
 var noop = function noop() {};
+
 var pseudoSelectors = {
   _base: '& + div',
   _disabled: '&[disabled] + div',
@@ -62,24 +68,25 @@ var internalStyles = {
     cursor: 'pointer'
   })
 };
-var Radio = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Radio(props, ref) {
+var Radio = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Radio(props, ref) {
   var id = props.id,
-    name = props.name,
-    label = props.label,
-    disabled = props.disabled,
-    _props$isInvalid = props.isInvalid,
-    isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
-    checked = props.checked,
-    _props$onChange = props.onChange,
-    onChange = _props$onChange === void 0 ? noop : _props$onChange,
-    value = props.value,
-    _props$size = props.size,
-    size = _props$size === void 0 ? 12 : _props$size,
-    _props$isRequired = props.isRequired,
-    isRequired = _props$isRequired === void 0 ? false : _props$isRequired,
-    _props$appearance = props.appearance,
-    appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
-    rest = _objectWithoutProperties(props, _excluded2);
+      name = props.name,
+      label = props.label,
+      disabled = props.disabled,
+      _props$isInvalid = props.isInvalid,
+      isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
+      checked = props.checked,
+      _props$onChange = props.onChange,
+      onChange = _props$onChange === void 0 ? noop : _props$onChange,
+      value = props.value,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 12 : _props$size,
+      _props$isRequired = props.isRequired,
+      isRequired = _props$isRequired === void 0 ? false : _props$isRequired,
+      _props$appearance = props.appearance,
+      appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
+      rest = _objectWithoutProperties(props, _excluded2);
+
   var themedProps = useStyleConfig('Radio', {
     appearance: appearance
   }, pseudoSelectors, internalStyles);
@@ -125,18 +132,22 @@ Radio.propTypes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objec
    * The id attribute of the radio.
    */
   id: PropTypes.string,
+
   /**
    * The name attribute of the radio.
    */
   name: PropTypes.string,
+
   /**
    * Label of the radio.
    */
   label: PropTypes.node,
+
   /**
    * The value attribute of the radio.
    */
   value: PropTypes.string,
+
   /**
    * Function called when state changes
    * Signature:
@@ -145,27 +156,33 @@ Radio.propTypes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objec
    * ```
    */
   onChange: PropTypes.func,
+
   /**
    * When true, the radio is disabled.
    */
   disabled: PropTypes.bool,
+
   /**
    * When true, the radio is checked.
    */
   checked: PropTypes.bool,
+
   /**
    * The size of the radio circle. This also informs the text size and spacing.
    */
   size: PropTypes.oneOf([12, 16]),
+
   /**
    * When true, the radio get the required attribute.
    */
   isRequired: PropTypes.bool,
+
   /**
    * When true, the aria-invalid attribute is true.
    * Used for accessibility.
    */
   isInvalid: PropTypes.bool,
+
   /**
    * The appearance of the checkbox.
    * The default theme only comes with a default style.

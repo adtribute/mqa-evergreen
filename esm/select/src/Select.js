@@ -2,8 +2,11 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["appearance", "aria-describedby", "autoFocus", "children", "defaultValue", "disabled", "height", "id", "isInvalid", "name", "onChange", "required", "value"];
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box, { dimensions, spacing, position, layout } from 'ui-box';
@@ -30,30 +33,34 @@ var pseudoSelectors = {
   _focus: '&:not([disabled]):focus',
   _active: '&:not([disabled]):active'
 };
+
 var getIconSizeForSelect = function getIconSizeForSelect(height) {
   if (height <= 28) return 12;
   if (height <= 32) return 14; // Slightly bigger than getIconSizeForButton
+
   if (height <= 40) return 16;
   if (height <= 48) return 18;
   return 20;
 };
-var Select = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Select(props, ref) {
+
+var Select = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Select(props, ref) {
   var _props$appearance = props.appearance,
-    appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
-    ariaDescribedby = props['aria-describedby'],
-    autoFocus = props.autoFocus,
-    children = props.children,
-    defaultValue = props.defaultValue,
-    disabled = props.disabled,
-    heightProp = props.height,
-    id = props.id,
-    _props$isInvalid = props.isInvalid,
-    isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
-    name = props.name,
-    onChange = props.onChange,
-    required = props.required,
-    value = props.value,
-    restProps = _objectWithoutProperties(props, _excluded);
+      appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
+      ariaDescribedby = props['aria-describedby'],
+      autoFocus = props.autoFocus,
+      children = props.children,
+      defaultValue = props.defaultValue,
+      disabled = props.disabled,
+      heightProp = props.height,
+      id = props.id,
+      _props$isInvalid = props.isInvalid,
+      isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
+      name = props.name,
+      onChange = props.onChange,
+      required = props.required,
+      value = props.value,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   var themedProps = useStyleConfig('Select', {
     appearance: appearance,
     size: restProps.size || 'medium'
@@ -100,38 +107,47 @@ Select.propTypes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_obje
    * The id attribute for the select.
    */
   id: PropTypes.string,
+
   /**
    * The name attribute for the select.
    */
   name: PropTypes.string,
+
   /**
    * The options that are passed to the select.
    */
   children: PropTypes.node,
+
   /**
    * The initial value of an uncontrolled select
    */
   defaultValue: PropTypes.any,
+
   /**
    * Function called when value changes.
    */
   onChange: PropTypes.func,
+
   /**
    * The value of the select.
    */
   value: PropTypes.any,
+
   /**
    * When true, the select is required.
    */
   required: PropTypes.bool,
+
   /**
    * When true, the select should auto focus.
    */
   autoFocus: PropTypes.bool,
+
   /**
    * When true, the select is invalid.
    */
   isInvalid: PropTypes.bool,
+
   /**
    * The appearance of the select. The default theme only supports default.
    */

@@ -10,9 +10,10 @@ import getPosition from './getPosition';
 var animationEasing = {
   spring: 'cubic-bezier(0.175, 0.885, 0.320, 1.175)'
 };
+
 var getCSS = function getCSS(_ref) {
   var animationDuration = _ref.animationDuration,
-    initialScale = _ref.initialScale;
+      initialScale = _ref.initialScale;
   return {
     position: 'fixed',
     transitionTimingFunction: animationEasing.spring,
@@ -32,7 +33,9 @@ var getCSS = function getCSS(_ref) {
     }
   };
 };
+
 var noop = function noop() {};
+
 var initialDimensions = {
   left: 0,
   top: 0,
@@ -42,26 +45,28 @@ var initialDimensions = {
 };
 var Positioner = /*#__PURE__*/memo(function Positioner(props) {
   var target = props.target,
-    isShown = props.isShown,
-    children = props.children,
-    _props$initialScale = props.initialScale,
-    initialScale = _props$initialScale === void 0 ? 0.9 : _props$initialScale,
-    _props$animationDurat = props.animationDuration,
-    animationDuration = _props$animationDurat === void 0 ? 300 : _props$animationDurat,
-    _props$position = props.position,
-    position = _props$position === void 0 ? Position.BOTTOM : _props$position,
-    _props$bodyOffset = props.bodyOffset,
-    bodyOffset = _props$bodyOffset === void 0 ? 6 : _props$bodyOffset,
-    _props$targetOffset = props.targetOffset,
-    targetOffset = _props$targetOffset === void 0 ? 6 : _props$targetOffset,
-    _props$onOpenComplete = props.onOpenComplete,
-    onOpenComplete = _props$onOpenComplete === void 0 ? noop : _props$onOpenComplete,
-    _props$onCloseComplet = props.onCloseComplete,
-    onCloseComplete = _props$onCloseComplet === void 0 ? noop : _props$onCloseComplet;
+      isShown = props.isShown,
+      children = props.children,
+      _props$initialScale = props.initialScale,
+      initialScale = _props$initialScale === void 0 ? 0.9 : _props$initialScale,
+      _props$animationDurat = props.animationDuration,
+      animationDuration = _props$animationDurat === void 0 ? 300 : _props$animationDurat,
+      _props$position = props.position,
+      position = _props$position === void 0 ? Position.BOTTOM : _props$position,
+      _props$bodyOffset = props.bodyOffset,
+      bodyOffset = _props$bodyOffset === void 0 ? 6 : _props$bodyOffset,
+      _props$targetOffset = props.targetOffset,
+      targetOffset = _props$targetOffset === void 0 ? 6 : _props$targetOffset,
+      _props$onOpenComplete = props.onOpenComplete,
+      onOpenComplete = _props$onOpenComplete === void 0 ? noop : _props$onOpenComplete,
+      _props$onCloseComplet = props.onCloseComplete,
+      onCloseComplete = _props$onCloseComplet === void 0 ? noop : _props$onCloseComplet;
+
   var _useState = useState(initialDimensions),
-    _useState2 = _slicedToArray(_useState, 2),
-    dimensions = _useState2[0],
-    setDimensions = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      dimensions = _useState2[0],
+      setDimensions = _useState2[1];
+
   var previousDimensions = usePrevious(dimensions, initialDimensions);
   var latestAnimationFrame = useRef();
   var transitionState = useRef();
@@ -79,13 +84,13 @@ var Positioner = /*#__PURE__*/memo(function Positioner(props) {
     var viewportWidth = document.documentElement.clientWidth;
     var height;
     var width;
+
     if (hasEntered) {
       // Only when the animation is done should we opt-in to `getBoundingClientRect`
-      var positionerRect = positionerRef.current.getBoundingClientRect();
-
-      // https://github.com/segmentio/evergreen/issues/255
+      var positionerRect = positionerRef.current.getBoundingClientRect(); // https://github.com/segmentio/evergreen/issues/255
       // We need to ceil the width and height to prevent jitter when
       // the window is zoomed (when `window.devicePixelRatio` is not an integer)
+
       height = Math.round(positionerRect.height);
       width = Math.round(positionerRect.width);
     } else {
@@ -96,22 +101,24 @@ var Positioner = /*#__PURE__*/memo(function Positioner(props) {
       height = Math.max(positionerRef.current.offsetHeight, prevHeight);
       width = Math.max(positionerRef.current.offsetWidth, prevWidth);
     }
+
     var _getPosition = getPosition({
-        position: position,
-        targetRect: targetRect,
-        targetOffset: targetOffset,
-        dimensions: {
-          height: height,
-          width: width
-        },
-        viewport: {
-          width: viewportWidth,
-          height: viewportHeight
-        },
-        viewportOffset: bodyOffset
-      }),
-      rect = _getPosition.rect,
-      transformOrigin = _getPosition.transformOrigin;
+      position: position,
+      targetRect: targetRect,
+      targetOffset: targetOffset,
+      dimensions: {
+        height: height,
+        width: width
+      },
+      viewport: {
+        width: viewportWidth,
+        height: viewportHeight
+      },
+      viewportOffset: bodyOffset
+    }),
+        rect = _getPosition.rect,
+        transformOrigin = _getPosition.transformOrigin;
+
     setDimensions({
       left: rect.left,
       top: rect.top,
@@ -119,39 +126,44 @@ var Positioner = /*#__PURE__*/memo(function Positioner(props) {
       width: width,
       transformOrigin: transformOrigin
     });
-  }, [bodyOffset, isShown, position, targetOffset]);
-
-  // Call `update` whenever the component has "entered" and dimensions change
+  }, [bodyOffset, isShown, position, targetOffset]); // Call `update` whenever the component has "entered" and dimensions change
   // additionally, when there are dynamic children
+
   useEffect(function () {
     if (transitionState.current === 'entered') {
       latestAnimationFrame.current = requestAnimationFrame(function () {
         update(previousDimensions.height, previousDimensions.width);
       });
     }
+
     return function () {
       if (latestAnimationFrame.current) {
         cancelAnimationFrame(latestAnimationFrame.current);
       }
     };
   }, [previousDimensions.height, previousDimensions.width, update, children]);
+
   var handleEntering = function handleEntering() {
     transitionState.current = 'entering';
     update();
   };
+
   var handleEnter = function handleEnter() {
     transitionState.current = 'entered';
     update();
   };
+
   var handleExited = function handleExited() {
     transitionState.current = 'exited';
     setDimensions(initialDimensions);
     onCloseComplete();
   };
+
   useEffect(function () {
     var handleResizeOrScroll = function handleResizeOrScroll() {
       return update();
     };
+
     window.addEventListener('resize', handleResizeOrScroll);
     window.addEventListener('scroll', handleResizeOrScroll);
     return function () {
@@ -203,39 +215,48 @@ Positioner.propTypes = {
    * Smart positioning might override this.
    */
   position: PropTypes.oneOf([Position.TOP, Position.TOP_LEFT, Position.TOP_RIGHT, Position.BOTTOM, Position.BOTTOM_LEFT, Position.BOTTOM_RIGHT, Position.LEFT, Position.RIGHT]),
+
   /**
    * When true, show the element being positioned.
    */
   isShown: PropTypes.bool,
+
   /**
    * Function that returns the element being positioned.
    */
   children: PropTypes.func.isRequired,
+
   /**
    * The minimum distance from the body to the element being positioned.
    */
   bodyOffset: PropTypes.number,
+
   /**
    * The minimum distance from the target to the element being positioned.
    */
   targetOffset: PropTypes.number,
+
   /**
    * Function that should return a node for the target.
    * ({ getRef: () -> Ref, isShown: Bool }) -> React Node
    */
   target: PropTypes.func.isRequired,
+
   /**
    * Initial scale of the element being positioned.
    */
   initialScale: PropTypes.number,
+
   /**
    * Duration of the animation.
    */
   animationDuration: PropTypes.number,
+
   /**
    * Function that will be called when the exit transition is complete.
    */
   onCloseComplete: PropTypes.func,
+
   /**
    * Function that will be called when the enter transition is complete.
    */

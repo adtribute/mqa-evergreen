@@ -5,9 +5,11 @@ import { majorScale } from '../../scales';
 import { Table } from '../../table';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+
 var TableWithLinkExample = function TableWithLinkExample() {
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   return /*#__PURE__*/React.createElement(Pane, {
     marginBottom: majorScale(8)
   }, /*#__PURE__*/React.createElement(Table, {
@@ -30,5 +32,6 @@ var TableWithLinkExample = function TableWithLinkExample() {
     }, "Learn more about compute time.")
   }))));
 };
+
 TableWithLinkExample.displayName = "TableWithLinkExample";
 export default TableWithLinkExample;

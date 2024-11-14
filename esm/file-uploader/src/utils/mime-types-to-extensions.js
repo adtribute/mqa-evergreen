@@ -1,6 +1,5 @@
 import hasValue from '../../../lib/has-value';
 import mimeTypeToExtension from './mime-type-to-extension';
-
 /**
  * Returns the corresponding file extensions from the provided MimeTypes.
  *
@@ -10,8 +9,10 @@ import mimeTypeToExtension from './mime-type-to-extension';
  * @param {string[]} mimeTypes
  * @returns {string[]} Mapped file extensions each MimeType
  */
+
 var mimeTypesToExtensions = function mimeTypesToExtensions(mimeTypes) {
   var extensions = mimeTypes.map(mimeTypeToExtension);
   return extensions.filter(hasValue);
 };
+
 export default mimeTypesToExtensions;

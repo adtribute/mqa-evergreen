@@ -5,12 +5,13 @@ import React, { memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from '../../image';
 import Option from '../../select-menu/src/Option';
-var AutocompleteItem = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function AutocompleteItem(props, ref) {
+var AutocompleteItem = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function AutocompleteItem(props, ref) {
   var children = props.children,
-    isHighlighted = props.isHighlighted,
-    isSelected = props.isSelected,
-    style = props.style,
-    restProps = _objectWithoutProperties(props, _excluded);
+      isHighlighted = props.isHighlighted,
+      isSelected = props.isSelected,
+      style = props.style,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   return /*#__PURE__*/React.createElement(Option, _extends({
     ref: ref,
     isHighlighted: isHighlighted,

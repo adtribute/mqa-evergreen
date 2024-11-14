@@ -14,19 +14,20 @@ SelectAppearances["default"] = Themer.createSelectAppearance({
   focus: defaultControlStyles.focus,
   active: defaultControlStyles.active
 });
-
 /**
  * Get the appearance of a `Select`.
  * @param {string} appearance
  * @return {string} the appearance object.
  */
+
 var getSelectAppearance = function getSelectAppearance() {
   return SelectAppearances["default"];
 };
-
 /**
  * Get the className of a `Select`.
  * @param {string} appearance
  * @return {string} the appearance class name.
  */
+
+
 export default memoizeClassName(getSelectAppearance);

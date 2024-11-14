@@ -29,55 +29,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const prop_types_1 = __importDefault(require("prop-types"));
 const react_transition_group_1 = require("react-transition-group");
-const ui_box_1 = __importStar(require("ui-box"));
+const ui_box_1 = __importDefault(require("ui-box"));
 const Alert_1 = __importDefault(require("../../alert/src/Alert"));
-const animationEasing = {
-    deceleration: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
-    acceleration: 'cubic-bezier(0.4, 0.0, 1, 1)',
-    spring: 'cubic-bezier(0.175, 0.885, 0.320, 1.175)'
-};
 const ANIMATION_DURATION = 240;
-const openAnimation = (0, ui_box_1.keyframes)('openAnimation', {
-    from: {
-        opacity: 0,
-        transform: 'translateY(-120%)'
-    },
-    to: {
-        transform: 'translateY(0)'
-    }
-});
-const closeAnimation = (0, ui_box_1.keyframes)('closeAnimation', {
-    from: {
-        transform: 'scale(1)',
-        opacity: 1
-    },
-    to: {
-        transform: 'scale(0.9)',
-        opacity: 0
-    }
-});
-const enterAnimationProps = {
-    animationName: openAnimation,
-    animationDuration: ANIMATION_DURATION,
-    animationTimingFunction: animationEasing.spring,
-    animationFillMode: 'both'
-};
-const animationStyles = {
+const defaultStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     height: 0,
-    transition: `all ${ANIMATION_DURATION}ms ${animationEasing.deceleration}`,
-    selectors: {
-        '&[data-state="entering"]': enterAnimationProps,
-        '&[data-state="entered"]': enterAnimationProps,
-        '&[data-state="exiting"]': {
-            animationName: closeAnimation,
-            animationDuration: 120,
-            animationTimingFunction: animationEasing.acceleration,
-            animationFillMode: 'both'
-        }
-    }
+    transform: 'scale(1)',
+    transition: `all ${ANIMATION_DURATION}ms cubic-bezier(0.0, 0.0, 0.2, 1)`,
+    opacity: 0
+};
+const transitionStyles = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0, transform: 'scale(1)' },
+    exited: { opacity: 0, transform: 'scale(0.9)' }
 };
 const Toast = (0, react_1.memo)(function Toast(props) {
     const { children, duration, hasCloseButton, 
@@ -129,7 +97,10 @@ const Toast = (0, react_1.memo)(function Toast(props) {
         zIndex,
         marginBottom: isShown ? 0 : -height
     }), [isShown, height, zIndex]);
-    return (react_1.default.createElement(react_transition_group_1.Transition, { nodeRef: transitionRef, appear: true, unmountOnExit: true, timeout: ANIMATION_DURATION, in: isShown, onExited: onRemove }, state => (react_1.default.createElement(ui_box_1.default, Object.assign({}, animationStyles, { ref: transitionRef, "data-state": state, onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave }, styles),
+    return (react_1.default.createElement(react_transition_group_1.Transition, { nodeRef: transitionRef, appear: true, unmountOnExit: true, timeout: ANIMATION_DURATION, in: isShown, onExited: onRemove }, state => (react_1.default.createElement(ui_box_1.default, { ref: transitionRef, "data-state": state || 'entered', onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave, 
+        // Styles object needs to be spread after defaultStyles, otherwise the height/zIndex is overridden
+        // and earlier toasts will not be pushed down in the viewport
+        style: Object.assign(Object.assign(Object.assign({}, defaultStyles), transitionStyles[state]), styles) },
         react_1.default.createElement(ui_box_1.default, { ref: onRef, padding: 8 },
             react_1.default.createElement(Alert_1.default, { flexShrink: 0, appearance: "card", elevation: 3, intent: intent, title: title, isRemoveable: hasCloseButton, onRemove: close, pointerEvents: "all" }, children))))));
 });

@@ -58,26 +58,29 @@ InputAppearances.none = Themer.createInputAppearance({
     backgroundColor: scales.neutral.N2
   }
 });
-
 /**
  * Get the appearance of a `TextInput`.
  * @param {string} appearance - the appearance name
  * @return {Object} the appearance object.
  */
+
 var getTextInputAppearance = function getTextInputAppearance(appearance) {
   switch (appearance) {
     case 'neutral':
       return InputAppearances.neutral;
+
     case 'none':
       return InputAppearances.none;
+
     default:
       return InputAppearances["default"];
   }
 };
-
 /**
  * Get the className of a `TextInput`.
  * @param {string} appearance - the appearance name
  * @return {string} the appearance class name.
  */
+
+
 export default memoizeClassName(getTextInputAppearance);

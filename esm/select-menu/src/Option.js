@@ -1,7 +1,7 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["children", "disabled", "height", "isHighlighted", "isSelectable", "isSelected", "item", "onDeselect", "onSelect", "style"],
-  _excluded2 = ["style"];
+    _excluded2 = ["style"];
 import React, { memo, forwardRef } from 'react';
 import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
@@ -23,21 +23,23 @@ var internalStyles = {
   display: 'flex'
 };
 var emptyObject = {};
-var Option = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Option(props, ref) {
+var Option = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Option(props, ref) {
   var children = props.children,
-    disabled = props.disabled,
-    height = props.height,
-    isHighlighted = props.isHighlighted,
-    isSelectable = props.isSelectable,
-    isSelected = props.isSelected,
-    item = props.item,
-    onDeselect = props.onDeselect,
-    onSelect = props.onSelect,
-    styleProp = props.style,
-    rest = _objectWithoutProperties(props, _excluded);
+      disabled = props.disabled,
+      height = props.height,
+      isHighlighted = props.isHighlighted,
+      isSelectable = props.isSelectable,
+      isSelected = props.isSelected,
+      item = props.item,
+      onDeselect = props.onDeselect,
+      onSelect = props.onSelect,
+      styleProp = props.style,
+      rest = _objectWithoutProperties(props, _excluded);
+
   var _useStyleConfig = useStyleConfig('Option', emptyObject, pseudoSelectors, internalStyles),
-    themedStyle = _useStyleConfig.style,
-    themedProps = _objectWithoutProperties(_useStyleConfig, _excluded2);
+      themedStyle = _useStyleConfig.style,
+      themedProps = _objectWithoutProperties(_useStyleConfig, _excluded2);
+
   var style = merge({}, styleProp, themedStyle);
   return /*#__PURE__*/React.createElement(TableRow, _extends({
     isSelectable: isSelectable && !disabled,

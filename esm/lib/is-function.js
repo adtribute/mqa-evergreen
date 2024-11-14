@@ -6,4 +6,5 @@
 var isFunction = function isFunction(maybeFunction) {
   return typeof maybeFunction === 'function';
 };
+
 export default isFunction;

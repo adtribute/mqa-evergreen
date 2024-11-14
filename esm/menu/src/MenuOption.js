@@ -6,27 +6,31 @@ import { TickIcon } from '../../icons';
 import { Pane } from '../../layers';
 import { pseudoSelectors } from '../../table/src/TableRow';
 import { Text } from '../../typography';
+
 var noop = function noop() {};
+
 var internalStyles = {
   display: 'flex',
   alignItems: 'center'
 };
 var MenuOption = /*#__PURE__*/memo(function MenuOption(props) {
   var id = props.id,
-    children = props.children,
-    _props$appearance = props.appearance,
-    appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
-    _props$onSelect = props.onSelect,
-    onSelect = _props$onSelect === void 0 ? noop : _props$onSelect,
-    secondaryText = props.secondaryText,
-    _props$isSelected = props.isSelected,
-    isSelected = _props$isSelected === void 0 ? false : _props$isSelected;
+      children = props.children,
+      _props$appearance = props.appearance,
+      appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
+      _props$onSelect = props.onSelect,
+      onSelect = _props$onSelect === void 0 ? noop : _props$onSelect,
+      secondaryText = props.secondaryText,
+      _props$isSelected = props.isSelected,
+      isSelected = _props$isSelected === void 0 ? false : _props$isSelected;
   var handleClick = useCallback(function (e) {
     return onSelect(e);
   }, [onSelect]);
+
   var _useClickable = useClickable(),
-    onKeyDown = _useClickable.onKeyDown,
-    tabIndex = _useClickable.tabIndex;
+      onKeyDown = _useClickable.onKeyDown,
+      tabIndex = _useClickable.tabIndex;
+
   var themedProps = useStyleConfig('MenuItem', {
     appearance: appearance
   }, pseudoSelectors, internalStyles);
@@ -66,22 +70,27 @@ MenuOption.propTypes = {
    * The id attribute of the menu option.
    */
   id: PropTypes.string,
+
   /**
    * Function that is called on click and enter/space keypress.
    */
   onSelect: PropTypes.func,
+
   /**
    * The icon before the label.
    */
   isSelected: PropTypes.bool,
+
   /**
    * The children of the component.
    */
   children: PropTypes.node,
+
   /**
    * Secondary text shown on the right.
    */
   secondaryText: PropTypes.node,
+
   /**
    * The default theme only supports one default appearance.
    */

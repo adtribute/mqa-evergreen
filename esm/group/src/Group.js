@@ -14,16 +14,17 @@ var pseudoSelectors = {
 var internalStyles = {
   display: 'inline-flex'
 };
-
 /**
  * Accessible `Group` component to identify a set of inputs/elements. Implements the WAI-ARIA Group Role
  * @see {@link https://www.w3.org/TR/wai-aria-1.1/#group}
  */
-var Group = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Group(props, ref) {
+
+var Group = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Group(props, ref) {
   var children = props.children,
-    className = props.className,
-    size = props.size,
-    restProps = _objectWithoutProperties(props, _excluded);
+      className = props.className,
+      size = props.size,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   var themedProps = useStyleConfig('Group', {
     size: size
   }, pseudoSelectors, internalStyles);
@@ -31,6 +32,7 @@ var Group = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Group(props, ref)
     if (! /*#__PURE__*/React.isValidElement(child)) {
       return child;
     }
+
     return /*#__PURE__*/React.cloneElement(child, {
       // Prefer more granularly defined props if present
       size: child.props.size || size
@@ -44,11 +46,13 @@ var Group = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Group(props, ref)
 }));
 Group.propTypes = {
   children: PropTypes.node.isRequired,
+
   /**
    * Class name passed to the component.
    * Only use if you know what you are doing.
    */
   className: PropTypes.string,
+
   /**
    * The size passed down to children (for consistency)
    */

@@ -5,5 +5,6 @@ var OptionShapePropType = PropTypes.shape({
   disabled: PropTypes.bool,
   // Optional
   icon: PropTypes.string // Optional
+
 });
 export default OptionShapePropType;

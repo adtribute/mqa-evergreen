@@ -19,19 +19,20 @@ TagInputAppearances["default"] = Themer.createTagInputAppearance({
     backgroundColor: scales.neutral.N2
   }
 });
-
 /**
  * Get the appearance of a `TagInput`.
  * @param {string} appearance - the appearance name
  * @return {Object} the appearance object.
  */
+
 var getTextInputAppearance = function getTextInputAppearance() {
   return TagInputAppearances["default"];
 };
-
 /**
  * Get the className of a `TagInput`.
  * @param {string} appearance - the appearance name
  * @return {string} the appearance class name.
  */
+
+
 export default memoizeClassName(getTextInputAppearance);

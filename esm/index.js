@@ -47,7 +47,7 @@ export { Textarea, TextareaField } from './textarea';
 export { toaster } from './toaster';
 export { Tooltip } from './tooltip';
 export { UnorderedList, Ul, OrderedList, Ol, ListItem, Li, Text, Paragraph, Heading, Code, Pre, Label, Link, Small, Strong } from './typography';
-
 /* Start generated icons */
+
 export * from './icons';
 /* End generated icons */

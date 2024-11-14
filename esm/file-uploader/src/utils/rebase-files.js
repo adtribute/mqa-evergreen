@@ -1,6 +1,5 @@
 import merge from 'lodash.merge';
 import splitFiles from './split-files';
-
 /**
  * @typedef {object} RebaseFilesOptions
  * @property {string[] | undefined} acceptedMimeTypes
@@ -22,9 +21,11 @@ import splitFiles from './split-files';
  * @param {RebaseFilesOptions | undefined} options
  * @returns {RebaseFilesResult}
  */
+
 var rebaseFiles = function rebaseFiles(files, options) {
   return splitFiles(files, merge({}, options !== null && options !== void 0 ? options : {}, {
     currentFileCount: null
   }));
 };
+
 export default rebaseFiles;

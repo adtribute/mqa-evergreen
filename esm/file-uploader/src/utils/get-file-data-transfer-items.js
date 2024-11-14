@@ -1,6 +1,5 @@
 import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import isEmpty from 'lodash.isempty';
-
 /**
  * Converts `DataTransferItemList` to an array of `DataTransferItem` objects filtered by the 'file' `kind`
  *
@@ -13,12 +12,15 @@ import isEmpty from 'lodash.isempty';
  * @param {DataTransferItemList} dataTransferList
  * @returns {DataTransferItem[]}
  */
+
 var getFileDataTransferItems = function getFileDataTransferItems(dataTransferList) {
   if (isEmpty(dataTransferList)) {
     return [];
   }
+
   return _toConsumableArray(dataTransferList).filter(function (dataTransferItem) {
     return dataTransferItem.kind === 'file';
   });
 };
+
 export default getFileDataTransferItems;

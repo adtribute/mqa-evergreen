@@ -8,9 +8,11 @@ import { Popover } from '../../popover';
 import { majorScale } from '../../scales';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+
 var SmallExample = function SmallExample(props) {
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   return /*#__PURE__*/React.createElement(Pane, {
     marginBottom: majorScale(20)
   }, /*#__PURE__*/React.createElement(Popover, _extends({}, props.popoverProps, {
@@ -32,6 +34,7 @@ var SmallExample = function SmallExample(props) {
     }))
   }), /*#__PURE__*/React.createElement(Button, null, "Trigger Popover")));
 };
+
 SmallExample.displayName = "SmallExample";
 SmallExample.propTypes = {
   popoverProps: PropTypes.any

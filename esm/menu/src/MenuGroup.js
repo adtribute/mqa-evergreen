@@ -4,7 +4,7 @@ import { Pane } from '../../layers';
 import { Heading } from '../../typography';
 var MenuGroup = /*#__PURE__*/memo(function MenuGroup(props) {
   var children = props.children,
-    title = props.title;
+      title = props.title;
   return /*#__PURE__*/React.createElement(Pane, {
     paddingY: 8
   }, title && /*#__PURE__*/React.createElement(Heading, {
@@ -18,6 +18,7 @@ MenuGroup.propTypes = {
    * Title of the menu group.
    */
   title: PropTypes.node,
+
   /**
    * The children of the menu group.
    */

@@ -4,8 +4,8 @@ import { StackingOrder } from '../../constants';
 import StackingContext from './StackingContext';
 var Stack = /*#__PURE__*/memo(function Stack(_ref) {
   var children = _ref.children,
-    _ref$value = _ref.value,
-    value = _ref$value === void 0 ? StackingOrder.STACKING_CONTEXT : _ref$value;
+      _ref$value = _ref.value,
+      value = _ref$value === void 0 ? StackingOrder.STACKING_CONTEXT : _ref$value;
   var previousValue = useContext(StackingContext);
   var currentValue = Math.max(value, previousValue);
   var nextValue = currentValue + 1;
@@ -19,6 +19,7 @@ Stack.propTypes = {
    * (zIndex) => ReactNode.
    */
   children: PropTypes.func.isRequired,
+
   /**
    * Set the value of the stack. This will increment for children.
    */
