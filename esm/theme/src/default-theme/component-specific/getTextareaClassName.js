@@ -63,26 +63,29 @@ Appearances.editableCell = Themer.createInputAppearance({
     backgroundColor: scales.neutral.N2
   }
 });
-
 /**
  * Get the appearance of a `TextInput`.
  * @param {string} appearance
  * @return {Object} the appearance object.
  */
+
 var getTextareaAppearance = function getTextareaAppearance(appearance) {
   switch (appearance) {
     case 'neutral':
       return Appearances.neutral;
+
     case 'editable-cell':
       return Appearances.editableCell;
+
     default:
       return Appearances["default"];
   }
 };
-
 /**
  * Get the className of a `TextInput`.
  * @param {string} appearance
  * @return {string} the appearance class name.
  */
+
+
 export default memoizeClassName(getTextareaAppearance);

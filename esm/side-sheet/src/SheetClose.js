@@ -2,15 +2,22 @@ import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
+import _inherits from "@babel/runtime/helpers/esm/inherits";
 import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _inherits from "@babel/runtime/helpers/esm/inherits";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 var _excluded = ["isClosing", "position"];
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+var _sheetCloseStyles;
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Box, { keyframes } from 'ui-box';
@@ -37,6 +44,7 @@ var sharedStyles = {
     }
   }
 };
+
 var withAnimations = function withAnimations(animateIn, animateOut) {
   var enterAnimation = {
     animation: "".concat(animateIn, " ").concat(ANIMATION_DURATION, "ms ").concat(animationEasing.deceleration, " both")
@@ -51,7 +59,8 @@ var withAnimations = function withAnimations(animateIn, animateOut) {
     }
   };
 };
-var sheetCloseStyles = _defineProperty(_defineProperty(_defineProperty(_defineProperty({}, Position.RIGHT, _objectSpread({
+
+var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty(_sheetCloseStyles, Position.RIGHT, _objectSpread({
   left: 0,
   marginLeft: -12,
   marginTop: 12,
@@ -70,7 +79,7 @@ var sheetCloseStyles = _defineProperty(_defineProperty(_defineProperty(_definePr
   to: {
     transform: 'translateX(100%) rotate(360deg)'
   }
-})))), Position.LEFT, _objectSpread({
+})))), _defineProperty(_sheetCloseStyles, Position.LEFT, _objectSpread({
   marginRight: -12,
   right: 0,
   marginTop: 12,
@@ -89,7 +98,7 @@ var sheetCloseStyles = _defineProperty(_defineProperty(_defineProperty(_definePr
   to: {
     transform: 'translateX(-100%), rotate(360deg)'
   }
-})))), Position.TOP, _objectSpread({
+})))), _defineProperty(_sheetCloseStyles, Position.TOP, _objectSpread({
   right: 0,
   marginRight: 12,
   top: '100%',
@@ -109,7 +118,7 @@ var sheetCloseStyles = _defineProperty(_defineProperty(_defineProperty(_definePr
   to: {
     transform: 'translateY(-200%), rotate(360deg)'
   }
-})))), Position.BOTTOM, _objectSpread({
+})))), _defineProperty(_sheetCloseStyles, Position.BOTTOM, _objectSpread({
   right: 0,
   marginRight: 12,
   bottom: '100%',
@@ -129,20 +138,27 @@ var sheetCloseStyles = _defineProperty(_defineProperty(_defineProperty(_definePr
   to: {
     transform: 'translateY(200%), rotate(360deg)'
   }
-}))));
+})))), _sheetCloseStyles);
+
 var SheetClose = /*#__PURE__*/function (_PureComponent) {
+  _inherits(SheetClose, _PureComponent);
+
+  var _super = _createSuper(SheetClose);
+
   function SheetClose() {
     _classCallCheck(this, SheetClose);
-    return _callSuper(this, SheetClose, arguments);
+
+    return _super.apply(this, arguments);
   }
-  _inherits(SheetClose, _PureComponent);
-  return _createClass(SheetClose, [{
+
+  _createClass(SheetClose, [{
     key: "render",
     value: function render() {
       var _this$props = this.props,
-        isClosing = _this$props.isClosing,
-        position = _this$props.position,
-        props = _objectWithoutProperties(_this$props, _excluded);
+          isClosing = _this$props.isClosing,
+          position = _this$props.position,
+          props = _objectWithoutProperties(_this$props, _excluded);
+
       return /*#__PURE__*/React.createElement(Box, _extends({
         width: 32,
         height: 32,
@@ -154,10 +170,15 @@ var SheetClose = /*#__PURE__*/function (_PureComponent) {
       }));
     }
   }]);
+
+  return SheetClose;
 }(PureComponent);
+
 SheetClose.displayName = "SheetClose";
+
 _defineProperty(SheetClose, "propTypes", _objectSpread(_objectSpread({}, Box.propTypes), {}, {
   isClosing: PropTypes.bool,
   position: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]).isRequired
 }));
+
 export { SheetClose as default };

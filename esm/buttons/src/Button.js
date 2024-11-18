@@ -2,8 +2,11 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["appearance", "children", "className", "color", "disabled", "iconAfter", "iconBefore", "intent", "is", "isActive", "isLoading"];
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box, { spacing, dimensions, position, layout } from 'ui-box';
@@ -11,13 +14,13 @@ import { useStyleConfig } from '../../hooks';
 import { IconWrapper } from '../../icons/src/IconWrapper';
 import { getTextPropsForControlHeight } from '../../lib/deprecated-theme-helpers';
 import { Spinner } from '../../spinner';
-
 /* eslint-disable react/prop-types */
+
 var ButtonIcon = /*#__PURE__*/memo(function ButtonIcon(_ref) {
   var edge = _ref.edge,
-    icon = _ref.icon,
-    size = _ref.size,
-    spacing = _ref.spacing;
+      icon = _ref.icon,
+      size = _ref.size,
+      spacing = _ref.spacing;
   if (!icon) return null;
   var relativeSpace = typeof spacing === 'number' ? spacing : size;
   var edgeMargin = -Math.round(relativeSpace * 0.25);
@@ -65,31 +68,32 @@ export var getIconSizeForButton = function getIconSizeForButton(height) {
   if (height <= 48) return 18;
   return 20;
 };
-var Button = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Button(props, ref) {
+var Button = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Button(props, ref) {
   var _props$appearance = props.appearance,
-    appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
-    children = props.children,
-    className = props.className,
-    color = props.color,
-    disabled = props.disabled,
-    iconAfter = props.iconAfter,
-    iconBefore = props.iconBefore,
-    _props$intent = props.intent,
-    intent = _props$intent === void 0 ? 'none' : _props$intent,
-    _props$is = props.is,
-    is = _props$is === void 0 ? 'button' : _props$is,
-    _props$isActive = props.isActive,
-    isActive = _props$isActive === void 0 ? false : _props$isActive,
-    isLoading = props.isLoading,
-    restProps = _objectWithoutProperties(props, _excluded);
+      appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
+      children = props.children,
+      className = props.className,
+      color = props.color,
+      disabled = props.disabled,
+      iconAfter = props.iconAfter,
+      iconBefore = props.iconBefore,
+      _props$intent = props.intent,
+      intent = _props$intent === void 0 ? 'none' : _props$intent,
+      _props$is = props.is,
+      is = _props$is === void 0 ? 'button' : _props$is,
+      _props$isActive = props.isActive,
+      isActive = _props$isActive === void 0 ? false : _props$isActive,
+      isLoading = props.isLoading,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   var themedProps = useStyleConfig('Button', {
     appearance: appearance,
     color: color,
     intent: intent,
     size: restProps.size || 'medium'
   }, pseudoSelectors, internalStyles);
-  var height = restProps.height || themedProps.height;
-  // Keep backwards compat font sizing if an explicit height was passed in.
+  var height = restProps.height || themedProps.height; // Keep backwards compat font sizing if an explicit height was passed in.
+
   var textProps = !restProps.size && restProps.height ? getTextPropsForControlHeight(restProps.height) : {};
   var iconSize = getIconSizeForButton(height);
   return /*#__PURE__*/React.createElement(Box, _extends({
@@ -120,37 +124,45 @@ Button.propTypes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_obje
    * The intent of the button.
    */
   intent: PropTypes.string,
+
   /**
    * The appearance of the button.
    */
   appearance: PropTypes.string,
+
   /**
    * The size of the button
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+
   /**
    * When true, show a loading spinner before the children.
    * This also disables the button.
    */
   isLoading: PropTypes.bool,
+
   /**
    * Forcefully set the active state of a button.
    * Useful in conjunction with a Popover.
    */
   isActive: PropTypes.bool,
+
   /**
    * Sets an icon before the text. Can be any icon from Evergreen or a custom element.
    */
   iconBefore: PropTypes.oneOfType([PropTypes.elementType, PropTypes.element]),
+
   /**
    * Sets an icon after the text. Can be any icon from Evergreen or a custom element.
    */
   iconAfter: PropTypes.oneOfType([PropTypes.elementType, PropTypes.element]),
+
   /**
    * When true, the button is disabled.
    * isLoading also sets the button to disabled.
    */
   disabled: PropTypes.bool,
+
   /**
    * Class name passed to the button.
    * Only use if you know what you are doing.

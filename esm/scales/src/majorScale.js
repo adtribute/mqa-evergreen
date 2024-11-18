@@ -10,5 +10,6 @@ export default function majorScale(x) {
   if (!Number.isInteger(x)) {
     throw new TypeError("majorScale only accepts integers as input, instead ".concat(x, " was passed."));
   }
+
   return x * 8;
 }

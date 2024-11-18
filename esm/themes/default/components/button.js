@@ -17,19 +17,24 @@ var baseStyle = {
     }
   }
 };
+
 var colorKeyForAppearanceOrIntent = function colorKeyForAppearanceOrIntent(appearance, intent) {
   if (appearance === 'destructive') {
     return 'red';
   }
+
   switch (intent) {
     case 'success':
       return 'green';
+
     case 'danger':
       return 'red';
+
     default:
       return 'blue';
   }
 };
+
 var colorKeyForIntent = function colorKeyForIntent(intent) {
   if (intent === 'danger') {
     return "red500";
@@ -39,6 +44,7 @@ var colorKeyForIntent = function colorKeyForIntent(intent) {
     return "gray800";
   }
 };
+
 var borderColorForIntent = function borderColorForIntent(intent, isHover) {
   if (intent === 'danger') {
     return "red".concat(isHover ? 500 : 300);
@@ -48,6 +54,7 @@ var borderColorForIntent = function borderColorForIntent(intent, isHover) {
     return "gray".concat(isHover ? 600 : 500);
   }
 };
+
 var getPrimaryButtonAppearance = function getPrimaryButtonAppearance(appearance, intent, textColor, theme) {
   var color = colorKeyForAppearanceOrIntent(appearance, intent);
   return {
@@ -75,11 +82,12 @@ var getPrimaryButtonAppearance = function getPrimaryButtonAppearance(appearance,
     }
   };
 };
+
 var appearances = {
   primary: function primary(theme, _ref2) {
     var appearance = _ref2.appearance,
-      color = _ref2.color,
-      intent = _ref2.intent;
+        color = _ref2.color,
+        intent = _ref2.intent;
     return getPrimaryButtonAppearance(appearance, intent, color, theme);
   },
   "default": {

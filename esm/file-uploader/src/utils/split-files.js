@@ -1,6 +1,5 @@
 import getAcceptedFiles from './get-accepted-files';
 import getFileRejections from './get-file-rejections';
-
 /**
  * @typedef {object} SplitFilesOptions
  * @property {string[] | undefined} acceptedMimeTypes
@@ -22,6 +21,7 @@ import getFileRejections from './get-file-rejections';
  * @param {SplitFilesOptions | undefined} options
  * @returns {SplitFilesResult}
  */
+
 var splitFiles = function splitFiles(files, options) {
   var accepted = getAcceptedFiles(files, options);
   var rejected = getFileRejections(files, options);
@@ -30,4 +30,5 @@ var splitFiles = function splitFiles(files, options) {
     rejected: rejected
   };
 };
+
 export default splitFiles;

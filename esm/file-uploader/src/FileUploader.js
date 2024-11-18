@@ -4,8 +4,11 @@ import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["acceptedMimeTypes", "browseOrDragText", "dragMaxFilesMessage", "description", "disabled", "hint", "isRequired", "label", "labelFor", "maxFiles", "maxSizeInBytes", "onAccepted", "onChange", "onRejected", "onRemove", "renderFile", "validationMessage", "values"];
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { memo, forwardRef, useState, useRef, useCallback } from 'react';
 import isEmpty from 'lodash.isempty';
 import PropTypes from 'prop-types';
@@ -45,53 +48,59 @@ var pseudoSelectors = {
   _invalid: invalidPseudoSelector
 };
 var internalStyles = {};
-var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, ref) {
+var FileUploader = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function (props, ref) {
   var acceptedMimeTypes = props.acceptedMimeTypes,
-    browseOrDragText = props.browseOrDragText,
-    _props$dragMaxFilesMe = props.dragMaxFilesMessage,
-    dragMaxFilesMessage = _props$dragMaxFilesMe === void 0 ? getMaxFilesMessage : _props$dragMaxFilesMe,
-    description = props.description,
-    _props$disabled = props.disabled,
-    disabled = _props$disabled === void 0 ? false : _props$disabled,
-    hint = props.hint,
-    isRequired = props.isRequired,
-    label = props.label,
-    labelFor = props.labelFor,
-    maxFiles = props.maxFiles,
-    maxSizeInBytes = props.maxSizeInBytes,
-    onAccepted = props.onAccepted,
-    onChange = props.onChange,
-    onRejected = props.onRejected,
-    onRemove = props.onRemove,
-    renderFile = props.renderFile,
-    validationMessageProp = props.validationMessage,
-    values = props.values,
-    rest = _objectWithoutProperties(props, _excluded);
+      browseOrDragText = props.browseOrDragText,
+      _props$dragMaxFilesMe = props.dragMaxFilesMessage,
+      dragMaxFilesMessage = _props$dragMaxFilesMe === void 0 ? getMaxFilesMessage : _props$dragMaxFilesMe,
+      description = props.description,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      hint = props.hint,
+      isRequired = props.isRequired,
+      label = props.label,
+      labelFor = props.labelFor,
+      maxFiles = props.maxFiles,
+      maxSizeInBytes = props.maxSizeInBytes,
+      onAccepted = props.onAccepted,
+      onChange = props.onChange,
+      onRejected = props.onRejected,
+      onRemove = props.onRemove,
+      renderFile = props.renderFile,
+      validationMessageProp = props.validationMessage,
+      values = props.values,
+      rest = _objectWithoutProperties(props, _excluded);
+
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   var themedProps = useStyleConfig('FileUploader', styleModifiers, pseudoSelectors, internalStyles);
+
   var _useState = useState(UploaderState.Initial),
-    _useState2 = _slicedToArray(_useState, 2),
-    state = _useState2[0],
-    setState = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      state = _useState2[0],
+      setState = _useState2[1];
+
   var _useState3 = useState(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    validationMessage = _useState4[0],
-    setValidationMessage = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      validationMessage = _useState4[0],
+      setValidationMessage = _useState4[1];
   /**
    * The underlying <input type="file" /> DOM element won't accept the same file after it has been
    * picked unless it is rerendered manually - if a user selects and removes a file, they should
    * still be able to pick it again without refreshing the page.
    * https://stackoverflow.com/a/45846251
    */
-  var _useState5 = useState(0),
-    _useState6 = _slicedToArray(_useState5, 2),
-    fileInputKey = _useState6[0],
-    setFileInputKey = _useState6[1];
-  var fileInputRef = useRef(null);
 
-  // If the dropzone is meant to be a single file input and we already have a file, don't render
+
+  var _useState5 = useState(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      fileInputKey = _useState6[0],
+      setFileInputKey = _useState6[1];
+
+  var fileInputRef = useRef(null); // If the dropzone is meant to be a single file input and we already have a file, don't render
   // the dropzone which will always result in rejected files/errors.
+
   var renderDropzone = maxFiles !== 1 || isEmpty(values);
   var resetState = useCallback(function () {
     setState(UploaderState.Initial);
@@ -105,23 +114,29 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     setFileInputKey(function (prev) {
       return prev + 1;
     });
+
     if (isEmpty(fileList)) {
       safeInvoke(onChange, []);
       return;
     }
+
     var files = _toConsumableArray(fileList);
+
     safeInvoke(onChange, files);
+
     var _splitFiles = splitFiles(files, {
-        maxSizeInBytes: maxSizeInBytes,
-        acceptedMimeTypes: acceptedMimeTypes,
-        currentFileCount: values === null || values === void 0 ? void 0 : values.length,
-        maxFiles: maxFiles
-      }),
-      accepted = _splitFiles.accepted,
-      rejected = _splitFiles.rejected;
+      maxSizeInBytes: maxSizeInBytes,
+      acceptedMimeTypes: acceptedMimeTypes,
+      currentFileCount: values === null || values === void 0 ? void 0 : values.length,
+      maxFiles: maxFiles
+    }),
+        accepted = _splitFiles.accepted,
+        rejected = _splitFiles.rejected;
+
     if (!isEmpty(accepted)) {
       safeInvoke(onAccepted, accepted);
     }
+
     if (!isEmpty(rejected)) {
       safeInvoke(onRejected, rejected);
     }
@@ -130,9 +145,11 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     if (disabled) {
       return;
     }
+
     if (fileInputRef.current == null) {
       return;
     }
+
     fileInputRef.current.click();
   }, [disabled]);
   var handleDragOver = useCallback(
@@ -143,22 +160,28 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     event.preventDefault();
     event.stopPropagation();
     event.dataTransfer.dropEffect = 'copy';
+
     if (disabled) {
       return;
     }
+
     var dragItems = getFileDataTransferItems(event.dataTransfer.items);
     var draggingCount = dragItems.length;
+
     var _ref = values !== null && values !== void 0 ? values : [],
-      currentCount = _ref.length;
+        currentCount = _ref.length;
+
     if (maxFiles == null || maxFiles < 0) {
       setState(UploaderState.Dragging);
       return;
     }
+
     if (draggingCount > maxFiles || draggingCount + currentCount > maxFiles) {
       setValidationMessage(dragMaxFilesMessage(maxFiles));
       setState(UploaderState.Error);
       return;
     }
+
     setState(UploaderState.Dragging);
   }, [disabled, dragMaxFilesMessage, maxFiles, values]);
   var handleDragLeave = useCallback(function () {
@@ -171,9 +194,11 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
   function (event) {
     event.preventDefault();
     event.stopPropagation();
+
     if (disabled) {
       return;
     }
+
     resetState();
     handleChange(event.dataTransfer.files);
   }, [disabled, handleChange, resetState]);
@@ -187,6 +212,7 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     if (disabled) {
       return;
     }
+
     handleChange(event.target.files);
   }, [disabled, handleChange]);
   var handleKeyDown = useCallback(
@@ -197,6 +223,7 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     if (event.key !== Key.Enter && event.key !== Key.Space) {
       return;
     }
+
     event.preventDefault();
     handleClick();
   }, [handleClick]);
@@ -207,8 +234,7 @@ var FileUploader = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, re
     labelFor: labelFor,
     description: description,
     hint: hint,
-    isRequired: isRequired
-    // Always override the validationMessage from prop if we have a message to display from dragging
+    isRequired: isRequired // Always override the validationMessage from prop if we have a message to display from dragging
     ,
     validationMessage: !isEmpty(validationMessage) ? validationMessage : validationMessageProp
   }, renderDropzone && /*#__PURE__*/React.createElement(Box, _extends({
@@ -272,55 +298,66 @@ FileUploader.propTypes = _objectSpread(_objectSpread({}, FormField.propTypes), {
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
    */
   acceptedMimeTypes: PropTypes.array,
+
   /**
    * Function to return a string or component for the 'Browse or drag' text
    * @type {(maxFiles: number) => React.ReactNode}
    */
   browseOrDragText: PropTypes.func,
+
   /**
    * When true, displays a disabled state where drops don't fire and the native browser picker doesn't open
    */
   disabled: PropTypes.bool,
+
   /**
    * Function to return a string when the max file limit has been hit while dragging
    * @default You can upload up to {count} {file|files}.
    * @type {(maxFiles: number) => string}
    */
   dragMaxFilesMessage: PropTypes.func,
+
   /**
    * Maximum number of files to accept
    */
   maxFiles: PropTypes.number,
+
   /**
    * Maximum size of an **individual** file to accept
    */
   maxSizeInBytes: PropTypes.number,
+
   /**
    * Callback for when files are accepted via drop or the native browser picker
    * @type {(files: File[]) => void}
    */
   onAccepted: PropTypes.func,
+
   /**
    * Callback for when files are added via drop or the native browser picker, which includes both
    * the accepted and rejected files
    * @type {(files: File[]) => void}
    */
   onChange: PropTypes.func,
+
   /**
    * Callback for when files are rejected via drop or the native browser picker
    * @type {(fileRejections: FileRejection[]) => void}
    */
   onRejected: PropTypes.func,
+
   /**
    * Callback to fire when a file should be removed
    * @type {(file: File) => void}
    */
   onRemove: PropTypes.func,
+
   /**
    * Custom render function for displaying the file underneath the uploader
    * @type {(file: File, index: number) => React.ReactNode}
    */
   renderFile: PropTypes.func,
+
   /**
    * File values to render underneath the uploader
    * @type {File}

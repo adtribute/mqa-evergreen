@@ -3,9 +3,11 @@ import { LockIcon } from '../../icons';
 import { Pane } from '../../layers';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+
 var BasicWithLinkExample = function BasicWithLinkExample() {
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   return /*#__PURE__*/React.createElement(Pane, {
     maxWidth: 1152
   }, /*#__PURE__*/React.createElement(EmptyState, {
@@ -24,5 +26,6 @@ var BasicWithLinkExample = function BasicWithLinkExample() {
     }, "Learn more about permission")
   }));
 };
+
 BasicWithLinkExample.displayName = "BasicWithLinkExample";
 export default BasicWithLinkExample;

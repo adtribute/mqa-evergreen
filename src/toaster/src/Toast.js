@@ -1,61 +1,26 @@
 import React, { memo, useMemo, useRef, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Transition } from 'react-transition-group'
-import Box, { keyframes } from 'ui-box'
+import Box from 'ui-box'
 import Alert from '../../alert/src/Alert'
-
-const animationEasing = {
-  deceleration: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
-  acceleration: 'cubic-bezier(0.4, 0.0, 1, 1)',
-  spring: 'cubic-bezier(0.175, 0.885, 0.320, 1.175)'
-}
 
 const ANIMATION_DURATION = 240
 
-const openAnimation = keyframes('openAnimation', {
-  from: {
-    opacity: 0,
-    transform: 'translateY(-120%)'
-  },
-  to: {
-    transform: 'translateY(0)'
-  }
-})
-
-const closeAnimation = keyframes('closeAnimation', {
-  from: {
-    transform: 'scale(1)',
-    opacity: 1
-  },
-  to: {
-    transform: 'scale(0.9)',
-    opacity: 0
-  }
-})
-
-const enterAnimationProps = {
-  animationName: openAnimation,
-  animationDuration: ANIMATION_DURATION,
-  animationTimingFunction: animationEasing.spring,
-  animationFillMode: 'both'
-}
-
-const animationStyles = {
+const defaultStyles = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   height: 0,
-  transition: `all ${ANIMATION_DURATION}ms ${animationEasing.deceleration}`,
-  selectors: {
-    '&[data-state="entering"]': enterAnimationProps,
-    '&[data-state="entered"]': enterAnimationProps,
-    '&[data-state="exiting"]': {
-      animationName: closeAnimation,
-      animationDuration: 120,
-      animationTimingFunction: animationEasing.acceleration,
-      animationFillMode: 'both'
-    }
-  }
+  transform: 'scale(1)',
+  transition: `all ${ANIMATION_DURATION}ms cubic-bezier(0.0, 0.0, 0.2, 1)`,
+  opacity: 0
+}
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0, transform: 'scale(1)' },
+  exited: { opacity: 0, transform: 'scale(0.9)' }
 }
 
 const Toast = memo(function Toast(props) {
@@ -141,14 +106,17 @@ const Toast = memo(function Toast(props) {
     >
       {state => (
         <Box
-          {...animationStyles}
           ref={transitionRef}
-          data-state={state}
+          data-state={state || 'entered'}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          // Styles object needs to be spread after animationStyles, otherwise the height/zIndex is overridden
+          // Styles object needs to be spread after defaultStyles, otherwise the height/zIndex is overridden
           // and earlier toasts will not be pushed down in the viewport
-          {...styles}
+          style={{
+            ...defaultStyles,
+            ...transitionStyles[state],
+            ...styles
+          }}
         >
           <Box ref={onRef} padding={8}>
             <Alert

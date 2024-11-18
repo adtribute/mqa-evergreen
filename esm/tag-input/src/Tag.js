@@ -1,6 +1,7 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["children", "isRemovable", "onRemove"];
+
 /**
  * @overview TagInput accepts multiple values that can be individually removed
  */
@@ -20,11 +21,12 @@ var badgeStyles = {
   marginBottom: 0,
   textTransform: 'none'
 };
-var Tag = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Tag(props, ref) {
+var Tag = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Tag(props, ref) {
   var children = props.children,
-    isRemovable = props.isRemovable,
-    onRemove = props.onRemove,
-    restProps = _objectWithoutProperties(props, _excluded);
+      isRemovable = props.isRemovable,
+      onRemove = props.onRemove,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   return /*#__PURE__*/React.createElement(Badge, _extends({
     ref: ref,
     isInteractive: true
@@ -39,11 +41,13 @@ var Tag = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Tag(props, ref) {
 Tag.propTypes = {
   /** The tag content */
   children: PropTypes.node,
+
   /**
    * Callback invoked when the removal icon is clicked.
    * (event) => void
    */
   onRemove: PropTypes.func,
+
   /** Whether or not the tag can be removed. */
   isRemovable: PropTypes.bool
 };

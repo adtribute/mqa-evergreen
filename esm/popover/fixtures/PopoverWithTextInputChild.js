@@ -4,6 +4,7 @@ import { Popover } from '../';
 import { Button } from '../../buttons';
 import { Pane } from '../../layers';
 import { TextInput } from '../../text-input';
+
 function PopoverWithTextInputChild(props) {
   return /*#__PURE__*/React.createElement(Popover, _extends({
     content: /*#__PURE__*/React.createElement(Pane, {
@@ -23,5 +24,6 @@ function PopoverWithTextInputChild(props) {
     "data-testid": "popover-trigger"
   }, "Trigger Popover"));
 }
+
 PopoverWithTextInputChild.displayName = "PopoverWithTextInputChild";
 export default PopoverWithTextInputChild;

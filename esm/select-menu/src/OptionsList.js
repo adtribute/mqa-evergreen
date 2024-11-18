@@ -14,20 +14,22 @@ import TableHead from '../../table/src/TableHead';
 import { useTheme } from '../../theme';
 import Option from './Option';
 import OptionShapePropType from './OptionShapePropType';
-
 /**
  * Fuzzaldrin-plus is the default filter, but you can use your own
  * as long as they follow the following signature:
  * @param options <Array[String]> - ['label', 'label2', ...]
  * @param input <String>
  */
+
 var fuzzyFilter = function fuzzyFilter(options, input, _ref) {
   var key = _ref.key;
   return fuzzaldrin.filter(options, input, {
     key: key
   });
 };
+
 var noop = function noop() {};
+
 var defaultRenderItem = function defaultRenderItem(props) {
   return /*#__PURE__*/React.createElement(Option, props, props.icon && /*#__PURE__*/React.createElement(Image, {
     src: props.icon,
@@ -35,49 +37,55 @@ var defaultRenderItem = function defaultRenderItem(props) {
     marginRight: 8
   }), props.label);
 };
+
 defaultRenderItem.displayName = "defaultRenderItem";
 var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
   var _props$options = props.options,
-    originalOptions = _props$options === void 0 ? [] : _props$options,
-    _props$optionSize = props.optionSize,
-    optionSize = _props$optionSize === void 0 ? 33 : _props$optionSize,
-    close = props.close,
-    closeOnSelect = props.closeOnSelect,
-    _props$onSelect = props.onSelect,
-    onSelect = _props$onSelect === void 0 ? noop : _props$onSelect,
-    _props$onDeselect = props.onDeselect,
-    onDeselect = _props$onDeselect === void 0 ? noop : _props$onDeselect,
-    _props$onFilterChange = props.onFilterChange,
-    onFilterChange = _props$onFilterChange === void 0 ? noop : _props$onFilterChange,
-    hasFilter = props.hasFilter,
-    _props$selected = props.selected,
-    selected = _props$selected === void 0 ? [] : _props$selected,
-    optionsFilter = props.optionsFilter,
-    isMultiSelect = props.isMultiSelect,
-    height = props.height,
-    width = props.width,
-    _props$renderItem = props.renderItem,
-    _renderItem = _props$renderItem === void 0 ? defaultRenderItem : _props$renderItem,
-    _props$filterPlacehol = props.filterPlaceholder,
-    filterPlaceholder = _props$filterPlacehol === void 0 ? 'Filter...' : _props$filterPlacehol,
-    _props$filterIcon = props.filterIcon,
-    filterIcon = _props$filterIcon === void 0 ? SearchIcon : _props$filterIcon,
-    _props$defaultSearchV = props.defaultSearchValue,
-    defaultSearchValue = _props$defaultSearchV === void 0 ? '' : _props$defaultSearchV,
-    _props$shouldAutoFocu = props.shouldAutoFocus,
-    shouldAutoFocus = _props$shouldAutoFocu === void 0 ? true : _props$shouldAutoFocu,
-    rest = _objectWithoutProperties(props, _excluded);
+      originalOptions = _props$options === void 0 ? [] : _props$options,
+      _props$optionSize = props.optionSize,
+      optionSize = _props$optionSize === void 0 ? 33 : _props$optionSize,
+      close = props.close,
+      closeOnSelect = props.closeOnSelect,
+      _props$onSelect = props.onSelect,
+      onSelect = _props$onSelect === void 0 ? noop : _props$onSelect,
+      _props$onDeselect = props.onDeselect,
+      onDeselect = _props$onDeselect === void 0 ? noop : _props$onDeselect,
+      _props$onFilterChange = props.onFilterChange,
+      onFilterChange = _props$onFilterChange === void 0 ? noop : _props$onFilterChange,
+      hasFilter = props.hasFilter,
+      _props$selected = props.selected,
+      selected = _props$selected === void 0 ? [] : _props$selected,
+      optionsFilter = props.optionsFilter,
+      isMultiSelect = props.isMultiSelect,
+      height = props.height,
+      width = props.width,
+      _props$renderItem = props.renderItem,
+      _renderItem = _props$renderItem === void 0 ? defaultRenderItem : _props$renderItem,
+      _props$filterPlacehol = props.filterPlaceholder,
+      filterPlaceholder = _props$filterPlacehol === void 0 ? 'Filter...' : _props$filterPlacehol,
+      _props$filterIcon = props.filterIcon,
+      filterIcon = _props$filterIcon === void 0 ? SearchIcon : _props$filterIcon,
+      _props$defaultSearchV = props.defaultSearchValue,
+      defaultSearchValue = _props$defaultSearchV === void 0 ? '' : _props$defaultSearchV,
+      _props$shouldAutoFocu = props.shouldAutoFocus,
+      shouldAutoFocus = _props$shouldAutoFocu === void 0 ? true : _props$shouldAutoFocu,
+      rest = _objectWithoutProperties(props, _excluded);
+
   var _useState = useState(defaultSearchValue),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      searchValue = _useState2[0],
+      setSearchValue = _useState2[1];
+
   var _useState3 = useState(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    searchRef = _useState4[0],
-    setSearchRef = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchRef = _useState4[0],
+      setSearchRef = _useState4[1];
+
   var requestId = useRef();
+
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   var isSelected = useCallback(function (item) {
     return Boolean(selected.find(function (selectedItem) {
       return selectedItem === item.value;
@@ -87,15 +95,14 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
     return originalOptions.map(function (item) {
       return item.label;
     });
-  }, [originalOptions]);
+  }, [originalOptions]); // Gets filtered options any time the filter fn, value, or options change
 
-  // Gets filtered options any time the filter fn, value, or options change
   var options = useMemo(function () {
     if (searchValue.trim() === '') {
       return originalOptions;
-    }
+    } // Preserve backwards compatibility with allowing custom filters, which accept array of strings
 
-    // Preserve backwards compatibility with allowing custom filters, which accept array of strings
+
     if (typeof optionsFilter === 'function') {
       return optionsFilter(optionLabels, searchValue).map(function (name) {
         return originalOptions.find(function (item) {
@@ -103,6 +110,7 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
         });
       });
     }
+
     return fuzzyFilter(originalOptions, searchValue, {
       key: 'label'
     });
@@ -114,19 +122,24 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
   }, [selected, options]);
   var handleArrowUp = useCallback(function () {
     var nextIndex = getCurrentIndex() - 1;
+
     if (nextIndex < 0) {
       nextIndex = options.length - 1;
     }
+
     if (isSelected(options[nextIndex])) {
       return;
     }
+
     onSelect(options[nextIndex]);
   }, [onSelect, options, getCurrentIndex, isSelected]);
   var handleArrowDown = useCallback(function () {
     var nextIndex = getCurrentIndex() + 1;
+
     if (nextIndex === options.length) {
       nextIndex = 0;
     }
+
     if (!isSelected(options[nextIndex])) {
       onSelect(options[nextIndex]);
     }
@@ -141,12 +154,14 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
     } else {
       onSelect(item);
     }
+
     if (!isMultiSelect && closeOnSelect) {
       close();
     }
   }, [onDeselect, isMultiSelect, closeOnSelect, onSelect, isSelected, close]);
   var handleEnter = useCallback(function () {
     var isSelected = getCurrentIndex() !== -1;
+
     if (isSelected) {
       if (!isMultiSelect && closeOnSelect) {
         close();
@@ -160,12 +175,15 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
     if (e.key === 'ArrowUp') {
       handleArrowUp();
     }
+
     if (e.key === 'ArrowDown') {
       handleArrowDown();
     }
+
     if (e.key === 'Enter') {
       handleEnter();
     }
+
     if (e.key === 'Escape') {
       close();
     }
@@ -213,7 +231,7 @@ var OptionsList = /*#__PURE__*/memo(function OptionsList(props) {
     scrollToIndex: scrollToIndex || undefined,
     renderItem: function renderItem(_ref2) {
       var index = _ref2.index,
-        style = _ref2.style;
+          style = _ref2.style;
       var item = options[index];
       var isItemSelected = isSelected(item);
       var itemProps = {
@@ -243,18 +261,22 @@ OptionsList.propTypes = {
   close: PropTypes.func,
   height: PropTypes.number,
   width: PropTypes.number,
+
   /**
    * When true, multi select is accounted for.
    */
   isMultiSelect: PropTypes.bool,
+
   /**
    * When true, menu closes on option selection.
    */
   closeOnSelect: PropTypes.bool,
+
   /**
    * This holds the values of the options
    */
   selected: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+
   /**
    * When true, menu auto focuses on the search/filter bar.
    */

@@ -24,23 +24,25 @@ var pseudoSelectors = {
   _invalid: "&[aria-invalid='true']"
 };
 var internalStyles = {};
-var FileCard = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function (props, ref) {
+var FileCard = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function (props, ref) {
   var description = props.description,
-    _props$disabled = props.disabled,
-    disabled = _props$disabled === void 0 ? false : _props$disabled,
-    _props$isInvalid = props.isInvalid,
-    isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
-    _props$isLoading = props.isLoading,
-    isLoading = _props$isLoading === void 0 ? false : _props$isLoading,
-    name = props.name,
-    onRemove = props.onRemove,
-    sizeInBytes = props.sizeInBytes,
-    src = props.src,
-    type = props.type,
-    validationMessage = props.validationMessage,
-    rest = _objectWithoutProperties(props, _excluded);
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      _props$isInvalid = props.isInvalid,
+      isInvalid = _props$isInvalid === void 0 ? false : _props$isInvalid,
+      _props$isLoading = props.isLoading,
+      isLoading = _props$isLoading === void 0 ? false : _props$isLoading,
+      name = props.name,
+      onRemove = props.onRemove,
+      sizeInBytes = props.sizeInBytes,
+      src = props.src,
+      type = props.type,
+      validationMessage = props.validationMessage,
+      rest = _objectWithoutProperties(props, _excluded);
+
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   var themedProps = useStyleConfig('FileCard', styleModifiers, pseudoSelectors, internalStyles);
   var FileTypeIcon = getIconFromType(type);
   var renderImage = hasValue(src) && isImage(type);
@@ -110,39 +112,48 @@ FileCard.propTypes = {
    * Description to display under the file name. If not provided, defaults to the file size
    */
   description: PropTypes.string,
+
   /**
    * Disables the button to remove the file
    */
   disabled: PropTypes.bool,
+
   /**
    * When true, displays the card in an error state
    */
   isInvalid: PropTypes.bool,
+
   /**
    * Sets a loading state on the card. If the remove button is rendered, it will be disabled
    */
   isLoading: PropTypes.bool,
+
   /**
    * Name of the file to display
    */
   name: PropTypes.string,
+
   /**
    * Callback to be fired when the remove button is clicked. If not provided, the button will not
    * render
    */
   onRemove: PropTypes.func,
+
   /**
    * Size of the file
    */
   sizeInBytes: PropTypes.number,
+
   /**
    * Url of the uploaded image
    */
   src: PropTypes.string,
+
   /**
    * MimeType of the file to display, which controls what type of icon is rendered
    */
   type: PropTypes.string,
+
   /**
    * Message to display underneath the card
    */

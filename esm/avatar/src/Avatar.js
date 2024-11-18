@@ -22,49 +22,57 @@ var internalStyles = {
   justifyContent: 'center'
 };
 var isObjectFitSupported = typeof document !== 'undefined' && 'objectFit' in document.documentElement.style;
+
 var getAvatarInitialsFontSize = function getAvatarInitialsFontSize(size, sizeLimitOneCharacter) {
   if (size <= sizeLimitOneCharacter) {
     return Math.floor(size / 2.2);
   }
+
   return Math.floor(size / 2.6);
 };
-var Avatar = /*#__PURE__*/memo(/*#__PURE__*/forwardRef(function Avatar(props, ref) {
+
+var Avatar = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Avatar(props, ref) {
   var className = props.className,
-    _props$color = props.color,
-    color = _props$color === void 0 ? 'automatic' : _props$color,
-    _props$forceShowIniti = props.forceShowInitials,
-    forceShowInitials = _props$forceShowIniti === void 0 ? false : _props$forceShowIniti,
-    _props$getInitials = props.getInitials,
-    getInitials = _props$getInitials === void 0 ? globalGetInitials : _props$getInitials,
-    propsHashValue = props.hashValue,
-    name = props.name,
-    _props$shape = props.shape,
-    shape = _props$shape === void 0 ? 'round' : _props$shape,
-    _props$size = props.size,
-    size = _props$size === void 0 ? 24 : _props$size,
-    _props$sizeLimitOneCh = props.sizeLimitOneCharacter,
-    sizeLimitOneCharacter = _props$sizeLimitOneCh === void 0 ? 20 : _props$sizeLimitOneCh,
-    src = props.src,
-    restProps = _objectWithoutProperties(props, _excluded);
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'automatic' : _props$color,
+      _props$forceShowIniti = props.forceShowInitials,
+      forceShowInitials = _props$forceShowIniti === void 0 ? false : _props$forceShowIniti,
+      _props$getInitials = props.getInitials,
+      getInitials = _props$getInitials === void 0 ? globalGetInitials : _props$getInitials,
+      propsHashValue = props.hashValue,
+      name = props.name,
+      _props$shape = props.shape,
+      shape = _props$shape === void 0 ? 'round' : _props$shape,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 24 : _props$size,
+      _props$sizeLimitOneCh = props.sizeLimitOneCharacter,
+      sizeLimitOneCharacter = _props$sizeLimitOneCh === void 0 ? 20 : _props$sizeLimitOneCh,
+      src = props.src,
+      restProps = _objectWithoutProperties(props, _excluded);
+
   var hashValue = globalHash(propsHashValue || name);
   var themedProps = useStyleConfig('Avatar', {
     color: color,
     hashValue: hashValue,
     shape: shape
   }, pseudoSelectors, internalStyles);
+
   var _useState = useState(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    imageHasFailedLoading = _useState2[0],
-    setImageHasFailedLoading = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      imageHasFailedLoading = _useState2[0],
+      setImageHasFailedLoading = _useState2[1];
+
   var onError = useCallback(function () {
     return setImageHasFailedLoading(true);
   }, []);
   var imageUnavailable = !src || imageHasFailedLoading;
   var initialsFontSize = "".concat(getAvatarInitialsFontSize(size, sizeLimitOneCharacter), "px");
   var initials = getInitials(name);
+
   if (size <= sizeLimitOneCharacter) {
     initials = initials.slice(0, 1);
   }
+
   return /*#__PURE__*/React.createElement(Box, _extends({
     width: size,
     height: size,
@@ -98,43 +106,52 @@ Avatar.propTypes = {
    * Only use if you know what you are doing.
    */
   className: PropTypes.string,
+
   /**
    * The src attribute of the image.
    * When it's not available, render initials instead.
    */
   src: PropTypes.string,
+
   /**
    * The size of the avatar.
    */
   size: PropTypes.number,
+
   /**
    * The name used for the initials and title attribute.
    */
   name: PropTypes.string,
+
   /**
    * The value used for the hash function.
    * The name is used as the hashValue by default.
    * When dealing with anonymous users you should use the id instead.
    */
   hashValue: PropTypes.string,
+
   /**
    * The color used for the avatar.
    * When the value is `automatic`, use the hash function to determine the color.
    */
   color: PropTypes.string,
+
   /**
    * Function to get the initials based on the name.
    */
   getInitials: PropTypes.func,
+
   /**
    * When true, force show the initials.
    * This is useful in some cases when using Gravatar and transparent pngs.
    */
   forceShowInitials: PropTypes.bool,
+
   /**
    * When the size is smaller than this number, use a single initial for the avatar.
    */
   sizeLimitOneCharacter: PropTypes.number,
+
   /**
    * Allows for the shape of the avatar component to either be round or square
    */

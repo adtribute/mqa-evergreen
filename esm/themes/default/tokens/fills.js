@@ -1,8 +1,8 @@
 import colors from './colors';
-
 /**
  * Used for matching background colors and foreground colors
  */
+
 var fills = {
   neutral: {
     color: colors.gray800,

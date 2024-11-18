@@ -55,48 +55,54 @@ var animationStyles = {
     }
   }
 };
+
 var closeHandler = function closeHandler(close) {
   return close();
 };
+
 var noop = function noop() {};
+
 var emptyProps = {};
 var CornerDialog = /*#__PURE__*/memo(function CornerDialog(props) {
   var title = props.title,
-    _props$width = props.width,
-    width = _props$width === void 0 ? 448 : _props$width,
-    children = props.children,
-    _props$intent = props.intent,
-    intent = _props$intent === void 0 ? 'none' : _props$intent,
-    isShown = props.isShown,
-    _props$hasFooter = props.hasFooter,
-    hasFooter = _props$hasFooter === void 0 ? true : _props$hasFooter,
-    _props$hasCancel = props.hasCancel,
-    hasCancel = _props$hasCancel === void 0 ? true : _props$hasCancel,
-    _props$hasClose = props.hasClose,
-    hasClose = _props$hasClose === void 0 ? true : _props$hasClose,
-    _props$cancelLabel = props.cancelLabel,
-    cancelLabel = _props$cancelLabel === void 0 ? 'Close' : _props$cancelLabel,
-    _props$confirmLabel = props.confirmLabel,
-    confirmLabel = _props$confirmLabel === void 0 ? 'Learn More' : _props$confirmLabel,
-    onOpenComplete = props.onOpenComplete,
-    _props$onCloseComplet = props.onCloseComplete,
-    onCloseComplete = _props$onCloseComplet === void 0 ? noop : _props$onCloseComplet,
-    _props$onCancel = props.onCancel,
-    onCancel = _props$onCancel === void 0 ? closeHandler : _props$onCancel,
-    _props$onConfirm = props.onConfirm,
-    onConfirm = _props$onConfirm === void 0 ? closeHandler : _props$onConfirm,
-    _props$containerProps = props.containerProps,
-    containerProps = _props$containerProps === void 0 ? emptyProps : _props$containerProps,
-    _props$position = props.position,
-    position = _props$position === void 0 ? positions.BOTTOM_RIGHT : _props$position;
+      _props$width = props.width,
+      width = _props$width === void 0 ? 448 : _props$width,
+      children = props.children,
+      _props$intent = props.intent,
+      intent = _props$intent === void 0 ? 'none' : _props$intent,
+      isShown = props.isShown,
+      _props$hasFooter = props.hasFooter,
+      hasFooter = _props$hasFooter === void 0 ? true : _props$hasFooter,
+      _props$hasCancel = props.hasCancel,
+      hasCancel = _props$hasCancel === void 0 ? true : _props$hasCancel,
+      _props$hasClose = props.hasClose,
+      hasClose = _props$hasClose === void 0 ? true : _props$hasClose,
+      _props$cancelLabel = props.cancelLabel,
+      cancelLabel = _props$cancelLabel === void 0 ? 'Close' : _props$cancelLabel,
+      _props$confirmLabel = props.confirmLabel,
+      confirmLabel = _props$confirmLabel === void 0 ? 'Learn More' : _props$confirmLabel,
+      onOpenComplete = props.onOpenComplete,
+      _props$onCloseComplet = props.onCloseComplete,
+      onCloseComplete = _props$onCloseComplet === void 0 ? noop : _props$onCloseComplet,
+      _props$onCancel = props.onCancel,
+      onCancel = _props$onCancel === void 0 ? closeHandler : _props$onCancel,
+      _props$onConfirm = props.onConfirm,
+      onConfirm = _props$onConfirm === void 0 ? closeHandler : _props$onConfirm,
+      _props$containerProps = props.containerProps,
+      containerProps = _props$containerProps === void 0 ? emptyProps : _props$containerProps,
+      _props$position = props.position,
+      position = _props$position === void 0 ? positions.BOTTOM_RIGHT : _props$position;
+
   var _useState = useState(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    exiting = _useState2[0],
-    setExiting = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      exiting = _useState2[0],
+      setExiting = _useState2[1];
+
   var _useState3 = useState(!props.isShown),
-    _useState4 = _slicedToArray(_useState3, 2),
-    exited = _useState4[0],
-    setExited = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      exited = _useState4[0],
+      setExited = _useState4[1];
+
   var transitionRef = useRef(null);
   useEffect(function () {
     if (isShown) {
@@ -123,19 +129,24 @@ var CornerDialog = /*#__PURE__*/memo(function CornerDialog(props) {
         close: handleClose
       });
     }
+
     if (typeof children === 'string') {
       return /*#__PURE__*/React.createElement(Paragraph, {
         size: 400,
         color: "muted"
       }, children);
     }
+
     return children;
   }, [children, handleClose]);
+
   if (exited) {
     return null;
   }
+
   var containerClassName = containerProps.className,
-    remainingContainerProps = _objectWithoutProperties(containerProps, _excluded);
+      remainingContainerProps = _objectWithoutProperties(containerProps, _excluded);
+
   return /*#__PURE__*/React.createElement(Portal, null, /*#__PURE__*/React.createElement(Transition, {
     nodeRef: transitionRef,
     appear: true,
@@ -191,30 +202,37 @@ CornerDialog.propTypes = {
    * When passing a string, <Paragraph size={400} color="muted" /> is used to wrap the string.
    */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+
   /**
    * The intent of the CornerDialog. Used for the button.
    */
   intent: PropTypes.string,
+
   /**
    * When true, the dialog is shown.
    */
   isShown: PropTypes.bool,
+
   /**
    * Title of the Dialog. Titles should use Title Case.
    */
   title: PropTypes.node,
+
   /**
    * Function that will be called when the exit transition is complete.
    */
   onCloseComplete: PropTypes.func,
+
   /**
    * Function that will be called when the enter transition is complete.
    */
   onOpenComplete: PropTypes.func,
+
   /**
    * When true, the footer with the cancel and confirm button is shown.
    */
   hasFooter: PropTypes.bool,
+
   /**
    * Function that will be called when the confirm button is clicked.
    * This does not close the Dialog. A close function will be passed
@@ -223,18 +241,22 @@ CornerDialog.propTypes = {
    * `onConfirm={(close) => close()}`
    */
   onConfirm: PropTypes.func,
+
   /**
    * Label of the confirm button.
    */
   confirmLabel: PropTypes.string,
+
   /**
    * When true, the cancel button is shown.
    */
   hasCancel: PropTypes.bool,
+
   /**
    * When true, the close button is shown.
    */
   hasClose: PropTypes.bool,
+
   /**
    * Function that will be called when the cancel button is clicked.
    * This closes the Dialog by default.
@@ -242,18 +264,22 @@ CornerDialog.propTypes = {
    * `onCancel={(close) => close()}`
    */
   onCancel: PropTypes.func,
+
   /**
    * Label of the cancel button.
    */
   cancelLabel: PropTypes.string,
+
   /**
    * Width of the Dialog.
    */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
   /**
    * Props that are passed to the dialog container.
    */
   containerProps: PropTypes.object,
+
   /**
    * Props that will set position of corner dialog
    */

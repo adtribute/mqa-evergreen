@@ -49,19 +49,20 @@ var defaultAppearance = Themer.createCheckboxAppearance({
     boxShadow: "inset 0 0 0 1px ".concat(scales.neutral.N4A, ", inset 0 -1px 1px 0 ").concat(scales.neutral.N2A)
   }
 });
-
 /**
  * There is only a single appearance in the default theme.
  * @param {String} appearance.
  * @return {Object} the appearance of the checkbox.
  */
+
 var getCheckboxAppearance = function getCheckboxAppearance() {
   return defaultAppearance;
 };
-
 /**
  * Get the className of a `Checkbox`.
  * @param {string} appearance
  * @return {string} the appearance class name.
  */
+
+
 export default memoizeClassName(getCheckboxAppearance);

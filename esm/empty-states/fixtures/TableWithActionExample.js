@@ -5,9 +5,11 @@ import { majorScale } from '../../scales';
 import { Table } from '../../table';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+
 var TableWithActionExample = function TableWithActionExample() {
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   return /*#__PURE__*/React.createElement(Pane, {
     marginBottom: majorScale(8)
   }, /*#__PURE__*/React.createElement(Table, {
@@ -27,5 +29,6 @@ var TableWithActionExample = function TableWithActionExample() {
     primaryCta: /*#__PURE__*/React.createElement(EmptyState.PrimaryButton, null, "Create Audience")
   }))));
 };
+
 TableWithActionExample.displayName = "TableWithActionExample";
 export default TableWithActionExample;

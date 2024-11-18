@@ -24,5 +24,5 @@ exports.default = {
     /**
      * Used for the toasts in the toaster. Appears on top of everything else.
      */
-    TOASTER: 30
+    TOASTER: 101
 };

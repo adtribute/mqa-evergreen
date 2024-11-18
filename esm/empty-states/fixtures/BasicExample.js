@@ -3,9 +3,11 @@ import { LockIcon } from '../../icons';
 import { Pane } from '../../layers';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+
 var BasicExample = function BasicExample() {
   var _useTheme = useTheme(),
-    colors = _useTheme.colors;
+      colors = _useTheme.colors;
+
   return /*#__PURE__*/React.createElement(Pane, {
     maxWidth: 1152
   }, /*#__PURE__*/React.createElement(EmptyState, {
@@ -20,5 +22,6 @@ var BasicExample = function BasicExample() {
     primaryCta: /*#__PURE__*/React.createElement(EmptyState.PrimaryButton, null, "Request Access")
   }));
 };
+
 BasicExample.displayName = "BasicExample";
 export default BasicExample;
