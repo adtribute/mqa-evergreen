@@ -36,7 +36,7 @@ const Alert = memo(
     const themedProps = useStyleConfig('Alert', { appearance, intent: intentToken }, pseudoSelectors, internalStyles)
 
     return (
-      <Pane ref={ref} className={className} role="alert" {...themedProps} {...restProps}>
+      <Pane ref={ref} className={className} role="alert" {...themedProps} {...restProps} data-intent={intent}>
         {hasIcon && (
           <Pane marginRight={16} marginLeft={2} marginTop={-1} display="flex" alignItems="flex-start">
             {getIconForIntent(intentToken, { size: 16 })}
