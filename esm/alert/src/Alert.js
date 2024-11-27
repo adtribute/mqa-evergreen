@@ -48,7 +48,9 @@ var Alert = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Alert(props, ref
     ref: ref,
     className: className,
     role: "alert"
-  }, themedProps, restProps), hasIcon && /*#__PURE__*/React.createElement(Pane, {
+  }, themedProps, restProps, {
+    "data-intent": intent
+  }), hasIcon && /*#__PURE__*/React.createElement(Pane, {
     marginRight: 16,
     marginLeft: 2,
     marginTop: -1,

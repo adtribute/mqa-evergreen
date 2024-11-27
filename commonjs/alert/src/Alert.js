@@ -58,7 +58,7 @@ const Alert = (0, react_1.memo)((0, react_1.forwardRef)(function Alert(props, re
     const { appearance = 'default', children, className, hasIcon = true, intent = 'info', isRemoveable = false, onRemove, title } = props, restProps = __rest(props, ["appearance", "children", "className", "hasIcon", "intent", "isRemoveable", "onRemove", "title"]);
     const intentToken = intent === 'none' ? 'info' : intent;
     const themedProps = (0, hooks_1.useStyleConfig)('Alert', { appearance, intent: intentToken }, pseudoSelectors, internalStyles);
-    return (react_1.default.createElement(layers_1.Pane, Object.assign({ ref: ref, className: className, role: "alert" }, themedProps, restProps),
+    return (react_1.default.createElement(layers_1.Pane, Object.assign({ ref: ref, className: className, role: "alert" }, themedProps, restProps, { "data-intent": intent }),
         hasIcon && (react_1.default.createElement(layers_1.Pane, { marginRight: 16, marginLeft: 2, marginTop: -1, display: "flex", alignItems: "flex-start" }, (0, getIconForIntent_1.getIconForIntent)(intentToken, { size: 16 }))),
         react_1.default.createElement(layers_1.Pane, { flex: 1 },
             title && (react_1.default.createElement(typography_1.Heading, { is: "h4", size: 400, marginTop: 0, marginBottom: 0, fontWeight: 500, lineHeight: 1, 
