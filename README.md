@@ -25,7 +25,7 @@ This will install all the dependencies required to run the project but errors wi
 
 ## Making Changes
 
-The app is linked to this repositories application version (current version can be found in the package.json file). Making changes to the app will require a new version to be released (along side with your changes). When you've commit your changes to your branch and are ready to merge into master, you will need to release a new version. To do this, run:
+The app is linked to this repositories application version (current version can be found in the package.json file). Making changes to the app will require a new version to be released (along side with your changes). When you've committed your changes to your branch and are ready to merge into master, you will need to release a new version. To do this, run:
 
 ```bash
 yarn release
