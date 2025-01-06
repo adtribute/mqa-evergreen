@@ -26,5 +26,5 @@ export default {
   /**
    * Used for the toasts in the toaster. Appears on top of everything else.
    */
-  TOASTER: 101
+  TOASTER: 201
 }
