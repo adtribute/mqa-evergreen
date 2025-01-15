@@ -59,12 +59,13 @@ const internalStyles = {
     display: 'flex'
 };
 const emptyObject = {};
+const disabledTextProps = { opacity: 0.5 };
 const Option = (0, react_1.memo)((0, react_1.forwardRef)(function Option(props, ref) {
     const { children, disabled, height, isHighlighted, isSelectable, isSelected, item, onDeselect, onSelect, style: styleProp } = props, rest = __rest(props, ["children", "disabled", "height", "isHighlighted", "isSelectable", "isSelected", "item", "onDeselect", "onSelect", "style"]);
     const _a = (0, hooks_1.useStyleConfig)('Option', emptyObject, exports.pseudoSelectors, internalStyles), { style: themedStyle } = _a, themedProps = __rest(_a, ["style"]);
     const style = (0, lodash_merge_1.default)({}, styleProp, themedStyle);
     return (react_1.default.createElement(TableRow_1.default, Object.assign({ isSelectable: isSelectable && !disabled, isHighlighted: isHighlighted, onSelect: onSelect, onDeselect: onDeselect, isSelected: isSelected, style: style }, themedProps, rest, { ref: ref }),
-        react_1.default.createElement(TextTableCell_1.default, { borderRight: null, flex: 1, alignSelf: "stretch", height: height, cursor: disabled ? 'default' : 'pointer' },
+        react_1.default.createElement(TextTableCell_1.default, { borderRight: null, flex: 1, alignSelf: "stretch", height: height, cursor: disabled ? 'not-allowed' : 'pointer', textProps: disabled ? disabledTextProps : emptyObject },
             react_1.default.createElement(layers_1.Pane, { alignItems: "center", display: "flex" }, children))));
 }));
 Option.propTypes = {
