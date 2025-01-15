@@ -1,6 +1,6 @@
 {
   "name": "evergreen-ui",
-  "version": "7.3.1",
+  "version": "7.3.2",
   "description": "🌲 React UI Kit by Segment 🌲",
   "contributors": [
     "Jeroen Ransijn (https://jssr.design/)",
@@ -180,7 +180,7 @@
     "arrowParens": "avoid"
   },
   "lint-staged": {
-    "!(codemods|docs)/**/.{js,ts,tsx}": [
+    "!(codemods|docs)/**/*.{js,ts,tsx}": [
       "yarn lint --fix",
       "prettier --write"
     ],

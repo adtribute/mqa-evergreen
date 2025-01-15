@@ -10,7 +10,7 @@ import { Pane } from '../../layers'
 import { TextInput } from '../../text-input'
 import { Text } from '../../typography'
 import Manager from './Manager'
-import options, { optionsWithIcons } from './starwars-options'
+import options, { disabledOptions, optionsWithIcons } from './starwars-options'
 
 storiesOf('select-menu', module).add('SelectMenu', () => (
   <Box padding={40}>
@@ -43,6 +43,20 @@ storiesOf('select-menu', module).add('SelectMenu', () => (
             closeOnSelect
           >
             <Button>Menu will close on select</Button>
+          </SelectMenu>
+        )}
+      </Manager>
+    </Box>
+    <Box marginBottom={24}>
+      <Manager>
+        {({ setState, state }) => (
+          <SelectMenu
+            title="Select name"
+            options={disabledOptions}
+            selected={state.selected}
+            onSelect={item => setState({ selected: item.value })}
+          >
+            <Button>Disabled options</Button>
           </SelectMenu>
         )}
       </Manager>

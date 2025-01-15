@@ -23,6 +23,9 @@ var internalStyles = {
   display: 'flex'
 };
 var emptyObject = {};
+var disabledTextProps = {
+  opacity: 0.5
+};
 var Option = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Option(props, ref) {
   var children = props.children,
       disabled = props.disabled,
@@ -55,7 +58,8 @@ var Option = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Option(props, r
     flex: 1,
     alignSelf: "stretch",
     height: height,
-    cursor: disabled ? 'default' : 'pointer'
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    textProps: disabled ? disabledTextProps : emptyObject
   }, /*#__PURE__*/React.createElement(Pane, {
     alignItems: "center",
     display: "flex"

@@ -22,6 +22,7 @@ const internalStyles = {
 }
 
 const emptyObject = {}
+const disabledTextProps = { opacity: 0.5 }
 
 const Option = memo(
   forwardRef(function Option(props, ref) {
@@ -65,7 +66,8 @@ const Option = memo(
           flex={1}
           alignSelf="stretch"
           height={height}
-          cursor={disabled ? 'default' : 'pointer'}
+          cursor={disabled ? 'not-allowed' : 'pointer'}
+          textProps={disabled ? disabledTextProps : emptyObject}
         >
           <Pane alignItems="center" display="flex">
             {children}
