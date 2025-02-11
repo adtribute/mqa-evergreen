@@ -1,11 +1,14 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { Portal } from '..'
 
-storiesOf('portal', module).add('Portal', () => (
+export default {
+  title: 'portal'
+}
+
+export const _Portal = () => (
   <div>
     <Portal>
       <div>Portal</div>
     </Portal>
   </div>
-))
+)

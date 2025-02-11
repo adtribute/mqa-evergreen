@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Checkbox } from '..'
 
@@ -21,7 +20,11 @@ function IndeterminateWithRefExample() {
   return <Checkbox checked indeterminate ref={ref} label="Checkbox checked indeterminate disabled with ref" />
 }
 
-storiesOf('checkbox', module).add('Checkbox', () => (
+export default {
+  title: 'checkbox'
+}
+
+export const _Checkbox = () => (
   <Box padding={40}>
     <Checkbox label="Checkbox default" />
     <Checkbox checked label="Checkbox checked" />
@@ -31,4 +34,4 @@ storiesOf('checkbox', module).add('Checkbox', () => (
     <Checkbox checked indeterminate label="Checkbox checked indeterminate" />
     <IndeterminateWithRefExample />
   </Box>
-))
+)

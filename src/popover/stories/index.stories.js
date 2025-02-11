@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
 import Box from 'ui-box'
 import { Popover } from '..'
@@ -56,8 +55,12 @@ const controlUsage = (
   </Popover>
 )
 
-storiesOf('popover', module)
-  .add('positions', () => (
+export default {
+  title: 'popover'
+}
+
+export const Positions = {
+  render: () => (
     <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
       {(() => {
         document.body.style.margin = '0'
@@ -96,8 +99,13 @@ storiesOf('popover', module)
         </Box>
       </Box>
     </Box>
-  ))
-  .add('usages', () => (
+  ),
+
+  name: 'positions'
+}
+
+export const Usages = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -142,8 +150,13 @@ storiesOf('popover', module)
         </Button>
       </Popover>
     </Box>
-  ))
-  .add('auto focus text input', () => (
+  ),
+
+  name: 'usages'
+}
+
+export const AutoFocusTextInput = {
+  render: () => (
     <Box padding={120}>
       {(() => {
         document.body.style.margin = '0'
@@ -153,8 +166,13 @@ storiesOf('popover', module)
         <Button marginRight={20}>Trigger Popover</Button>
       </Popover>
     </Box>
-  ))
-  .add('test jitter', () => (
+  ),
+
+  name: 'auto focus text input'
+}
+
+export const TestJitter = {
+  render: () => (
     <Box padding={120}>
       {(() => {
         document.body.style.margin = '0'
@@ -173,8 +191,13 @@ storiesOf('popover', module)
         </Button>
       </Popover>
     </Box>
-  ))
-  .add('toggle button with children', () => (
+  ),
+
+  name: 'test jitter'
+}
+
+export const ToggleButtonWithChildren = {
+  render: () => (
     <Box padding={120}>
       {(() => {
         document.body.style.margin = '0'
@@ -186,8 +209,13 @@ storiesOf('popover', module)
         </Button>
       </Popover>
     </Box>
-  ))
-  .add('Popover with tooltip', () => (
+  ),
+
+  name: 'toggle button with children'
+}
+
+export const PopoverWithTooltip = {
+  render: () => (
     <Box padding={120}>
       {(() => {
         document.body.style.margin = '0'
@@ -220,4 +248,7 @@ storiesOf('popover', module)
         </Tooltip>
       </Popover>
     </Box>
-  ))
+  ),
+
+  name: 'Popover with tooltip'
+}

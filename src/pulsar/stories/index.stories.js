@@ -1,11 +1,14 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import Position from '../../constants/src/Position'
 import Tooltip from '../../tooltip/src/Tooltip'
 import { Pulsar } from '../src/Pulsar'
 
-storiesOf('pulsar', module).add('Pulsar', () => (
+export default {
+  title: 'pulsar'
+}
+
+export const _Pulsar = () => (
   <Box padding={40} display="flex" flexDirection="column" gap={32} alignItems="flex-start">
     <Box position="relative" display="inline-block">
       <Box>Pulsar</Box>
@@ -38,4 +41,4 @@ storiesOf('pulsar', module).add('Pulsar', () => (
       </Tooltip>
     </Box>
   </Box>
-))
+)

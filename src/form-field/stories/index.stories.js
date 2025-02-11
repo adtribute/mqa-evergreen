@@ -1,10 +1,13 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { FormField, FormFieldDescription, FormFieldLabel, FormFieldValidationMessage } from '..'
 
-storiesOf('form-field', module)
-  .add('FormField', () => (
+export default {
+  title: 'form-field'
+}
+
+export const _FormField = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -12,8 +15,13 @@ storiesOf('form-field', module)
       })()}
       <FormField label="FormField Label">FormField Children</FormField>
     </Box>
-  ))
-  .add('FormFieldDescription', () => (
+  ),
+
+  name: 'FormField'
+}
+
+export const _FormFieldDescription = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -21,8 +29,13 @@ storiesOf('form-field', module)
       })()}
       <FormFieldDescription>FormFieldDescription</FormFieldDescription>
     </Box>
-  ))
-  .add('FormFieldLabel', () => (
+  ),
+
+  name: 'FormFieldDescription'
+}
+
+export const _FormFieldLabel = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -30,8 +43,13 @@ storiesOf('form-field', module)
       })()}
       <FormFieldLabel>FormFieldLabel</FormFieldLabel>
     </Box>
-  ))
-  .add('FormFieldValidationMessage', () => (
+  ),
+
+  name: 'FormFieldLabel'
+}
+
+export const _FormFieldValidationMessage = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -45,4 +63,7 @@ storiesOf('form-field', module)
         </FormFieldValidationMessage>
       </Box>
     </Box>
-  ))
+  ),
+
+  name: 'FormFieldValidationMessage'
+}

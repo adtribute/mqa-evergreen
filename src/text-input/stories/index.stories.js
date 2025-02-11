@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
 import Box from 'ui-box'
 import { TextInputField, TextInput } from '..'
@@ -27,8 +26,12 @@ class Manager extends React.Component {
   }
 }
 
-storiesOf('text-input', module)
-  .add('TextInput', () => (
+export default {
+  title: 'text-input'
+}
+
+export const _TextInput = {
+  render: () => (
     <div>
       {['default', 'none'].map(appearance => (
         <Box key={appearance} padding={40} float="left">
@@ -79,8 +82,13 @@ storiesOf('text-input', module)
         </Box>
       ))}
     </div>
-  ))
-  .add('TextInputField', () => (
+  ),
+
+  name: 'TextInput'
+}
+
+export const _TextInputField = {
+  render: () => (
     <Box padding={40}>
       <Heading size={700} marginBottom={40}>
         TextInputField component
@@ -118,8 +126,13 @@ storiesOf('text-input', module)
         }}
       </Manager>
     </Box>
-  ))
-  .add('Settings example', () => {
+  ),
+
+  name: 'TextInputField'
+}
+
+export const SettingsExample = {
+  render: () => {
     return (
       <Pane background="tint1" padding={40} height="100vh" boxSizing="border-box">
         {(() => {
@@ -163,4 +176,7 @@ storiesOf('text-input', module)
         </Card>
       </Pane>
     )
-  })
+  },
+
+  name: 'Settings example'
+}

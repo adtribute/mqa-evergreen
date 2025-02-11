@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { StatusIndicator } from '..'
 import { Heading } from '../../typography'
@@ -7,7 +6,11 @@ import { Heading } from '../../typography'
 const StoryHeader = props => <Box marginBottom={16} {...props} />
 const StoryHeading = props => <Heading size={600} marginBottom={0} {...props} />
 
-storiesOf('status-indicator', module).add('Status Indicator', () => (
+export default {
+  title: 'status-indicator'
+}
+
+export const _StatusIndicator = () => (
   <Box padding={40}>
     {(() => {
       document.body.style.margin = '0'
@@ -38,4 +41,4 @@ storiesOf('status-indicator', module).add('Status Indicator', () => (
       <StatusIndicator color="#ED55C2">#ED55C2</StatusIndicator>
     </Box>
   </Box>
-))
+)

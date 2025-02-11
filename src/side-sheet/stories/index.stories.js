@@ -1,6 +1,5 @@
 import React from 'react'
 import Component from '@reactions/component'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { SideSheet } from '..'
 import { Button } from '../../buttons'
@@ -12,8 +11,12 @@ import { Tab } from '../../tabs'
 import { TextInput, TextInputField } from '../../text-input'
 import { Heading, Paragraph } from '../../typography'
 
-storiesOf('side-sheet', module)
-  .add('title + sub title + tabs', () => (
+export default {
+  title: 'side-sheet'
+}
+
+export const TitleSubTitleTabs = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -72,8 +75,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('title + sub title', () => (
+  ),
+
+  name: 'title + sub title + tabs'
+}
+
+export const TitleSubTitle = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -117,8 +125,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('title', () => (
+  ),
+
+  name: 'title + sub title'
+}
+
+export const Title = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -159,8 +172,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('close from within', () => (
+  ),
+
+  name: 'title'
+}
+
+export const CloseFromWithin = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -183,8 +201,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('positions', () => (
+  ),
+
+  name: 'close from within'
+}
+
+export const Positions = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -236,8 +259,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('escape + overlay click disabled', () => (
+  ),
+
+  name: 'positions'
+}
+
+export const EscapeOverlayClickDisabled = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -257,8 +285,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('onBeforeClose', () => (
+  ),
+
+  name: 'escape + overlay click disabled'
+}
+
+export const OnBeforeClose = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -358,8 +391,13 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('Autofocus disabled', () => (
+  ),
+
+  name: 'onBeforeClose'
+}
+
+export const AutofocusDisabled = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -380,4 +418,7 @@ storiesOf('side-sheet', module)
         )}
       </Component>
     </Box>
-  ))
+  ),
+
+  name: 'Autofocus disabled'
+}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { storiesOf } from '@storybook/react'
 import starWarsNames from 'starwars-names'
 import Box from 'ui-box'
 import { Combobox } from '..'
@@ -28,7 +27,11 @@ const handleChange = selectedItem => {
   console.log(selectedItem)
 }
 
-storiesOf('combobox', module).add('Combobox', () => {
+export default {
+  title: 'combobox'
+}
+
+export const _Combobox = () => {
   const [value, setValue] = useState('')
   return (
     <Box padding={40}>
@@ -132,4 +135,4 @@ storiesOf('combobox', module).add('Combobox', () => {
       </Box>
     </Box>
   )
-})
+}
