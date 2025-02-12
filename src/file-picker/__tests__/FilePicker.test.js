@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FilePicker, { CLASS_PREFIX } from '../src/FilePicker'
 
@@ -115,10 +115,12 @@ describe('<FilePicker />', () => {
 
     const fileInput = await getFileInput(container)
 
-    fireEvent.change(fileInput, {
-      target: {
-        files: [{ name: 'data.json' }]
-      }
+    await act(async () => {
+      fireEvent.change(fileInput, {
+        target: {
+          files: [{ name: 'data.json' }]
+        }
+      })
     })
 
     expect(onChange).toHaveBeenCalledTimes(1)

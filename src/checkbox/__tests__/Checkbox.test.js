@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import Checkbox from '../src/Checkbox'
 
 describe('Checkbox', () => {
@@ -61,7 +61,9 @@ describe('Checkbox', () => {
     render(<ControlledCheckbox />)
     const checkbox = screen.getByRole('checkbox')
     expect(screen.getByRole('checkbox').checked).toBeFalsy()
-    fireEvent.click(checkbox)
+    act(() => {
+      fireEvent.click(checkbox)
+    })
     expect(screen.getByRole('checkbox').checked).toBeTruthy()
   })
 })

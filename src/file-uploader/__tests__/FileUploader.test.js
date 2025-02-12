@@ -1,6 +1,6 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import { Key, MimeType } from '../../constants'
 import { majorScale } from '../../scales'
 import { buildFiles } from '../../test/utils'
@@ -161,7 +161,9 @@ describe('FileUploader', () => {
 
           renderWithProps({ onAccepted })
           const fileUploader = screen.getByTestId(testId)
-          fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          act(() => {
+            fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          })
 
           expect(onAccepted).toHaveBeenCalledWith(files)
         })
@@ -173,7 +175,9 @@ describe('FileUploader', () => {
           renderWithProps({ onAccepted })
           const fileUploader = screen.getByTestId(testId)
           const fileInput = fileUploader.querySelector('input')
-          fireEvent.change(fileInput, { target: { files } })
+          act(() => {
+            fireEvent.change(fileInput, { target: { files } })
+          })
 
           expect(onAccepted).toHaveBeenCalledWith(files)
         })
@@ -188,7 +192,9 @@ describe('FileUploader', () => {
           renderWithProps({ maxSizeInBytes, onAccepted })
           const fileUploader = screen.getByTestId(testId)
           const fileInput = fileUploader.querySelector('input')
-          fireEvent.change(fileInput, { target: { files } })
+          act(() => {
+            fireEvent.change(fileInput, { target: { files } })
+          })
 
           expect(onAccepted).not.toHaveBeenCalled()
         })
@@ -202,7 +208,9 @@ describe('FileUploader', () => {
 
         renderWithProps({ onChange })
         const fileUploader = screen.getByTestId(testId)
-        fireEvent.drop(fileUploader, { dataTransfer: { files } })
+        act(() => {
+          fireEvent.drop(fileUploader, { dataTransfer: { files } })
+        })
 
         expect(onChange).toHaveBeenCalledWith(files)
       })
@@ -214,7 +222,9 @@ describe('FileUploader', () => {
         renderWithProps({ onChange })
         const fileUploader = screen.getByTestId(testId)
         const fileInput = fileUploader.querySelector('input')
-        fireEvent.change(fileInput, { target: { files } })
+        act(() => {
+          fireEvent.change(fileInput, { target: { files } })
+        })
 
         expect(onChange).toHaveBeenCalledWith(files)
       })
@@ -228,7 +238,9 @@ describe('FileUploader', () => {
 
         renderWithProps({ maxSizeInBytes, onChange })
         const fileUploader = screen.getByTestId(testId)
-        fireEvent.drop(fileUploader, { dataTransfer: { files: expected } })
+        act(() => {
+          fireEvent.drop(fileUploader, { dataTransfer: { files: expected } })
+        })
 
         expect(onChange).toHaveBeenCalledWith(expected)
       })
@@ -239,7 +251,9 @@ describe('FileUploader', () => {
 
         renderWithProps({ onChange })
         const fileUploader = screen.getByTestId(testId)
-        fireEvent.drop(fileUploader, { dataTransfer: { files: expected } })
+        act(() => {
+          fireEvent.drop(fileUploader, { dataTransfer: { files: expected } })
+        })
 
         expect(onChange).toHaveBeenCalledWith(expected)
       })
@@ -252,7 +266,9 @@ describe('FileUploader', () => {
 
           renderWithProps({ disabled, onChange })
           const fileUploader = screen.getByTestId(testId)
-          fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          act(() => {
+            fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          })
 
           expect(onChange).not.toHaveBeenCalled()
         })
@@ -265,7 +281,9 @@ describe('FileUploader', () => {
           renderWithProps({ disabled, onChange })
           const fileUploader = screen.getByTestId(testId)
           const fileInput = fileUploader.querySelector('input')
-          fireEvent.change(fileInput, { target: { files } })
+          act(() => {
+            fireEvent.change(fileInput, { target: { files } })
+          })
 
           expect(onChange).not.toHaveBeenCalled()
         })
@@ -282,7 +300,9 @@ describe('FileUploader', () => {
           renderWithProps({ maxSizeInBytes, onRejected })
           const fileUploader = screen.getByTestId(testId)
           const fileInput = fileUploader.querySelector('input')
-          fireEvent.change(fileInput, { target: { files } })
+          act(() => {
+            fireEvent.change(fileInput, { target: { files } })
+          })
 
           expect(onRejected).not.toHaveBeenCalled()
         })
@@ -297,7 +317,9 @@ describe('FileUploader', () => {
 
           renderWithProps({ maxSizeInBytes, onRejected })
           const fileUploader = screen.getByTestId(testId)
-          fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          act(() => {
+            fireEvent.drop(fileUploader, { dataTransfer: { files } })
+          })
 
           expect(onRejected).toHaveBeenCalledWith(expected)
         })
@@ -311,7 +333,9 @@ describe('FileUploader', () => {
           renderWithProps({ maxSizeInBytes, onRejected })
           const fileUploader = screen.getByTestId(testId)
           const fileInput = fileUploader.querySelector('input')
-          fireEvent.change(fileInput, { target: { files } })
+          act(() => {
+            fireEvent.change(fileInput, { target: { files } })
+          })
 
           expect(onRejected).toHaveBeenCalledWith(expected)
         })
@@ -344,10 +368,12 @@ describe('FileUploader', () => {
 
         const { rerender } = renderWithProps({ maxFiles, validationMessage })
         const fileUploader = screen.getByTestId(testId)
-        fireEvent.dragOver(fileUploader, {
-          dataTransfer: {
-            files: buildFiles(maxFiles + 1)
-          }
+        act(() => {
+          fireEvent.dragOver(fileUploader, {
+            dataTransfer: {
+              files: buildFiles(maxFiles + 1)
+            }
+          })
         })
         rerender()
 

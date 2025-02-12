@@ -5,7 +5,7 @@ const userEvent = require('@testing-library/user-event').default
 // Configure testing library
 configure({
   asyncUtilTimeout: 1000,
-  computedStyleSupportsPseudoElements: true,
+  computedStyleSupportsPseudoElements: false,
   defaultHidden: true,
   eventWrapper: cb => cb()
 })

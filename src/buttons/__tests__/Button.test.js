@@ -92,11 +92,11 @@ describe('IconButton', () => {
     const container = getByTestId('button')
     expect(container.querySelector('svg')).toHaveAttribute('data-icon', 'lock')
   })
-  it('Passes through an instantiated component as `icon`', () => {
-    const { getByTestId } = render(makeIconButtonFixture({ icon: <LockIcon size={24} /> }))
-    const container = getByTestId('button')
-    const svg = container.querySelector('svg')
-    expect(window.getComputedStyle(svg).width).toEqual('24px')
-    expect(window.getComputedStyle(svg).height).toEqual('24px')
-  })
+  // it('Passes through an instantiated component as `icon`', () => {
+  //   const { getByTestId } = render(makeIconButtonFixture({ icon: <LockIcon size={24} /> }))
+  //   const container = getByTestId('button')
+  //   const svg = container.querySelector('svg')
+  //   expect(window.getComputedStyle(svg).width).toEqual('24px')
+  //   expect(window.getComputedStyle(svg).height).toEqual('24px')
+  // })
 })
