@@ -27,11 +27,11 @@ describe('Autocomplete', () => {
         )
 
         const textInput = await screen.findByTestId('TextInput')
-        userEvent.click(textInput)
-        userEvent.type(textInput, 'A')
+        await userEvent.click(textInput)
+        await userEvent.type(textInput, 'A')
 
         // Change focus by clicking off of the component
-        userEvent.click(document.body)
+        await userEvent.click(document.body)
 
         expect(textInput).not.toHaveValue()
       })
@@ -52,12 +52,12 @@ describe('Autocomplete', () => {
 
         // Type 'A' into the input to filter items down containing the string
         const textInput = await screen.findByTestId('TextInput')
-        userEvent.click(textInput)
-        userEvent.type(textInput, 'A')
+        await userEvent.click(textInput)
+        await userEvent.type(textInput, 'A')
 
         // Click the 'Apple' option, which should also update the input element
         const item = await screen.findByText('Apple')
-        userEvent.click(item)
+        await userEvent.click(item)
 
         expect(textInput).toHaveValue('Apple')
       })
@@ -75,11 +75,11 @@ describe('Autocomplete', () => {
         )
 
         const textInput = await screen.findByTestId('TextInput')
-        userEvent.click(textInput)
-        userEvent.type(textInput, 'A')
+        await userEvent.click(textInput)
+        await userEvent.type(textInput, 'A')
 
         // Change focus by clicking off of the component
-        userEvent.click(document.body)
+        await userEvent.click(document.body)
 
         expect(textInput).toHaveValue('A')
       })

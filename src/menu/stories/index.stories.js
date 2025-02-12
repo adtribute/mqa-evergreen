@@ -1,6 +1,5 @@
 import React from 'react'
 import Component from '@reactions/component'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Button } from '../../buttons'
 import { Position } from '../../constants'
@@ -9,8 +8,12 @@ import { Popover } from '../../popover'
 import { UnorderedList, ListItem } from '../../typography'
 import Menu from '../src/Menu'
 
-storiesOf('menu', module)
-  .add('dropdown', () => (
+export default {
+  title: 'menu'
+}
+
+export const Dropdown = {
+  render: () => (
     <Box padding={40}>
       <Popover
         position={Position.BOTTOM_LEFT}
@@ -208,19 +211,23 @@ storiesOf('menu', module)
         <ListItem>The End key (fn + arrow right) will go to the last item.</ListItem>
       </UnorderedList>
     </Box>
-  ))
-  .add('Menu', () => (
-    <div>
-      <Menu>
-        <Menu.Group>
-          <Menu.Item>Share...</Menu.Item>
-          <Menu.Item>Move...</Menu.Item>
-          <Menu.Item>Rename...</Menu.Item>
-        </Menu.Group>
-        <Menu.Divider />
-        <Menu.Group>
-          <Menu.Item intent="danger">Delete...</Menu.Item>
-        </Menu.Group>
-      </Menu>
-    </div>
-  ))
+  ),
+
+  name: 'dropdown'
+}
+
+export const _Menu = () => (
+  <div>
+    <Menu>
+      <Menu.Group>
+        <Menu.Item>Share...</Menu.Item>
+        <Menu.Item>Move...</Menu.Item>
+        <Menu.Item>Rename...</Menu.Item>
+      </Menu.Group>
+      <Menu.Divider />
+      <Menu.Group>
+        <Menu.Item intent="danger">Delete...</Menu.Item>
+      </Menu.Group>
+    </Menu>
+  </div>
+)

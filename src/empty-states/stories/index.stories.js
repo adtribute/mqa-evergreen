@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import BasicExample from '../fixtures/BasicExample'
 import BasicWithLinkExample from '../fixtures/BasicWithLinkExample'
 import SmallExample from '../fixtures/SmallExample'
@@ -7,22 +6,42 @@ import SmallMinimalExample from '../fixtures/SmallMinimalExample'
 import TableWithActionExample from '../fixtures/TableWithActionExample'
 import TableWithLinkExample from '../fixtures/TableWithLinkExample'
 
-storiesOf('empty-states', module)
-  .add('Basic Example', () => {
-    return <BasicExample />
-  })
-  .add('Basic with Link Example', () => {
+export default {
+  title: 'empty-states'
+}
+
+export const _BasicExample = () => {
+  return <BasicExample />
+}
+
+export const _BasicWithLinkExample = {
+  render: () => {
     return <BasicWithLinkExample />
-  })
-  .add('Table with Action Example', () => {
+  },
+
+  name: 'Basic with Link Example'
+}
+
+export const _TableWithActionExample = {
+  render: () => {
     return <TableWithActionExample />
-  })
-  .add('Table with Link Example', () => {
+  },
+
+  name: 'Table with Action Example'
+}
+
+export const _TableWithLinkExample = {
+  render: () => {
     return <TableWithLinkExample />
-  })
-  .add('Small Example', () => {
-    return <SmallExample />
-  })
-  .add('Small Minimal Example', () => {
-    return <SmallMinimalExample />
-  })
+  },
+
+  name: 'Table with Link Example'
+}
+
+export const _SmallExample = () => {
+  return <SmallExample />
+}
+
+export const _SmallMinimalExample = () => {
+  return <SmallMinimalExample />
+}

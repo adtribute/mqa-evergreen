@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 import { Pagination } from '../'
 import BasePaginationFixture from '../fixtures/BasePaginationFixture'
 
@@ -54,13 +54,17 @@ describe('Pagination', () => {
     expect(previousHandle).toHaveAttribute('disabled')
     expect(container.querySelector('button[aria-current="true"').textContent).toEqual('1')
 
-    fireEvent.click(nextHandle)
+    await act(async () => {
+      fireEvent.click(nextHandle)
+    })
 
     expect(container.querySelector('button[aria-current="true"').textContent).toEqual('2')
 
     expect(previousHandle).not.toHaveAttribute('disabled')
 
-    fireEvent.click(previousHandle)
+    await act(async () => {
+      fireEvent.click(previousHandle)
+    })
 
     expect(container.querySelector('button[aria-current="true"').textContent).toEqual('1')
   })

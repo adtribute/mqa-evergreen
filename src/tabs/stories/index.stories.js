@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
 import Box from 'ui-box'
 import { Tab, Tablist, TabNavigation } from '..'
@@ -36,7 +35,11 @@ class TabManager extends React.PureComponent {
 const appearances = ['primary', 'secondary']
 const tabs = ['Traits', 'Event History', 'Identities']
 
-storiesOf('tabs', module).add('Tab', () => (
+export default {
+  title: 'tabs'
+}
+
+export const _Tab = () => (
   <Box padding={40}>
     {(() => {
       document.body.style.margin = '0'
@@ -210,4 +213,4 @@ storiesOf('tabs', module).add('Tab', () => (
       </Box>
     </StorySection>
   </Box>
-))
+)

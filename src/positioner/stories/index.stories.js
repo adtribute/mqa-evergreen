@@ -1,8 +1,11 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 
-storiesOf('positioner', module).add('Positioner', () => (
+export default {
+  title: 'positioner'
+}
+
+export const Positioner = () => (
   <Box padding={40}>
     {(() => {
       document.body.style.margin = '0'
@@ -10,4 +13,4 @@ storiesOf('positioner', module).add('Positioner', () => (
     })()}
     <Box>See popover or tooltip story for now.</Box>
   </Box>
-))
+)

@@ -18,7 +18,7 @@ describe('<FilePicker />', () => {
     const { asFragment, container } = render(<FilePicker />)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(asFragment()).toMatchSnapshot()
   })
@@ -27,7 +27,7 @@ describe('<FilePicker />', () => {
     const { asFragment, container } = render(<FilePicker multiple />)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])
@@ -165,11 +165,11 @@ describe('<FilePicker />', () => {
     expect(button).toHaveTextContent(browseText)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(button).toHaveTextContent(replaceText)
 
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])
@@ -198,11 +198,11 @@ describe('<FilePicker />', () => {
     expect(textInput).toHaveValue(noFiles)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(textInput).toHaveValue(oneFile)
 
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])

@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import {
   Text,
@@ -35,41 +34,52 @@ function previewTextComponent(Comp, sizes = TextSizes, props = {}) {
   )
 }
 
-storiesOf('typography', module)
-  .add('Text', () => <div>{previewTextComponent(Text)}</div>)
-  .add('Link', () => (
-    <Box padding={40}>
-      <Box marginBottom={24}>
-        <Text>
-          In order to learn more about this feature, visit <Link href="#">the developer center</Link>.{' '}
-        </Text>
-      </Box>
-      <Box marginBottom={24}>
-        <Link href="#" color="neutral">
-          Neutral Link
-        </Link>
-      </Box>
+export default {
+  title: 'typography'
+}
+
+export const _Text = () => <div>{previewTextComponent(Text)}</div>
+
+export const _Link = () => (
+  <Box padding={40}>
+    <Box marginBottom={24}>
+      <Text>
+        In order to learn more about this feature, visit <Link href="#">the developer center</Link>.{' '}
+      </Text>
     </Box>
-  ))
-  .add('Paragraph', () => <div>{previewTextComponent(Paragraph, TextSizes, { marginTop: 24 })}</div>)
-  .add('Heading', () => <div>{previewTextComponent(Heading, HeadingSizes, { marginTop: 24 })}</div>)
-  .add('Code', () => (
-    <div>
-      {previewTextComponent(Code)}
-      {previewTextComponent(Code, TextSizes, { appearance: 'minimal' })}
-    </div>
-  ))
-  .add('Pre', () => <div>{previewTextComponent(Pre)}</div>)
-  .add('Label', () => <div>{previewTextComponent(Label)}</div>)
-  .add('Small', () => (
-    <div>
-      <Paragraph>
-        Small can only be used inside of a paragraph or other text component <Small>like this</Small>
-      </Paragraph>
-    </div>
-  ))
-  .add('Strong', () => <div>{previewTextComponent(Strong)}</div>)
-  .add('UnorderedList', () => (
+    <Box marginBottom={24}>
+      <Link href="#" color="neutral">
+        Neutral Link
+      </Link>
+    </Box>
+  </Box>
+)
+
+export const _Paragraph = () => <div>{previewTextComponent(Paragraph, TextSizes, { marginTop: 24 })}</div>
+export const _Heading = () => <div>{previewTextComponent(Heading, HeadingSizes, { marginTop: 24 })}</div>
+
+export const _Code = () => (
+  <div>
+    {previewTextComponent(Code)}
+    {previewTextComponent(Code, TextSizes, { appearance: 'minimal' })}
+  </div>
+)
+
+export const _Pre = () => <div>{previewTextComponent(Pre)}</div>
+export const _Label = () => <div>{previewTextComponent(Label)}</div>
+
+export const _Small = () => (
+  <div>
+    <Paragraph>
+      Small can only be used inside of a paragraph or other text component <Small>like this</Small>
+    </Paragraph>
+  </div>
+)
+
+export const _Strong = () => <div>{previewTextComponent(Strong)}</div>
+
+export const _UnorderedList = {
+  render: () => (
     <Box padding={40}>
       {[300, 400, 500].map(size => (
         <Box key={size}>
@@ -92,8 +102,13 @@ storiesOf('typography', module)
         </Box>
       ))}
     </Box>
-  ))
-  .add('UnorderedList with icons', () => (
+  ),
+
+  name: 'UnorderedList'
+}
+
+export const UnorderedListWithIcons = {
+  render: () => (
     <Box padding={40}>
       {[300, 400, 500].map(size => (
         <Box key={size}>
@@ -127,8 +142,13 @@ storiesOf('typography', module)
         </Box>
       ))}
     </Box>
-  ))
-  .add('OrderedList', () => (
+  ),
+
+  name: 'UnorderedList with icons'
+}
+
+export const _OrderedList = {
+  render: () => (
     <Box padding={40}>
       {[300, 400, 500].map(size => (
         <Box key={size}>
@@ -151,4 +171,7 @@ storiesOf('typography', module)
         </Box>
       ))}
     </Box>
-  ))
+  ),
+
+  name: 'OrderedList'
+}

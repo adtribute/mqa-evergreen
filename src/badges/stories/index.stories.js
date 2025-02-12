@@ -1,6 +1,5 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Badge, Pill } from '..'
 import { ThemeConsumer } from '../../theme'
@@ -24,39 +23,43 @@ const randomNumbers = range(8).map(() => {
   })
 })
 
-storiesOf('badges', module)
-  .add('Badge', () => (
-    <ThemeConsumer>
-      {theme => (
-        <Box style={{ ...wrapperStyles }}>
-          {Object.keys(theme.fills).map(color => (
-            <Box key={color}>
-              <Badge color={color} {...baseStyles}>
-                {color}
-              </Badge>
-              <Badge color={color} {...baseStyles} isInteractive>
-                {color}
-              </Badge>
+export default {
+  title: 'badges'
+}
+
+export const _Badge = () => (
+  <ThemeConsumer>
+    {theme => (
+      <Box style={{ ...wrapperStyles }}>
+        {Object.keys(theme.fills).map(color => (
+          <Box key={color}>
+            <Badge color={color} {...baseStyles}>
+              {color}
+            </Badge>
+            <Badge color={color} {...baseStyles} isInteractive>
+              {color}
+            </Badge>
+          </Box>
+        ))}
+      </Box>
+    )}
+  </ThemeConsumer>
+)
+
+export const _Pill = () => (
+  <ThemeConsumer>
+    {theme => (
+      <Box style={{ ...wrapperStyles }}>
+        {Object.keys(theme.fills).map((color, index) => {
+          return (
+            <Box key={color} display="flex" flexDirection="column" alignItems="center">
+              <Pill color={color} {...baseStyles}>
+                {randomNumbers[index]}
+              </Pill>
             </Box>
-          ))}
-        </Box>
-      )}
-    </ThemeConsumer>
-  ))
-  .add('Pill', () => (
-    <ThemeConsumer>
-      {theme => (
-        <Box style={{ ...wrapperStyles }}>
-          {Object.keys(theme.fills).map((color, index) => {
-            return (
-              <Box key={color} display="flex" flexDirection="column" alignItems="center">
-                <Pill color={color} {...baseStyles}>
-                  {randomNumbers[index]}
-                </Pill>
-              </Box>
-            )
-          })}
-        </Box>
-      )}
-    </ThemeConsumer>
-  ))
+          )
+        })}
+      </Box>
+    )}
+  </ThemeConsumer>
+)

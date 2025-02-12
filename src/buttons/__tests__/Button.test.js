@@ -35,12 +35,12 @@ describe('Button', () => {
   it('renders children without crashing', () => {
     expect(() => render(makeButtonFixture())).not.toThrow()
   })
-  it('accepts an `onClick` handler that gets called upon clicking', () => {
+  it('accepts an `onClick` handler that gets called upon clicking', async () => {
     const onClick = jest.fn()
     const { getByTestId } = render(makeButtonFixture({ onClick }))
     const container = getByTestId('button')
 
-    userEvent.click(container)
+    await userEvent.click(container)
     expect(onClick).toHaveBeenCalledTimes(1)
   })
   it('has a `disabled` prop that disables the button', () => {
@@ -48,7 +48,7 @@ describe('Button', () => {
     const { getByTestId } = render(makeButtonFixture({ onClick, disabled: true }))
     const container = getByTestId('button')
 
-    expect(() => userEvent.click(container)).toThrowError()
+    expect(() => userEvent.click(container)).rejects.toThrowError()
     expect(onClick).toHaveBeenCalledTimes(0)
   })
   it('has a `isLoading` prop that renders a spinner and disables the button', () => {
@@ -56,7 +56,7 @@ describe('Button', () => {
     const { getByTestId } = render(makeButtonFixture({ onClick, isLoading: true }))
     const container = getByTestId('button')
 
-    expect(() => userEvent.click(container)).toThrowError()
+    expect(() => userEvent.click(container)).rejects.toThrowError()
     expect(container.querySelector('svg')).toBeVisible()
     expect(onClick).toHaveBeenCalledTimes(0)
   })
@@ -72,16 +72,16 @@ describe('Button', () => {
 
     expect(container.querySelector('svg')).toHaveAttribute('data-icon', 'lock')
   })
-  it('properly handles keyboard events to simulate clicks', () => {
+  it('properly handles keyboard events to simulate clicks', async () => {
     const onClick = jest.fn()
     const { getByTestId } = render(makeButtonFixture({ onClick, iconAfter: LockIcon }))
     const container = getByTestId('button')
 
     container.focus()
     expect(document.activeElement).toEqual(container)
-    userEvent.keyboard('{enter}')
+    await userEvent.keyboard('{enter}')
     expect(onClick).toHaveBeenCalledTimes(1)
-    userEvent.keyboard('{space}')
+    await userEvent.keyboard(' ')
     expect(onClick).toHaveBeenCalledTimes(2)
   })
 })

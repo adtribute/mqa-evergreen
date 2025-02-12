@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen, act } from '@testing-library/react'
+import { fireEvent, render, screen, act, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import TagInput from '../src/TagInput'
 
@@ -8,15 +8,13 @@ const TEST_PLACEHOLDER = 'Enter something...'
 
 describe('<TagInput />', () => {
   describe('onAdd', () => {
-    it('should be called when a new value is entered', () => {
+    it('should be called when a new value is entered', async () => {
       const mockOnAdd = jest.fn()
       const newTestVal = 'Testing'
 
       render(<TagInput values={TEST_VALUES} onAdd={mockOnAdd} inputProps={{ placeholder: TEST_PLACEHOLDER }} />)
 
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
 
       expect(screen.queryByTestId('TagInput-autocomplete-toggle')).not.toBeInTheDocument()
       expect(mockOnAdd).toHaveBeenCalledWith([newTestVal])
@@ -24,13 +22,11 @@ describe('<TagInput />', () => {
   })
 
   describe('onRemove', () => {
-    it('should be called after hitting backspace', () => {
+    it('should be called after hitting backspace', async () => {
       const mockOnRemove = jest.fn()
 
       render(<TagInput values={TEST_VALUES} onRemove={mockOnRemove} inputProps={{ placeholder: TEST_PLACEHOLDER }} />)
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), '{backspace}')
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), '{backspace}')
 
       const lastValueIndex = TEST_VALUES.length - 1
       expect(mockOnRemove).toHaveBeenCalledWith(TEST_VALUES[lastValueIndex], lastValueIndex)
@@ -38,25 +34,21 @@ describe('<TagInput />', () => {
   })
 
   describe('onChange', () => {
-    it('should be called when a value is added', () => {
+    it('should be called when a value is added', async () => {
       const mockOnChange = jest.fn()
       const newTestVal = 'Testing'
 
       render(<TagInput values={TEST_VALUES} onChange={mockOnChange} inputProps={{ placeholder: TEST_PLACEHOLDER }} />)
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
 
       expect(mockOnChange).toHaveBeenLastCalledWith(TEST_VALUES.concat([newTestVal]))
     })
 
-    it('should be called when a value is removed', () => {
+    it('should be called when a value is removed', async () => {
       const mockOnChange = jest.fn()
 
       render(<TagInput values={TEST_VALUES} onChange={mockOnChange} inputProps={{ placeholder: TEST_PLACEHOLDER }} />)
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), '{backspace}')
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), '{backspace}')
 
       const valuesLastRemoved = TEST_VALUES.slice(0, -1)
       expect(mockOnChange).toHaveBeenLastCalledWith(valuesLastRemoved)
@@ -64,7 +56,7 @@ describe('<TagInput />', () => {
   })
 
   describe('tagSubmitKey', () => {
-    it('should allow entering values with space key', () => {
+    it('should allow entering values with space key', async () => {
       const mockOnAdd = jest.fn()
       const newTestVal = 'Testing'
 
@@ -77,11 +69,12 @@ describe('<TagInput />', () => {
         />
       )
 
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{space}`)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), newTestVal)
+      await userEvent.keyboard(' ')
 
-      expect(mockOnAdd).toHaveBeenCalledWith([newTestVal])
+      await waitFor(() => {
+        expect(mockOnAdd).toHaveBeenCalledWith([newTestVal])
+      })
     })
   })
 
@@ -103,7 +96,7 @@ describe('<TagInput />', () => {
   })
 
   describe('addOnBlur', () => {
-    it('should allow adding new value on blur', () => {
+    it('should allow adding new value on blur', async () => {
       const mockOnAdd = jest.fn()
       jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb())
       const newTestVal = 'Testing'
@@ -118,42 +111,40 @@ describe('<TagInput />', () => {
         />
       )
 
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), newTestVal)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), newTestVal)
 
-      act(() => {
+      await act(async () => {
         screen.getByPlaceholderText(TEST_PLACEHOLDER).blur()
       })
 
-      act(() => {
+      await act(async () => {
         fireEvent.blur(screen.getByPlaceholderText(TEST_PLACEHOLDER))
       })
 
-      expect(mockOnAdd).toHaveBeenCalledWith([newTestVal])
+      await waitFor(() => {
+        expect(mockOnAdd).toHaveBeenCalledWith([newTestVal])
+      })
 
       window.requestAnimationFrame.mockRestore()
     })
   })
 
   describe('separator', () => {
-    it('prop should allow entering multiple values at a time', () => {
+    it('prop should allow entering multiple values at a time', async () => {
       const mockOnAdd = jest.fn()
       const newTestVal = 'Testing|123'
 
       render(
         <TagInput separator="|" values={TEST_VALUES} onAdd={mockOnAdd} inputProps={{ placeholder: TEST_PLACEHOLDER }} />
       )
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), `${newTestVal}{enter}`)
 
       expect(mockOnAdd).toHaveBeenCalledWith(['Testing', '123'])
     })
   })
 
   describe('autocompleteItems', () => {
-    it('should render a toggle button when provided', () => {
+    it('should render a toggle button when provided', async () => {
       const mockOnAdd = jest.fn()
       const testAutocompleteItems = ['Testing1', 'Testing2', 'Testing3', 'Other']
 
@@ -170,16 +161,14 @@ describe('<TagInput />', () => {
         expect(screen.queryByText(item)).not.toBeInTheDocument()
       })
 
-      act(() => {
-        userEvent.click(screen.getByTestId('TagInput-autocomplete-toggle'))
-      })
+      await userEvent.click(screen.getByTestId('TagInput-autocomplete-toggle'))
 
       testAutocompleteItems.forEach(item => {
         expect(screen.queryByText(item)).toBeInTheDocument()
       })
     })
 
-    it('should reveal options based on search query', () => {
+    it('should reveal options based on search query', async () => {
       const mockOnAdd = jest.fn()
       const testAutocompleteItems = ['Testing1', 'Testing2', 'Testing3', 'Other']
       const testSearch = 'Test'
@@ -197,9 +186,7 @@ describe('<TagInput />', () => {
         expect(screen.queryByText(item)).not.toBeInTheDocument()
       })
 
-      act(() => {
-        userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), testSearch)
-      })
+      await userEvent.type(screen.getByPlaceholderText(TEST_PLACEHOLDER), testSearch)
 
       testAutocompleteItems.forEach(item => {
         if (item.startsWith(testSearch)) {
@@ -210,7 +197,7 @@ describe('<TagInput />', () => {
       })
     })
 
-    it('should allow user to add item via popover', () => {
+    it('should allow user to add item via popover', async () => {
       const mockOnAdd = jest.fn()
       const testAutocompleteItems = ['Testing1', 'Testing2', 'Testing3', 'Other']
 
@@ -222,13 +209,8 @@ describe('<TagInput />', () => {
           inputProps={{ placeholder: TEST_PLACEHOLDER }}
         />
       )
-      act(() => {
-        userEvent.click(screen.getByTestId('TagInput-autocomplete-toggle'))
-      })
-
-      act(() => {
-        userEvent.click(screen.getByText(testAutocompleteItems[0]))
-      })
+      await userEvent.click(screen.getByTestId('TagInput-autocomplete-toggle'))
+      await userEvent.click(screen.getByText(testAutocompleteItems[0]))
 
       expect(mockOnAdd).toHaveBeenCalledWith([testAutocompleteItems[0]])
     })

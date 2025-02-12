@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Avatar } from '..'
 import { Heading, Paragraph } from '../../typography'
@@ -23,7 +22,11 @@ const StoryHeader = props => <Box marginBottom={16} {...props} />
 const StoryHeading = props => <Heading size={600} marginBottom={0} {...props} />
 const StoryDescription = props => <Paragraph size={400} color="muted" {...props} />
 
-storiesOf('avatar', module).add('Avatar', () => (
+export default {
+  title: 'avatar'
+}
+
+export const _Avatar = () => (
   <Box padding={40}>
     {(() => {
       document.body.style.margin = '0'
@@ -114,4 +117,4 @@ storiesOf('avatar', module).add('Avatar', () => (
       ))}
     </Box>
   </Box>
-))
+)

@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
 import Box from 'ui-box'
 import { Textarea, TextareaField } from '..'
@@ -22,8 +21,12 @@ class Manager extends React.Component {
   }
 }
 
-storiesOf('textarea', module)
-  .add('overview', () => (
+export default {
+  title: 'textarea'
+}
+
+export const Overview = {
+  render: () => (
     <Box padding={48}>
       <Box marginBottom={24} width={360}>
         <Label marginBottom={8} htmlFor="32" size={400} display="block">
@@ -55,8 +58,13 @@ storiesOf('textarea', module)
         />
       </Box>
     </Box>
-  ))
-  .add('TextareaField', () => (
+  ),
+
+  name: 'overview'
+}
+
+export const _TextareaField = {
+  render: () => (
     <Box padding={40}>
       <Heading size={700} marginBottom={40}>
         TextareaField component
@@ -95,4 +103,7 @@ storiesOf('textarea', module)
         }}
       </Manager>
     </Box>
-  ))
+  ),
+
+  name: 'TextareaField'
+}

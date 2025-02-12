@@ -7,17 +7,17 @@ describe('Popover', () => {
   it('Should not be dismissed when clicking on a child within the popover', async () => {
     const { findByTestId } = render(<PopoverWithTextInputFixture />)
     const trigger = await findByTestId('popover-trigger')
-    userEvent.click(trigger)
+    await userEvent.click(trigger)
 
     const container = await findByTestId('popover-container')
     const input = await findByTestId('popover-input')
 
     // Simulate a user click event on the immediate child node
-    userEvent.click(container)
+    await userEvent.click(container)
     expect(container).toBeVisible()
 
     // Click on a child node a level deeper
-    userEvent.click(input)
+    await userEvent.click(input)
     expect(container).toBeVisible()
     expect(input).toBeVisible()
   })
@@ -33,7 +33,7 @@ describe('Popover', () => {
     const mockBodyClick = jest.fn()
     render(<PopoverWithTextInputFixture isShown={true} onBodyClick={mockBodyClick} />)
 
-    userEvent.click(document.body)
+    await userEvent.click(document.body)
 
     expect(mockBodyClick).toHaveBeenCalledTimes(1)
   })
@@ -42,7 +42,7 @@ describe('Popover', () => {
     const { findByTestId } = render(<PopoverWithTextInputFixture isShown shouldCloseOnExternalClick={false} />)
     const container = await findByTestId('popover-container')
     expect(container).toBeVisible()
-    userEvent.click(document.body)
+    await userEvent.click(document.body)
 
     // Container should still be after document body was clicked
     expect(container).toBeVisible()

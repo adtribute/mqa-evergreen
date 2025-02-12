@@ -1,9 +1,16 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import ColorExamples from './ColorExamples'
 
-storiesOf('colors', module).add('overview', () => (
-  <div style={{ margin: 40 }}>
-    <ColorExamples />
-  </div>
-))
+export default {
+  title: 'colors'
+}
+
+export const Overview = {
+  render: () => (
+    <div style={{ margin: 40 }}>
+      <ColorExamples />
+    </div>
+  ),
+
+  name: 'overview'
+}

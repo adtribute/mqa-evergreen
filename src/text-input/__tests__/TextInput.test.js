@@ -34,7 +34,7 @@ describe('TextInput', () => {
     expect(screen.getByTestId('input')).toHaveAttribute('aria-invalid', 'true')
   })
 
-  it('should accept an `onChange` handler to be a controlled component', () => {
+  it('should accept an `onChange` handler to be a controlled component', async () => {
     function ControlledTextInput() {
       const [value, setValue] = useState('')
       return (
@@ -49,10 +49,10 @@ describe('TextInput', () => {
 
     render(<ControlledTextInput />)
     const input = screen.getByTestId('input')
-    userEvent.click(input)
+    await userEvent.click(input)
 
     expect(document.activeElement).toEqual(input)
-    userEvent.type(input, 'Testing')
+    await userEvent.type(input, 'Testing')
     expect(screen.getByDisplayValue('Testing')).toEqual(input)
   })
 
