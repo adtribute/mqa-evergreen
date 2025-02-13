@@ -8333,9 +8333,9 @@ husky@^4.0.10:
     which-pm-runs "^1.0.0"
 
 hyphenate-style-name@^1.0.2:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
-  integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.1.0.tgz#1797bf50369588b47b72ca6d5e65374607cf4436"
+  integrity sha512-WDC/ui2VVRrz3jOVi+XtjqkDjiVjTtFaAGiW37k6b+ohyQ5wYDOGkvCZa8+H0nx3gyvv0+BST9xuOgIyGQ00gw==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
@@ -14549,10 +14549,9 @@ typescript@4.9.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
-ui-box@^5.4.1:
+"ui-box@git+https://github.com/adtribute/mqa-ui-box.git":
   version "5.4.1"
-  resolved "https://registry.yarnpkg.com/ui-box/-/ui-box-5.4.1.tgz#34f497a143783a3513e850bd58379ac583e3f2fb"
-  integrity sha512-5p+b6kSh1q/bptvLANuAusyB/3fGIvnw8w6rSZNPHckQ8UdPfjIK4DvinmMXRKgdniOba22h8ypVqtkJ9zK/iQ==
+  resolved "git+https://github.com/adtribute/mqa-ui-box.git#4da420bf8197785983ff855d6c12835302fb437d"
   dependencies:
     "@emotion/hash" "^0.7.1"
     inline-style-prefixer "^5.0.4"
