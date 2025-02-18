@@ -14549,9 +14549,9 @@ typescript@4.9.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
-"ui-box@git+https://github.com/adtribute/mqa-ui-box.git":
-  version "5.4.1"
-  resolved "git+https://github.com/adtribute/mqa-ui-box.git#4da420bf8197785983ff855d6c12835302fb437d"
+"ui-box@github:adtribute/mqa-ui-box#v5.5.0":
+  version "5.5.0"
+  resolved "https://codeload.github.com/adtribute/mqa-ui-box/tar.gz/6b7fd1ea2f733cf52d53ac33e475ef628b24352f"
   dependencies:
     "@emotion/hash" "^0.7.1"
     inline-style-prefixer "^5.0.4"
