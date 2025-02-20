@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import starWarsNames from 'starwars-names'
 import Box from 'ui-box'
 import { Autocomplete } from '..'
@@ -26,7 +25,11 @@ const items = [
   return 0
 })
 
-storiesOf('autocomplete', module).add('Autocomplete', () => {
+export default {
+  title: 'autocomplete'
+}
+
+export const _Autocomplete = () => {
   const [selectedItem, setSelectedItem] = React.useState('')
 
   const handleChange = React.useCallback(selection => {
@@ -150,4 +153,4 @@ storiesOf('autocomplete', module).add('Autocomplete', () => {
       </Box>
     </Box>
   )
-})
+}

@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Button } from '../../buttons'
 import { MimeType } from '../../constants'
@@ -37,8 +36,12 @@ const FileUploaderState = props => {
   )
 }
 
-storiesOf('file-uploader', module)
-  .add('FileUploader', () => (
+export default {
+  title: 'file-uploader'
+}
+
+export const _FileUploader = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -82,8 +85,13 @@ storiesOf('file-uploader', module)
       <FileUploaderState label="#1581 With TextInput rendered on same page" />
       <TextInput />
     </Box>
-  ))
-  .add('FileCard', () => (
+  ),
+
+  name: 'FileUploader'
+}
+
+export const _FileCard = {
+  render: () => (
     <Box padding={40} maxWidth={600}>
       {(() => {
         document.body.style.margin = '0'
@@ -121,4 +129,7 @@ storiesOf('file-uploader', module)
         type={MimeType.png}
       />
     </Box>
-  ))
+  ),
+
+  name: 'FileCard'
+}

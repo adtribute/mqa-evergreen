@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FilePicker, { CLASS_PREFIX } from '../src/FilePicker'
 
@@ -18,7 +18,7 @@ describe('<FilePicker />', () => {
     const { asFragment, container } = render(<FilePicker />)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(asFragment()).toMatchSnapshot()
   })
@@ -27,7 +27,7 @@ describe('<FilePicker />', () => {
     const { asFragment, container } = render(<FilePicker multiple />)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])
@@ -115,10 +115,12 @@ describe('<FilePicker />', () => {
 
     const fileInput = await getFileInput(container)
 
-    fireEvent.change(fileInput, {
-      target: {
-        files: [{ name: 'data.json' }]
-      }
+    await act(async () => {
+      fireEvent.change(fileInput, {
+        target: {
+          files: [{ name: 'data.json' }]
+        }
+      })
     })
 
     expect(onChange).toHaveBeenCalledTimes(1)
@@ -165,11 +167,11 @@ describe('<FilePicker />', () => {
     expect(button).toHaveTextContent(browseText)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(button).toHaveTextContent(replaceText)
 
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])
@@ -198,11 +200,11 @@ describe('<FilePicker />', () => {
     expect(textInput).toHaveValue(noFiles)
 
     const fileInput = await getFileInput(container)
-    userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
+    await userEvent.upload(fileInput, [new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' })])
 
     expect(textInput).toHaveValue(oneFile)
 
-    userEvent.upload(fileInput, [
+    await userEvent.upload(fileInput, [
       new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' }),
       new File(['(□_□¬)'], 'brucelee.png', { type: 'image/png' })
     ])

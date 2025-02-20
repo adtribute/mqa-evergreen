@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { InlineAlert, Alert, Button, majorScale, Paragraph } from '../..'
 import { Heading } from '../../typography'
@@ -15,86 +14,85 @@ const ErrorMessage = ({ cta, messaging, title }) => (
     )}
   </Alert>
 )
-/* eslint-enable react/prop-types */
 
-storiesOf('alert', module)
-  .add('Alert', () => (
-    <div>
-      <Box padding={40}>
-        {(() => {
-          document.body.style.margin = '0'
-          document.body.style.height = '100vh'
-        })()}
-        {['default', 'card'].map(appearance => (
-          <Box key={appearance}>
-            <Heading marginBottom={16}>{appearance}</Heading>
-            <Alert appearance={appearance} marginBottom={32} title="A simple general message" />
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="success"
-              title="Hooray! You did it. Your Source is now sending data."
-            />
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="warning"
-              title="Changes will affect all Warehouses."
-            />
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="danger"
-              title="We weren’t able to save your changes."
-            />
-            <Alert appearance={appearance} marginBottom={32} intent="danger">
-              This Alert has no title
-            </Alert>
-            <ErrorMessage title="This is broken" messaging="You need to fix this" cta="Try again" />
-          </Box>
-        ))}
-      </Box>
-      <Box padding={40}>
-        {['default'].map(appearance => (
-          <Box key={appearance}>
-            <Heading marginBottom={16}>{appearance}</Heading>
-            <Alert appearance={appearance} marginBottom={32} title="A simple general message">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </Alert>
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="success"
-              title="Hooray! You did it. Your Source is now sending data."
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </Alert>
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="warning"
-              title="Changes will affect all Warehouses."
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </Alert>
-            <Alert
-              appearance={appearance}
-              marginBottom={32}
-              intent="danger"
-              title="We weren’t able to save your changes."
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </Alert>
-          </Box>
-        ))}
-      </Box>
-    </div>
-  ))
-  .add('InlineAlert', () => (
+export default {
+  title: 'alert'
+}
+
+export const _Alert = () => (
+  <div>
+    <Box padding={40}>
+      {(() => {
+        document.body.style.margin = '0'
+        document.body.style.height = '100vh'
+      })()}
+      {['default', 'card'].map(appearance => (
+        <Box key={appearance}>
+          <Heading marginBottom={16}>{appearance}</Heading>
+          <Alert appearance={appearance} marginBottom={32} title="A simple general message" />
+          <Alert
+            appearance={appearance}
+            marginBottom={32}
+            intent="success"
+            title="Hooray! You did it. Your Source is now sending data."
+          />
+          <Alert
+            appearance={appearance}
+            marginBottom={32}
+            intent="warning"
+            title="Changes will affect all Warehouses."
+          />
+          <Alert
+            appearance={appearance}
+            marginBottom={32}
+            intent="danger"
+            title="We weren’t able to save your changes."
+          />
+          <Alert appearance={appearance} marginBottom={32} intent="danger">
+            This Alert has no title
+          </Alert>
+          <ErrorMessage title="This is broken" messaging="You need to fix this" cta="Try again" />
+        </Box>
+      ))}
+    </Box>
+    <Box padding={40}>
+      {['default'].map(appearance => (
+        <Box key={appearance}>
+          <Heading marginBottom={16}>{appearance}</Heading>
+          <Alert appearance={appearance} marginBottom={32} title="A simple general message">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </Alert>
+          <Alert
+            appearance={appearance}
+            marginBottom={32}
+            intent="success"
+            title="Hooray! You did it. Your Source is now sending data."
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </Alert>
+          <Alert appearance={appearance} marginBottom={32} intent="warning" title="Changes will affect all Warehouses.">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </Alert>
+          <Alert
+            appearance={appearance}
+            marginBottom={32}
+            intent="danger"
+            title="We weren’t able to save your changes."
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </Alert>
+        </Box>
+      ))}
+    </Box>
+  </div>
+)
+
+export const _InlineAlert = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -119,4 +117,7 @@ storiesOf('alert', module)
         </InlineAlert>
       </Box>
     </Box>
-  ))
+  ),
+
+  name: 'InlineAlert'
+}

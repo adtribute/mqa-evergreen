@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Switch } from '..'
 import { Heading } from '../../typography'
 
-storiesOf('switch', module).add('Switch', () => {
+export default {
+  title: 'switch'
+}
+
+export const _Switch = () => {
   const [testOneChecked, setTestOneChecked] = useState(false)
   const [testTwoChecked, setTestTwoChecked] = useState(false)
 
@@ -38,4 +41,4 @@ storiesOf('switch', module).add('Switch', () => {
       </Box>
     </Box>
   )
-})
+}

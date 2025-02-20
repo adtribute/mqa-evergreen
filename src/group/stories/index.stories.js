@@ -1,13 +1,18 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { Button } from '../../buttons'
 import { Pane } from '../../layers'
 import { TextInput } from '../../text-input'
 import { Group } from '../index'
 
-const groupStory = storiesOf('group', module)
-groupStory.add('Group', () => {
-  return (
+const meta = {
+  title: 'group',
+  component: Group
+}
+
+export default meta
+
+export const Default = {
+  render: () => (
     <Pane display="grid" gridRowGap={16}>
       <Group size="small">
         <Button>One</Button>
@@ -30,4 +35,4 @@ groupStory.add('Group', () => {
       </Group>
     </Pane>
   )
-})
+}

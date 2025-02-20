@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
 import Box from 'ui-box'
 import { TagInput } from '..'
@@ -55,132 +54,117 @@ class StateManager extends React.PureComponent {
   }
 }
 
-storiesOf('tag-input', module).add('TagInput', () => (
-  <Box padding={40}>
-    {(() => {
-      document.body.style.margin = '0'
-      document.body.style.height = '100vh'
-    })()}
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>Default usage (height 32)</StoryHeading>
-      </StoryHeader>
-      <StateManager>
-        {({ addValues, removeValue, values }) => (
-          <TagInput
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            onRemove={removeValue}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>Changing tag submit key</StoryHeading>
-      </StoryHeader>
-      <StateManager>
-        {({ addValues, removeValue, values }) => (
-          <TagInput
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            tagSubmitKey="space"
-            onRemove={removeValue}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>With tag values</StoryHeading>
-      </StoryHeader>
-      <StateManager values={initialValues}>
-        {({ addValues, removeValue, values }) => (
-          <TagInput
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            onRemove={removeValue}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>Disabled</StoryHeading>
-      </StoryHeader>
-      <StateManager values={initialValues}>
-        {({ addValues, removeValue, values }) => (
-          <TagInput
-            disabled
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            onRemove={removeValue}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>Invalid</StoryHeading>
-      </StoryHeader>
-      <StateManager>
-        {({ addValues, removeValue, values }) => (
-          <TagInput
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            onRemove={removeValue}
-            isInvalid={true}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>With `tagProps`</StoryHeading>
-      </StoryHeader>
-      <StateManager values={['valid', 'invalid']}>
-        {({ addValues, removeValue, tagProps, values }) => (
-          <TagInput
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            onAdd={addValues}
-            onRemove={removeValue}
-            tagProps={tagProps}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>Prevent input clearing on even values</StoryHeading>
-      </StoryHeader>
-      <StateManager values={initialValues}>
-        {({ addValues, handleChange, removeValue, values }) => (
-          <TagInput
-            addOnBlur
-            inputProps={{ placeholder: 'Enter something...' }}
-            values={values}
-            separator={false}
-            onAdd={addValues}
-            onChange={handleChange}
-            onRemove={removeValue}
-          />
-        )}
-      </StateManager>
-    </StorySection>
-    <StorySection>
-      <StoryHeader>
-        <StoryHeading>With Autocomplete</StoryHeading>
-      </StoryHeader>
-      <StateManager>
-        {({ addValues, handleChange, removeValue, values }) => {
-          const autocompleteItems = autocompleteValues.filter(i => !values.includes(i))
-          return (
+export default {
+  title: 'tag-input'
+}
+
+export const _TagInput = {
+  render: () => (
+    <Box padding={40}>
+      {(() => {
+        document.body.style.margin = '0'
+        document.body.style.height = '100vh'
+      })()}
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>Default usage (height 32)</StoryHeading>
+        </StoryHeader>
+        <StateManager>
+          {({ addValues, removeValue, values }) => (
+            <TagInput
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              onRemove={removeValue}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>Changing tag submit key</StoryHeading>
+        </StoryHeader>
+        <StateManager>
+          {({ addValues, removeValue, values }) => (
+            <TagInput
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              tagSubmitKey="space"
+              onRemove={removeValue}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>With tag values</StoryHeading>
+        </StoryHeader>
+        <StateManager values={initialValues}>
+          {({ addValues, removeValue, values }) => (
+            <TagInput
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              onRemove={removeValue}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>Disabled</StoryHeading>
+        </StoryHeader>
+        <StateManager values={initialValues}>
+          {({ addValues, removeValue, values }) => (
+            <TagInput
+              disabled
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              onRemove={removeValue}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>Invalid</StoryHeading>
+        </StoryHeader>
+        <StateManager>
+          {({ addValues, removeValue, values }) => (
+            <TagInput
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              onRemove={removeValue}
+              isInvalid={true}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>With `tagProps`</StoryHeading>
+        </StoryHeader>
+        <StateManager values={['valid', 'invalid']}>
+          {({ addValues, removeValue, tagProps, values }) => (
+            <TagInput
+              inputProps={{ placeholder: 'Enter something...' }}
+              values={values}
+              onAdd={addValues}
+              onRemove={removeValue}
+              tagProps={tagProps}
+            />
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>Prevent input clearing on even values</StoryHeading>
+        </StoryHeader>
+        <StateManager values={initialValues}>
+          {({ addValues, handleChange, removeValue, values }) => (
             <TagInput
               addOnBlur
               inputProps={{ placeholder: 'Enter something...' }}
@@ -189,11 +173,34 @@ storiesOf('tag-input', module).add('TagInput', () => (
               onAdd={addValues}
               onChange={handleChange}
               onRemove={removeValue}
-              autocompleteItems={autocompleteItems}
             />
-          )
-        }}
-      </StateManager>
-    </StorySection>
-  </Box>
-))
+          )}
+        </StateManager>
+      </StorySection>
+      <StorySection>
+        <StoryHeader>
+          <StoryHeading>With Autocomplete</StoryHeading>
+        </StoryHeader>
+        <StateManager>
+          {({ addValues, handleChange, removeValue, values }) => {
+            const autocompleteItems = autocompleteValues.filter(i => !values.includes(i))
+            return (
+              <TagInput
+                addOnBlur
+                inputProps={{ placeholder: 'Enter something...' }}
+                values={values}
+                separator={false}
+                onAdd={addValues}
+                onChange={handleChange}
+                onRemove={removeValue}
+                autocompleteItems={autocompleteItems}
+              />
+            )
+          }}
+        </StateManager>
+      </StorySection>
+    </Box>
+  ),
+
+  name: 'TagInput'
+}

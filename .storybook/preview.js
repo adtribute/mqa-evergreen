@@ -1,25 +1,32 @@
 import React from 'react'
-import { ThemeProvider, classicTheme, defaultTheme } from '../src'
+import { ThemeProvider, defaultTheme } from '../src'
 
-const withThemeProvider = (Story, context) => {
-  const theme = context.globals.theme === 'v5' ? classicTheme : defaultTheme
-  return (
-    <ThemeProvider value={theme}>
-      <Story {...context} />
-    </ThemeProvider>
-  )
-}
-
-export const decorators = [withThemeProvider]
-
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Evergreen theme for components',
-    defaultValue: 'v6',
-    toolbar: {
-      icon: 'paintbrush',
-      items: ['v6', 'v5']
+/** @type { import('@storybook/react').Preview } */
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/
+      }
+    },
+    docs: {
+      toc: true,
+      source: {
+        language: 'jsx',
+        format: true,
+        type: 'code'
+      }
     }
-  }
+  },
+  decorators: [
+    Story => (
+      <ThemeProvider value={defaultTheme}>
+        <Story />
+      </ThemeProvider>
+    )
+  ]
 }
+
+export default preview

@@ -1,7 +1,6 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
 import Component from '@reactions/component'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Table } from '..'
 import { Pane } from '../../layers'
@@ -20,17 +19,22 @@ const dynamicHeights = range(500).map(() => {
   })
 })
 
-storiesOf('table', module)
-  .add('Advanced Sortable Table', () => (
-    <Box padding={24}>
-      {(() => {
-        document.body.style.margin = '0'
-        document.body.style.height = '100vh'
-      })()}
-      <AdvancedTable />
-    </Box>
-  ))
-  .add('Virtual Table + Automatic Heights', () => (
+export default {
+  title: 'table'
+}
+
+export const AdvancedSortableTable = () => (
+  <Box padding={24}>
+    {(() => {
+      document.body.style.margin = '0'
+      document.body.style.height = '100vh'
+    })()}
+    <AdvancedTable />
+  </Box>
+)
+
+export const VirtualTableAutomaticHeights = {
+  render: () => (
     <Box padding={24} height="100vh">
       {(() => {
         document.body.style.margin = '0'
@@ -38,8 +42,13 @@ storiesOf('table', module)
       })()}
       <VirtualTable />
     </Box>
-  ))
-  .add('Editable Table ', () => (
+  ),
+
+  name: 'Virtual Table + Automatic Heights'
+}
+
+export const _EditableTable = {
+  render: () => (
     <Box padding={24} height="100vh">
       {(() => {
         document.body.style.margin = '0'
@@ -47,8 +56,13 @@ storiesOf('table', module)
       })()}
       <EditableTable />
     </Box>
-  ))
-  .add('Editable Table offset test ', () => (
+  ),
+
+  name: 'Editable Table '
+}
+
+export const EditableTableOffsetTest = {
+  render: () => (
     <Box padding={24} paddingTop={800} height="100vh">
       {(() => {
         document.body.style.margin = '0'
@@ -56,8 +70,13 @@ storiesOf('table', module)
       })()}
       <EditableTable />
     </Box>
-  ))
-  .add('Virtual Table within Portal test', () => (
+  ),
+
+  name: 'Editable Table offset test '
+}
+
+export const VirtualTableWithinPortalTest = {
+  render: () => (
     <Box padding={24} height="100vh">
       {(() => {
         document.body.style.margin = '0'
@@ -69,8 +88,13 @@ storiesOf('table', module)
         </Box>
       </Portal>
     </Box>
-  ))
-  .add('Table.Cell', () => (
+  ),
+
+  name: 'Virtual Table within Portal test'
+}
+
+export const TableCell = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -78,8 +102,13 @@ storiesOf('table', module)
       })()}
       <Table.Cell isSelectable>Table.Cell</Table.Cell>
     </Box>
-  ))
-  .add('Table.TextCell', () => (
+  ),
+
+  name: 'Table.Cell'
+}
+
+export const TableTextCell = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -87,8 +116,13 @@ storiesOf('table', module)
       })()}
       <Table.TextCell>Table.TextCell</Table.TextCell>
     </Box>
-  ))
-  .add('Table.Head', () => (
+  ),
+
+  name: 'Table.TextCell'
+}
+
+export const TableHead = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -102,8 +136,13 @@ storiesOf('table', module)
         <Table.TextHeaderCell textAlign="right">ltv</Table.TextHeaderCell>
       </Table.Head>
     </Box>
-  ))
-  .add('Table.Row', () => (
+  ),
+
+  name: 'Table.Head'
+}
+
+export const TableRow = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -130,8 +169,13 @@ storiesOf('table', module)
         </Table.TextCell>
       </Table.Row>
     </Box>
-  ))
-  .add('Table.Row isSelectable', () => (
+  ),
+
+  name: 'Table.Row'
+}
+
+export const TableRowIsSelectable = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -158,8 +202,13 @@ storiesOf('table', module)
         )}
       </Component>
     </Box>
-  ))
-  .add('Table.HeaderCell', () => (
+  ),
+
+  name: 'Table.Row isSelectable'
+}
+
+export const TableHeaderCell = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -167,8 +216,13 @@ storiesOf('table', module)
       })()}
       <Table.HeaderCell>Table.HeaderCell</Table.HeaderCell>
     </Box>
-  ))
-  .add('Table.TextHeaderCell', () => (
+  ),
+
+  name: 'Table.HeaderCell'
+}
+
+export const TableTextHeaderCell = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -176,8 +230,13 @@ storiesOf('table', module)
       })()}
       <Table.TextHeaderCell>Table.TextHeaderCell</Table.TextHeaderCell>
     </Box>
-  ))
-  .add('Table.SearchHeaderCell', () => (
+  ),
+
+  name: 'Table.TextHeaderCell'
+}
+
+export const TableSearchHeaderCell = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -186,8 +245,13 @@ storiesOf('table', module)
       <Table.SearchHeaderCell />
       <Table.SearchHeaderCell autoFocus placeholder="autoFocus" />
     </Box>
-  ))
-  .add('Table.Body', () => (
+  ),
+
+  name: 'Table.SearchHeaderCell'
+}
+
+export const TableBody = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -195,8 +259,13 @@ storiesOf('table', module)
       })()}
       <Table.Body>Table.Body</Table.Body>
     </Box>
-  ))
-  .add('Table.VirtualBody tests', () => (
+  ),
+
+  name: 'Table.Body'
+}
+
+export const TableVirtualBodyTests = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -208,8 +277,13 @@ storiesOf('table', module)
       <Table.VirtualBody height={120}>String</Table.VirtualBody>
       <Table.VirtualBody height={120} />
     </Box>
-  ))
-  .add('Table.VirtualBody dynamic but known heights', () => (
+  ),
+
+  name: 'Table.VirtualBody tests'
+}
+
+export const TableVirtualBodyDynamicButKnownHeights = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -226,8 +300,13 @@ storiesOf('table', module)
         })}
       </Table.VirtualBody>
     </Box>
-  ))
-  .add('Table.VirtualBody grouped panes selectable cells', () => (
+  ),
+
+  name: 'Table.VirtualBody dynamic but known heights'
+}
+
+export const TableVirtualBodyGroupedPanesSelectableCells = {
+  render: () => (
     <Box padding={40}>
       {(() => {
         document.body.style.margin = '0'
@@ -262,4 +341,7 @@ storiesOf('table', module)
         </Pane>
       </Table.VirtualBody>
     </Box>
-  ))
+  ),
+
+  name: 'Table.VirtualBody grouped panes selectable cells'
+}

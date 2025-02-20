@@ -1,5 +1,4 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import Box from 'ui-box'
 import { Select } from '..'
 import { Text, Label } from '../../typography'
@@ -8,7 +7,11 @@ const Description = props => <Text is="p" marginTop={0} size={300} color="muted"
 
 const appearance = 'default'
 
-storiesOf('select', module).add('Select', () => (
+export default {
+  title: 'select'
+}
+
+export const _Select = () => (
   <Box padding={48}>
     <Box marginBottom={24} width={360}>
       <Label htmlFor="32" size={400} display="block">
@@ -78,4 +81,4 @@ storiesOf('select', module).add('Select', () => (
       </Select>
     </Box>
   </Box>
-))
+)

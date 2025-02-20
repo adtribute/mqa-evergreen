@@ -24,10 +24,10 @@ describe('Pulsar', () => {
     expect(screen.getByTestId('Pulsar')).toHaveStyle({ backgroundColor })
   })
 
-  it('should render Tooltip when wrapped and hovered', () => {
+  it('should render Tooltip when wrapped and hovered', async () => {
     render(<Tooltip content="Hello world">{makePulsarFixture()}</Tooltip>)
 
-    userEvent.hover(screen.getByTestId('Pulsar'))
+    await userEvent.hover(screen.getByTestId('Pulsar'))
 
     expect(screen.getByText('Hello world')).toBeInTheDocument()
   })

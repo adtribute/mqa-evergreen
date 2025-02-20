@@ -1,6 +1,5 @@
 import React from 'react'
 import Component from '@reactions/component'
-import { storiesOf } from '@storybook/react'
 import starWarsNames from 'starwars-names'
 import Box from 'ui-box'
 import { Dialog } from '..'
@@ -28,187 +27,192 @@ const comboboxItems = starWarsNames.all.sort((a, b) => {
   return 0
 })
 
-storiesOf('dialog', module)
-  .add('Dialog', () => (
-    <Box padding={40}>
-      {(() => {
-        document.body.style.margin = '0'
-        document.body.style.height = '100vh'
-      })()}
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog isShown={isShown} title="Dialog Title" onCloseComplete={hide} confirmLabel="Custom Label">
-              Passing a string as the content will wrap the string in a “Paragraph”
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Custom Button Label</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog
-              isShown={isShown}
-              title="Dialog with Danger Intent"
-              onCloseComplete={hide}
-              intent="danger"
-              confirmLabel="Dangerous Action"
-            >
-              Passing a string as the content will wrap the string in a “Paragraph”
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Danger Intent</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ confirmLoading, hide, isLoading, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog
-              isShown={isShown}
-              title="Dialog with Loading Confirmation"
-              onConfirm={confirmLoading}
-              confirmLabel={isLoading ? 'Loading...' : 'Confirm Loading'}
-              isConfirmLoading={isLoading}
-              onCloseComplete={hide}
-            >
-              This is useful when you need to process something before closing the dialog.
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Loading Confirmation</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog
-              isShown={isShown}
-              title="Dialog with Confirmation Button Only"
-              onCloseComplete={hide}
-              hasCancel={false}
-              confirmLabel="Got It"
-            >
-              This is useful for product updates and onboarding content.
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Primary Button Only</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog isShown={isShown} title="Dialog without Buttons" onCloseComplete={hide} hasFooter={false}>
+export default {
+  title: 'dialog'
+}
+
+export const _Dialog = () => (
+  <Box padding={40}>
+    {(() => {
+      document.body.style.margin = '0'
+      document.body.style.height = '100vh'
+    })()}
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog isShown={isShown} title="Dialog Title" onCloseComplete={hide} confirmLabel="Custom Label">
+            Passing a string as the content will wrap the string in a “Paragraph”
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Custom Button Label</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog
+            isShown={isShown}
+            title="Dialog with Danger Intent"
+            onCloseComplete={hide}
+            intent="danger"
+            confirmLabel="Dangerous Action"
+          >
+            Passing a string as the content will wrap the string in a “Paragraph”
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Danger Intent</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ confirmLoading, hide, isLoading, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog
+            isShown={isShown}
+            title="Dialog with Loading Confirmation"
+            onConfirm={confirmLoading}
+            confirmLabel={isLoading ? 'Loading...' : 'Confirm Loading'}
+            isConfirmLoading={isLoading}
+            onCloseComplete={hide}
+          >
+            This is useful when you need to process something before closing the dialog.
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Loading Confirmation</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog
+            isShown={isShown}
+            title="Dialog with Confirmation Button Only"
+            onCloseComplete={hide}
+            hasCancel={false}
+            confirmLabel="Got It"
+          >
+            This is useful for product updates and onboarding content.
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Primary Button Only</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog isShown={isShown} title="Dialog without Buttons" onCloseComplete={hide} hasFooter={false}>
+            <Box>
+              <Paragraph>Manage your own buttons and interactions.</Paragraph>
+            </Box>
+          </Dialog>
+          <Button onClick={show}>Show Dialog without Buttons</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog isShown={isShown} title="Dialog with Self Managed Close" onCloseComplete={hide} hasFooter={false}>
+            {({ close }) => (
               <Box>
-                <Paragraph>Manage your own buttons and interactions.</Paragraph>
+                <Paragraph>Manage Your Own Buttons and Interactions.</Paragraph>
+                <Button marginTop={16} onClick={close}>
+                  Self Managed Close
+                </Button>
               </Box>
-            </Dialog>
-            <Button onClick={show}>Show Dialog without Buttons</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog isShown={isShown} title="Dialog with Self Managed Close" onCloseComplete={hide} hasFooter={false}>
-              {({ close }) => (
-                <Box>
-                  <Paragraph>Manage Your Own Buttons and Interactions.</Paragraph>
-                  <Button marginTop={16} onClick={close}>
-                    Self Managed Close
-                  </Button>
-                </Box>
-              )}
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Self Managed Close</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog isShown={isShown} hasHeader={false} hasFooter={false} onCloseComplete={hide}>
-              {({ close }) => (
-                <Box>
-                  <Paragraph>Manage your own header, buttons and interactions.</Paragraph>
-                  <Button marginTop={16} onClick={close}>
-                    Self Managed Close
-                  </Button>
-                </Box>
-              )}
-            </Dialog>
-            <Button onClick={show}>Show Dialog without Header</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog
-              isShown={isShown}
-              hasClose={false}
-              shouldCloseOnOverlayClick={false}
-              shouldCloseOnEscapePress={false}
-              onCloseComplete={hide}
-            >
-              {({ close }) => (
-                <Box>
-                  Modal Dialog
-                  <Button marginTop={16} onClick={close}>
-                    Self Managed Close
-                  </Button>
-                </Box>
-              )}
-            </Dialog>
-            <Button onClick={show}>Show Modal Dialog without Close</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog isShown={isShown} title="Dialog with Internal Scrolling" onCloseComplete={hide}>
-              <Box height={1200} width="100%" backgroundColor="#ddd" />
-            </Dialog>
-            <Button onClick={show}>Show Dialog with Internal Scrolling</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog
-              isShown={isShown}
-              shouldCloseOnOverlayClick={false}
-              shouldCloseOnEscapePress={false}
-              title="Dialog with overlay and escape key disabled"
-              onCloseComplete={hide}
-              onCancel={close => {
-                // eslint-disable-next-line no-console
-                console.log('You canceled')
-                close()
-              }}
-            >
-              <Paragraph>
-                Resistance is futile, you shall not <Strong>esc</Strong>.
-              </Paragraph>
-            </Dialog>
-            <Button onClick={show}>Show Dialog with overlay and escape key disabled</Button>
-          </Box>
-        )}
-      </DialogManager>
-      <DialogManager>
-        {({ hide, isShown, show }) => (
-          <Box marginBottom={16}>
-            <Dialog shouldAutoFocus={false} isShown={isShown} title="Dialog Title" onCloseComplete={hide}>
-              <TextInputField label="First name" />
-            </Dialog>
-            <Button onClick={show}>Show Dialog with autofocus disabled</Button>
-          </Box>
-        )}
-      </DialogManager>
-    </Box>
-  ))
-  .add('Dialog with scrolling and custom header and footer', () => (
+            )}
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Self Managed Close</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog isShown={isShown} hasHeader={false} hasFooter={false} onCloseComplete={hide}>
+            {({ close }) => (
+              <Box>
+                <Paragraph>Manage your own header, buttons and interactions.</Paragraph>
+                <Button marginTop={16} onClick={close}>
+                  Self Managed Close
+                </Button>
+              </Box>
+            )}
+          </Dialog>
+          <Button onClick={show}>Show Dialog without Header</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog
+            isShown={isShown}
+            hasClose={false}
+            shouldCloseOnOverlayClick={false}
+            shouldCloseOnEscapePress={false}
+            onCloseComplete={hide}
+          >
+            {({ close }) => (
+              <Box>
+                Modal Dialog
+                <Button marginTop={16} onClick={close}>
+                  Self Managed Close
+                </Button>
+              </Box>
+            )}
+          </Dialog>
+          <Button onClick={show}>Show Modal Dialog without Close</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog isShown={isShown} title="Dialog with Internal Scrolling" onCloseComplete={hide}>
+            <Box height={1200} width="100%" backgroundColor="#ddd" />
+          </Dialog>
+          <Button onClick={show}>Show Dialog with Internal Scrolling</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog
+            isShown={isShown}
+            shouldCloseOnOverlayClick={false}
+            shouldCloseOnEscapePress={false}
+            title="Dialog with overlay and escape key disabled"
+            onCloseComplete={hide}
+            onCancel={close => {
+              // eslint-disable-next-line no-console
+              console.log('You canceled')
+              close()
+            }}
+          >
+            <Paragraph>
+              Resistance is futile, you shall not <Strong>esc</Strong>.
+            </Paragraph>
+          </Dialog>
+          <Button onClick={show}>Show Dialog with overlay and escape key disabled</Button>
+        </Box>
+      )}
+    </DialogManager>
+    <DialogManager>
+      {({ hide, isShown, show }) => (
+        <Box marginBottom={16}>
+          <Dialog shouldAutoFocus={false} isShown={isShown} title="Dialog Title" onCloseComplete={hide}>
+            <TextInputField label="First name" />
+          </Dialog>
+          <Button onClick={show}>Show Dialog with autofocus disabled</Button>
+        </Box>
+      )}
+    </DialogManager>
+  </Box>
+)
+
+export const DialogWithScrollingAndCustomHeaderAndFooter = {
+  render: () => (
     <Box padding={40}>
       <DialogManager>
         {({ hide, isShown, show }) => (
@@ -241,8 +245,13 @@ storiesOf('dialog', module)
         )}
       </DialogManager>
     </Box>
-  ))
-  .add('Dialog with nested Combobox', () => (
+  ),
+
+  name: 'Dialog with scrolling and custom header and footer'
+}
+
+export const DialogWithNestedCombobox = {
+  render: () => (
     <Box padding={40}>
       <DialogManager>
         {({ hide, isShown, show }) => (
@@ -255,8 +264,13 @@ storiesOf('dialog', module)
         )}
       </DialogManager>
     </Box>
-  ))
-  .add('Dialog with customized content container', () => (
+  ),
+
+  name: 'Dialog with nested Combobox'
+}
+
+export const DialogWithCustomizedContentContainer = {
+  render: () => (
     <Box padding={40}>
       <DialogManager>
         {({ hide, isShown, show }) => (
@@ -312,8 +326,13 @@ storiesOf('dialog', module)
         )}
       </DialogManager>
     </Box>
-  ))
-  .add('Dialog with endless stacking', () => (
+  ),
+
+  name: 'Dialog with customized content container'
+}
+
+export const DialogWithEndlessStacking = {
+  render: () => (
     <Box padding={40}>
       <DialogManager>
         {({ hide, isShown, show }) => (
@@ -395,4 +414,7 @@ storiesOf('dialog', module)
         )}
       </DialogManager>
     </Box>
-  ))
+  ),
+
+  name: 'Dialog with endless stacking'
+}
