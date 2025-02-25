@@ -35,7 +35,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const ui_box_1 = __importStar(require("ui-box"));
+const ui_box_1 = __importStar(require("@maestroqa/ui-box"));
 const constants_1 = require("../../constants");
 const icons_1 = require("../../icons");
 const text_input_1 = require("../../text-input");

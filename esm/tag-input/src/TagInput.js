@@ -8,9 +8,9 @@ var _excluded = ["addOnBlur", "disabled", "height", "separator", "values", "tagS
  * @overview TagInput accepts multiple values that can be individually removed
  */
 import React, { memo, forwardRef, useState } from 'react';
+import Box from '@maestroqa/ui-box';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
-import Box from 'ui-box';
 import { Autocomplete } from '../../autocomplete';
 import { Button } from '../../buttons';
 import { useId, useStyleConfig } from '../../hooks';

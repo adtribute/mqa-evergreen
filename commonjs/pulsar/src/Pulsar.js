@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pulsar = void 0;
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importStar(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importStar(require("ui-box"));
 const Position_1 = __importDefault(require("../../constants/src/Position"));
 const layers_1 = require("../../layers");
 const scales_1 = require("../../scales");

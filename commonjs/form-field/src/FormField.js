@@ -38,8 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importStar(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importStar(require("ui-box"));
 const FormFieldDescription_1 = __importDefault(require("./FormFieldDescription"));
 const FormFieldHint_1 = __importDefault(require("./FormFieldHint"));
 const FormFieldLabel_1 = __importDefault(require("./FormFieldLabel"));

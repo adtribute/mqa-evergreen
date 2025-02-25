@@ -3,9 +3,9 @@ import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutPr
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 var _excluded = ["className"];
 import React, { memo, useRef, useState, useEffect, useCallback } from 'react';
+import { keyframes } from '@maestroqa/ui-box';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
-import { keyframes } from 'ui-box';
 import { Button, IconButton } from '../../buttons';
 import absolutePositions from '../../constants/src/AbsolutePosition';
 import positions from '../../constants/src/Position';

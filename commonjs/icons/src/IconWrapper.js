@@ -39,9 +39,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IconWrapper = void 0;
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importDefault(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
 const react_is_1 = __importDefault(require("react-is"));
-const ui_box_1 = __importDefault(require("ui-box"));
 /**
  * This is an internal helper component for rendering custom or Evergreen icons
  * Box props are applied to the outer Box container, and Evergreen icon-specific props are added to the icon element.

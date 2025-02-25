@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getIconSizeForButton = exports.pseudoSelectors = exports.internalStyles = void 0;
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importStar(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importStar(require("ui-box"));
 const hooks_1 = require("../../hooks");
 const IconWrapper_1 = require("../../icons/src/IconWrapper");
 const deprecated_theme_helpers_1 = require("../../lib/deprecated-theme-helpers");

@@ -8,8 +8,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 import React, { memo, forwardRef } from 'react';
+import Box, { dimensions, spacing, position, layout } from '@maestroqa/ui-box';
 import PropTypes from 'prop-types';
-import Box, { dimensions, spacing, position, layout } from 'ui-box';
 import FormFieldDescription from './FormFieldDescription';
 import FormFieldHint from './FormFieldHint';
 import FormFieldLabel from './FormFieldLabel';

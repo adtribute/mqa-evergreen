@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
-const ui_box_1 = require("ui-box");
+const ui_box_1 = require("@maestroqa/ui-box");
 function extractStyles(options = {}) {
     const { cache, styles } = (0, ui_box_1.extractStyles)();
     const evergreenCache = {
