@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 
 const Image = memo(
   forwardRef(function Image(props, ref) {

@@ -1,6 +1,6 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
-import Box from 'ui-box'
 import { FilePicker } from '..'
 
 storiesOf('file-picker', module).add('FilePicker', () => (

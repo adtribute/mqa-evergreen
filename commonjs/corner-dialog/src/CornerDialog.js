@@ -38,9 +38,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const ui_box_1 = require("@maestroqa/ui-box");
 const prop_types_1 = __importDefault(require("prop-types"));
 const react_transition_group_1 = require("react-transition-group");
-const ui_box_1 = require("ui-box");
 const buttons_1 = require("../../buttons");
 const AbsolutePosition_1 = __importDefault(require("../../constants/src/AbsolutePosition"));
 const Position_1 = __importDefault(require("../../constants/src/Position"));

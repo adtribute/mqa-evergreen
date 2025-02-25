@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const ui_box_1 = __importDefault(require("ui-box"));
+const ui_box_1 = __importDefault(require("@maestroqa/ui-box"));
 const Small = (0, react_1.memo)((0, react_1.forwardRef)(function Small(props, ref) {
     return react_1.default.createElement(ui_box_1.default, Object.assign({ ref: ref, is: "small", fontSize: "85%" }, props));
 }));

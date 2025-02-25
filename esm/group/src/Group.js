@@ -2,8 +2,8 @@ import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 var _excluded = ["children", "className", "size"];
 import React, { memo, forwardRef } from 'react';
+import Box from '@maestroqa/ui-box';
 import PropTypes from 'prop-types';
-import Box from 'ui-box';
 import { useStyleConfig } from '../../hooks';
 var pseudoSelectors = {
   _child: '& > *',

@@ -19,7 +19,7 @@ exports.Ul = exports.UnorderedList = exports.Tooltip = exports.toaster = exports
 exports.Strong = exports.Small = exports.Link = exports.Label = exports.Pre = exports.Code = exports.Heading = exports.Paragraph = exports.Text = exports.Li = exports.ListItem = exports.Ol = exports.OrderedList = void 0;
 const ssr_1 = require("./ssr");
 (0, ssr_1.autoHydrate)();
-var ui_box_1 = require("ui-box");
+var ui_box_1 = require("@maestroqa/ui-box");
 Object.defineProperty(exports, "configureSafeHref", { enumerable: true, get: function () { return ui_box_1.configureSafeHref; } });
 var alert_1 = require("./alert");
 Object.defineProperty(exports, "Alert", { enumerable: true, get: function () { return alert_1.Alert; } });

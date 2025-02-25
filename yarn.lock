@@ -1704,6 +1704,15 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@maestroqa/ui-box@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@maestroqa/ui-box/-/ui-box-5.7.0.tgz#f79ca6a18a098b5583930f168139aedb3d6f3f2c"
+  integrity sha512-c9FJYV7YaI/KRx+pDig1YX6aqTsX3taXxXTxNwDMww/WC1if6/J9sYosr+Se3u8Xig23SEbfERwZmo6tF6DW9g==
+  dependencies:
+    "@emotion/hash" "^0.7.1"
+    inline-style-prefixer "^5.0.4"
+    prop-types "^15.7.2"
+
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.22.tgz#d9e8fe7f8185ff13c9c8639c048b123e30d322c4"
@@ -14548,14 +14557,6 @@ typescript@4.9.4:
   version "4.9.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
-
-"ui-box@github:adtribute/mqa-ui-box#v5.6.0":
-  version "5.6.0"
-  resolved "https://codeload.github.com/adtribute/mqa-ui-box/tar.gz/4566a94eaa796f39c19dbb6adcdc72509047edcc"
-  dependencies:
-    "@emotion/hash" "^0.7.1"
-    inline-style-prefixer "^5.0.4"
-    prop-types "^15.7.2"
 
 unbox-primitive@^1.0.1:
   version "1.0.1"

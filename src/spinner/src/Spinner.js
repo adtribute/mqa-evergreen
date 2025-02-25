@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, memo } from 'react'
+import Box, { keyframes } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { keyframes } from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 
 const loadingKeyframes = keyframes('loading', {

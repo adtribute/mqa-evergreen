@@ -38,9 +38,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importDefault(require("@maestroqa/ui-box"));
 const lodash_isempty_1 = __importDefault(require("lodash.isempty"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importDefault(require("ui-box"));
 const constants_1 = require("../../constants");
 const form_field_1 = require("../../form-field");
 const hooks_1 = require("../../hooks");

@@ -1,7 +1,7 @@
 import React, { memo, forwardRef, useState, useRef, useCallback } from 'react'
+import Box from '@maestroqa/ui-box'
 import isEmpty from 'lodash.isempty'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { Key } from '../../constants'
 import { FormField } from '../../form-field'
 import { useStyleConfig } from '../../hooks'

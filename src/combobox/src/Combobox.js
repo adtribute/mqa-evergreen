@@ -1,6 +1,6 @@
 import React, { memo, useState, useCallback } from 'react'
+import { dimensions, spacing, position, layout } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import { dimensions, spacing, position, layout } from 'ui-box'
 import { Autocomplete } from '../../autocomplete'
 import { IconButton } from '../../buttons'
 import { Group } from '../../group'

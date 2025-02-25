@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box, { keyframes } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { keyframes } from 'ui-box'
 import Positions from '../../constants/src/Position'
 import { Pane } from '../../layers'
 import { majorScale } from '../../scales'

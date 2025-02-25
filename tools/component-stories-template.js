@@ -17,11 +17,9 @@ module.exports = ({ packageName, componentNames = [] }) => {
   return `
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import Box from 'ui-box'
+import Box from '@maestroqa/ui-box'
 import { ${componentNames.join(', ')} } from '../../${packageName}'
 
-storiesOf('${packageName}', module)${componentNames
-    .map(componentName => storyTemplate(componentName))
-    .join('')}
+storiesOf('${packageName}', module)${componentNames.map(componentName => storyTemplate(componentName)).join('')}
 `.trim()
 }

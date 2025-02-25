@@ -1,6 +1,6 @@
 import React, { memo, forwardRef, ForwardedRef } from 'react'
+import Box, { PolymorphicBoxProps } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { PolymorphicBoxProps } from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 
 export interface PaneOwnProps {

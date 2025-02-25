@@ -1,6 +1,6 @@
 import React, { memo, forwardRef, useState, useRef, useCallback } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { Button } from '../../buttons'
 import safeInvoke from '../../lib/safe-invoke'
 import { TextInput } from '../../text-input'

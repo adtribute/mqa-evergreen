@@ -16,9 +16,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useStyleConfig = void 0;
 const react_1 = require("react");
+const ui_box_1 = require("@maestroqa/ui-box");
 const lodash_merge_1 = __importDefault(require("lodash.merge"));
 const react_fast_compare_1 = __importDefault(require("react-fast-compare"));
-const ui_box_1 = require("ui-box");
 const theme_1 = require("../theme");
 /**
  * @typedef {object} StateStyles
@@ -36,7 +36,7 @@ const theme_1 = require("../theme");
  * @property {string} [appearance]
  * @property {string} [size]
  */
-/** @typedef {import('ui-box').EnhancerProps & StateStyles} Style */
+/** @typedef {import('@maestroqa/ui-box').EnhancerProps & StateStyles} Style */
 /**
  * @typedef {object} StyleConfig
  * @property {Style} baseStyle
@@ -61,7 +61,7 @@ function maybeRunDeep(raw, ...args) {
  * @param {object} theme
  * @param {StyleModifiers} props
  * @param {StyleConfig} styleConfig
- * @param {import('ui-box').BoxCssProps<CssProps>} [internalStyles]
+ * @param {import('@maestroqa/ui-box').BoxCssProps<CssProps>} [internalStyles]
  * @returns {StyleConfig}
  */
 function combineStyles(theme, props, styleConfig, internalStyles = {}) {
@@ -93,7 +93,7 @@ function useBoxProps(styleProps, placeholderSelectors) {
     return (0, react_1.useMemo)(() => {
         // Split the resulting style object into ui-box-compatible props and the rest
         const _a = (0, ui_box_1.splitBoxProps)(styleProps), _b = _a.matchedProps, { selectors: actualSelectors = {} } = _b, matchedProps = __rest(_b, ["selectors"]), { remainingProps } = _a;
-        /** @type {import('ui-box').EnhancerProps['selectors']} */
+        /** @type {import('@maestroqa/ui-box').EnhancerProps['selectors']} */
         const selectors = {};
         // Swap out pseudo selector placeholders for their actual css selector strings
         for (const k of Object.keys(actualSelectors)) {
@@ -115,8 +115,8 @@ function useBoxProps(styleProps, placeholderSelectors) {
  * @param {string} componentKey the name of the component in the theme
  * @param {StyleModifiers} props props that modify the resulting visual style (e.g. `size` or `appearance`)
  * @param {PseudoSelectors} placeholderSelectors mapping for the component between states and actual pseudo selectors
- * @param {import('ui-box').BoxCssProps<CssProps>} [internalStyles] additional styles that are specified internally, separate from the visual styles
- * @returns {{ selectors: import('ui-box').EnhancerProps['selectors'], style: import('react').CSSProperties } & import('ui-box').EnhancerProps}
+ * @param {import('@maestroqa/ui-box').BoxCssProps<CssProps>} [internalStyles] additional styles that are specified internally, separate from the visual styles
+ * @returns {{ selectors: import('@maestroqa/ui-box').EnhancerProps['selectors'], style: import('react').CSSProperties } & import('@maestroqa/ui-box').EnhancerProps}
  */
 function useStyleConfig(componentKey, props, placeholderSelectors, internalStyles) {
     const theme = (0, theme_1.useTheme)();

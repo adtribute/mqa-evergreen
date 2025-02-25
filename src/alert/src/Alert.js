@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import { spacing, dimensions, position, layout } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import { spacing, dimensions, position, layout } from 'ui-box'
 import { IconButton } from '../../buttons'
 import { useStyleConfig } from '../../hooks'
 import { CrossIcon } from '../../icons'

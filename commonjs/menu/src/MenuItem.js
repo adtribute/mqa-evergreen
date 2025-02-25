@@ -38,8 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importDefault(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importDefault(require("ui-box"));
 const hooks_1 = require("../../hooks");
 const IconWrapper_1 = require("../../icons/src/IconWrapper");
 const layers_1 = require("../../layers");

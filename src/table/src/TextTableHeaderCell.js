@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import TableHeaderCell from './TableHeaderCell'
 
 const TextTableHeaderCell = memo(function TextTableHeaderCell(props) {

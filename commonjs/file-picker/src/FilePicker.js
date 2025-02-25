@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CLASS_PREFIX = void 0;
 const react_1 = __importStar(require("react"));
+const ui_box_1 = __importDefault(require("@maestroqa/ui-box"));
 const prop_types_1 = __importDefault(require("prop-types"));
-const ui_box_1 = __importDefault(require("ui-box"));
 const buttons_1 = require("../../buttons");
 const safe_invoke_1 = __importDefault(require("../../lib/safe-invoke"));
 const text_input_1 = require("../../text-input");

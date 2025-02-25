@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { StackingOrder } from '../../constants'
 import Toast from './Toast'
 
