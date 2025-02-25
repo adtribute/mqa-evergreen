@@ -1,9 +1,9 @@
 // @ts-nocheck Disabling TS checking on this file while definitions are being ported over to src files
 
 import * as React from 'react'
+import { extractStyles as boxExtractStyles, BoxProps, BoxComponent, PolymorphicBoxProps } from '@maestroqa/ui-box'
 import { DownshiftProps } from 'downshift'
 import { TransitionProps, TransitionStatus } from 'react-transition-group/Transition'
-import { extractStyles as boxExtractStyles, BoxProps, BoxComponent, PolymorphicBoxProps } from 'ui-box'
 /**
  * Generated types that are used for composition in manually written types need to be imported to be resolved
  */
@@ -17,8 +17,8 @@ export type {
   EnhancerProps,
   BoxCssProps,
   CssProps
-} from 'ui-box'
-export { configureSafeHref } from 'ui-box'
+} from '@maestroqa/ui-box'
+export { configureSafeHref } from '@maestroqa/ui-box'
 
 /**
  * Re-export generated types through this manually written typedef file until we can point to the generated index.d.ts file

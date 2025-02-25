@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react'
+import { splitBoxProps } from '@maestroqa/ui-box'
 import merge from 'lodash.merge'
 import isEqual from 'react-fast-compare'
-import { splitBoxProps } from 'ui-box'
 import { useTheme, get, resolveThemeTokens } from '../theme'
 
 /**
@@ -23,7 +23,7 @@ import { useTheme, get, resolveThemeTokens } from '../theme'
  * @property {string} [size]
  */
 
-/** @typedef {import('ui-box').EnhancerProps & StateStyles} Style */
+/** @typedef {import('@maestroqa/ui-box').EnhancerProps & StateStyles} Style */
 
 /**
  * @typedef {object} StyleConfig
@@ -55,7 +55,7 @@ function maybeRunDeep(raw, ...args) {
  * @param {object} theme
  * @param {StyleModifiers} props
  * @param {StyleConfig} styleConfig
- * @param {import('ui-box').BoxCssProps<CssProps>} [internalStyles]
+ * @param {import('@maestroqa/ui-box').BoxCssProps<CssProps>} [internalStyles]
  * @returns {StyleConfig}
  */
 function combineStyles(theme, props, styleConfig, internalStyles = {}) {
@@ -97,7 +97,7 @@ function useBoxProps(styleProps, placeholderSelectors) {
       remainingProps
     } = splitBoxProps(styleProps)
 
-    /** @type {import('ui-box').EnhancerProps['selectors']} */
+    /** @type {import('@maestroqa/ui-box').EnhancerProps['selectors']} */
     const selectors = {}
 
     // Swap out pseudo selector placeholders for their actual css selector strings
@@ -124,8 +124,8 @@ function useBoxProps(styleProps, placeholderSelectors) {
  * @param {string} componentKey the name of the component in the theme
  * @param {StyleModifiers} props props that modify the resulting visual style (e.g. `size` or `appearance`)
  * @param {PseudoSelectors} placeholderSelectors mapping for the component between states and actual pseudo selectors
- * @param {import('ui-box').BoxCssProps<CssProps>} [internalStyles] additional styles that are specified internally, separate from the visual styles
- * @returns {{ selectors: import('ui-box').EnhancerProps['selectors'], style: import('react').CSSProperties } & import('ui-box').EnhancerProps}
+ * @param {import('@maestroqa/ui-box').BoxCssProps<CssProps>} [internalStyles] additional styles that are specified internally, separate from the visual styles
+ * @returns {{ selectors: import('@maestroqa/ui-box').EnhancerProps['selectors'], style: import('react').CSSProperties } & import('@maestroqa/ui-box').EnhancerProps}
  */
 export function useStyleConfig(componentKey, props, placeholderSelectors, internalStyles) {
   const theme = useTheme()

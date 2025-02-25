@@ -1,7 +1,7 @@
 import React, { memo, forwardRef } from 'react'
+import Box from '@maestroqa/ui-box'
 import humanize from 'humanize-plus'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { IconButton } from '../../buttons'
 import { useStyleConfig } from '../../hooks'
 import { InfoSignIcon, TrashIcon } from '../../icons'

@@ -1,7 +1,7 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import Component from '@reactions/component'
 import { storiesOf } from '@storybook/react'
-import Box from 'ui-box'
 import { SideSheet } from '..'
 import { Button } from '../../buttons'
 import { Dialog } from '../../dialog'

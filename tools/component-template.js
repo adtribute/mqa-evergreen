@@ -4,7 +4,7 @@ module.exports = ({ componentName }) => {
   return `
 import React, { memo, forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
+import Box from '@maestroqa/ui-box'
 
 const ${componentName} = memo(forwardRef((props, ref) => {
   const { ...restProps } = props

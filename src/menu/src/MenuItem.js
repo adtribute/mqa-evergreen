@@ -1,6 +1,6 @@
 import React, { memo, forwardRef, useMemo, useCallback } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { useClickable, useStyleConfig } from '../../hooks'
 import { IconWrapper } from '../../icons/src/IconWrapper'
 import { Pane } from '../../layers'

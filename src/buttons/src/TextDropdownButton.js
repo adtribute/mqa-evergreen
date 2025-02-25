@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box, { dimensions, spacing, position, layout } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { dimensions, spacing, position, layout } from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 import { CaretDownIcon } from '../../icons'
 import { IconWrapper } from '../../icons/src/IconWrapper'

@@ -1,6 +1,6 @@
 import React, { forwardRef, memo } from 'react'
+import { splitBoxProps } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import { splitBoxProps } from 'ui-box'
 import { FormField } from '../../form-field'
 import { useId } from '../../hooks'
 import { generateAriaDescribedBy } from '../../lib/generate-aria-describedby'

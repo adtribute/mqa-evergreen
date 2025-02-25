@@ -1,7 +1,7 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { TagInput } from '..'
 import { Heading } from '../../typography'
 

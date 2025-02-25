@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box, { dimensions, spacing, position, layout } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { dimensions, spacing, position, layout } from 'ui-box'
 import FormFieldDescription from './FormFieldDescription'
 import FormFieldHint from './FormFieldHint'
 import FormFieldLabel from './FormFieldLabel'

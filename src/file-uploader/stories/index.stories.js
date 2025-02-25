@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
-import Box from 'ui-box'
 import { Button } from '../../buttons'
 import { MimeType } from '../../constants'
 import { FileUploader, FileCard } from '../../file-uploader'

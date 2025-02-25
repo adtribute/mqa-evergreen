@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
+import { keyframes } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import { keyframes } from 'ui-box'
 import { Button, IconButton } from '../../buttons'
 import { useStyleConfig } from '../../hooks'
 import { CrossIcon } from '../../icons'

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
+import Box, { keyframes } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { keyframes } from 'ui-box'
 import { Position } from '../../constants'
 import { CrossIcon } from '../../icons'
 

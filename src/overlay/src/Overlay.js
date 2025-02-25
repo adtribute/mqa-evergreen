@@ -1,7 +1,7 @@
 import React, { memo, useState, useEffect, useRef } from 'react'
+import Box, { keyframes } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
 import { Transition } from 'react-transition-group'
-import Box, { keyframes } from 'ui-box'
 import { StackingOrder } from '../../constants'
 import preventBodyScroll from '../../lib/prevent-body-scroll'
 import safeInvoke from '../../lib/safe-invoke'

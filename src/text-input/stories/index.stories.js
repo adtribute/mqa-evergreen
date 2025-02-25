@@ -1,7 +1,7 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { TextInputField, TextInput } from '..'
 import { Button } from '../../buttons'
 import { ErrorIcon } from '../../icons'

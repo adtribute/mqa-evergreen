@@ -1,7 +1,7 @@
 import React, { forwardRef, memo } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
 import ReactIs from 'react-is'
-import Box from 'ui-box'
 
 /**
  * This is an internal helper component for rendering custom or Evergreen icons

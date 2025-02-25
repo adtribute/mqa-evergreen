@@ -1,7 +1,7 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import Component from '@reactions/component'
 import { storiesOf } from '@storybook/react'
-import Box from 'ui-box'
 import { SelectMenu, Option } from '..'
 import { Button } from '../../buttons'
 import { PeopleIcon } from '../../icons'

@@ -1,4 +1,4 @@
-import { hydrate as boxHydrate } from 'ui-box'
+import { hydrate as boxHydrate } from '@maestroqa/ui-box'
 import canUseDom from '../../lib/canUseDom'
 
 /**

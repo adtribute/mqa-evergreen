@@ -1,5 +1,5 @@
 import React, { memo, forwardRef } from 'react'
-import Box from 'ui-box'
+import Box from '@maestroqa/ui-box'
 
 const Small = memo(
   forwardRef(function Small(props, ref) {

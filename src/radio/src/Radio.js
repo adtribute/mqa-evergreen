@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box, { spacing, position, layout, dimensions } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { spacing, position, layout, dimensions } from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 import { Text } from '../../typography'
 

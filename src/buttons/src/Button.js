@@ -1,6 +1,6 @@
 import React, { memo, forwardRef } from 'react'
+import Box, { spacing, dimensions, position, layout } from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box, { spacing, dimensions, position, layout } from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 import { IconWrapper } from '../../icons/src/IconWrapper'
 import { getTextPropsForControlHeight } from '../../lib/deprecated-theme-helpers'

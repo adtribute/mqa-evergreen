@@ -1,7 +1,7 @@
 import React from 'react'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
 import starWarsNames from 'starwars-names'
-import Box from 'ui-box'
 import { Autocomplete } from '..'
 import { Button } from '../../buttons'
 import { TextInput } from '../../text-input'

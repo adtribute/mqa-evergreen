@@ -1,6 +1,6 @@
 import React, { useState, memo, forwardRef, useCallback } from 'react'
+import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
-import Box from 'ui-box'
 import { useStyleConfig } from '../../hooks'
 import { Image } from '../../image'
 import { Text } from '../../typography'

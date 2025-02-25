@@ -1,7 +1,7 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
+import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
-import Box from 'ui-box'
 import { Badge, Pill } from '..'
 import { ThemeConsumer } from '../../theme'
 
