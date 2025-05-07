@@ -60,7 +60,7 @@ const fuzzyFilter = (options, input, { key }) => {
 };
 const noop = () => { };
 const defaultRenderItem = props => {
-    return (react_1.default.createElement(Option_1.default, Object.assign({}, props),
+    return (react_1.default.createElement(Option_1.default, Object.assign({ title: props.label }, props),
         props.icon && react_1.default.createElement(image_1.Image, { src: props.icon, width: 24, marginRight: 8 }),
         props.label));
 };

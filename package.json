@@ -180,7 +180,7 @@
     "arrowParens": "avoid"
   },
   "lint-staged": {
-    "!(codemods|docs)/**/*.{js,ts,tsx}": [
+    "!(codemods|docs|esm|commonjs)/**/*.{js,ts,tsx}": [
       "yarn lint --fix",
       "prettier --write"
     ],
