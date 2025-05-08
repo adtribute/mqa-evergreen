@@ -25,7 +25,7 @@ const noop = () => {}
 
 const defaultRenderItem = props => {
   return (
-    <Option {...props}>
+    <Option title={props.label} {...props}>
       {props.icon && <Image src={props.icon} width={24} marginRight={8} />}
       {props.label}
     </Option>

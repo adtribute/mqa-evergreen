@@ -1,6 +1,6 @@
-import _extends from "@babel/runtime/helpers/esm/extends";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
+import _extends from "@babel/runtime/helpers/esm/extends";
 var _excluded = ["options", "optionSize", "close", "closeOnSelect", "onSelect", "onDeselect", "onFilterChange", "hasFilter", "selected", "optionsFilter", "isMultiSelect", "height", "width", "renderItem", "filterPlaceholder", "filterIcon", "defaultSearchValue", "shouldAutoFocus"];
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import VirtualList from '@segment/react-tiny-virtual-list';
@@ -31,7 +31,9 @@ var fuzzyFilter = function fuzzyFilter(options, input, _ref) {
 var noop = function noop() {};
 
 var defaultRenderItem = function defaultRenderItem(props) {
-  return /*#__PURE__*/React.createElement(Option, props, props.icon && /*#__PURE__*/React.createElement(Image, {
+  return /*#__PURE__*/React.createElement(Option, _extends({
+    title: props.label
+  }, props), props.icon && /*#__PURE__*/React.createElement(Image, {
     src: props.icon,
     width: 24,
     marginRight: 8

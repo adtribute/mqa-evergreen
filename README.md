@@ -12,7 +12,7 @@ Ensure you have the following dependencies installed:
 Switch to the correct Node.js version (Node.js 16):
 
 ```bash
-nvm use 16
+nvm use
 ```
 
 To install the project dependencies, run:
