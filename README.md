@@ -9,7 +9,7 @@ Ensure you have the following dependencies installed:
 - yarn (https://yarnpkg.com/)
 - NVM (Node Version Manager) (https://github.com/nvm-sh/nvm)
 
-Switch to the correct Node.js version (Node.js 16):
+Switch to the correct Node.js version:
 
 ```bash
 nvm use

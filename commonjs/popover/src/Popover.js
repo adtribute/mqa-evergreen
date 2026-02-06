@@ -47,6 +47,41 @@ const tooltip_1 = require("../../tooltip");
 const PopoverStateless_1 = __importDefault(require("./PopoverStateless"));
 const noop = () => { };
 const emptyProps = {};
+// Module-level registry for tracking open popovers and their parent-child relationships
+const popoverRegistry = new Map(); // id -> { node, parentId }
+let popoverIdCounter = 0;
+function generatePopoverId() {
+    return `popover-${++popoverIdCounter}`;
+}
+function registerPopover(id, node, parentId) {
+    popoverRegistry.set(id, { node, parentId });
+}
+function unregisterPopover(id) {
+    popoverRegistry.delete(id);
+}
+function isDescendantOf(childId, ancestorId) {
+    let currentId = childId;
+    while (currentId) {
+        const popover = popoverRegistry.get(currentId);
+        if (!popover)
+            return false;
+        if (popover.parentId === ancestorId)
+            return true;
+        currentId = popover.parentId;
+    }
+    return false;
+}
+function isClickInsideDescendant(myId, target) {
+    for (const [id, { node }] of popoverRegistry) {
+        if (isDescendantOf(id, myId) && (node === null || node === void 0 ? void 0 : node.contains(target))) {
+            return true;
+        }
+    }
+    return false;
+}
+// React context for parent-child relationship tracking (flows through portals)
+const PopoverParentContext = (0, react_1.createContext)(null);
+PopoverParentContext.displayName = 'PopoverParentContext';
 const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, forwardedRef) {
     var { animationDuration = 300, bringFocusInside: shouldBringFocusInside = false, children, content, display, minHeight = 40, minWidth = 200, onBodyClick = noop, onClose = noop, onCloseComplete = noop, onOpen = noop, onOpenComplete = noop, position = constants_1.Position.BOTTOM, shouldCloseOnExternalClick = true, shouldCloseOnEscapePress = true, statelessProps = emptyProps, trigger = 'click' } = _a, props = __rest(_a, ["animationDuration", "bringFocusInside", "children", "content", "display", "minHeight", "minWidth", "onBodyClick", "onClose", "onCloseComplete", "onOpen", "onOpenComplete", "position", "shouldCloseOnExternalClick", "shouldCloseOnEscapePress", "statelessProps", "trigger"]);
     const [isShown, setIsShown] = (0, react_1.useState)(props.isShown);
@@ -54,6 +89,13 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
     const setPopoverNode = (0, hooks_1.useMergedRef)(popoverNode);
     const targetRef = (0, react_1.useRef)();
     const setTargetRef = (0, hooks_1.useMergedRef)(targetRef);
+    // Popover hierarchy tracking
+    const parentPopoverId = (0, react_1.useContext)(PopoverParentContext);
+    const popoverIdRef = (0, react_1.useRef)(null);
+    if (!popoverIdRef.current) {
+        popoverIdRef.current = generatePopoverId();
+    }
+    const popoverId = popoverIdRef.current;
     /**
      * Methods borrowed from BlueprintJS
      * https://github.com/palantir/blueprint/blob/release/2.0.0/packages/core/src/components/overlay/overlay.tsx
@@ -160,12 +202,16 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
         if (popoverNode.current && popoverNode.current.contains(event.target)) {
             return;
         }
+        // Ignore clicks inside any descendant popover (child popovers opened from within this one)
+        if (isClickInsideDescendant(popoverId, event.target)) {
+            return;
+        }
         // Notify body click
         onBodyClick(event);
         if (shouldCloseOnExternalClick !== false) {
             close();
         }
-    }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current]);
+    }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]);
     const handleOpenComplete = (0, react_1.useCallback)(() => {
         if (shouldBringFocusInside)
             bringFocusInside();
@@ -184,7 +230,21 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
             document.body.removeEventListener('click', handleBodyClick, false);
             document.body.removeEventListener('keydown', onEsc, false);
         };
-    }, [isShown, handleBodyClick, onEsc]);
+    }, [isShown, handleBodyClick, onEsc, popoverId]);
+    // Handle popover node ref and registration
+    // We register in the ref callback (not useEffect) because the Positioner
+    // uses react-transition-group which delays DOM mounting
+    const handlePopoverRef = (0, react_1.useCallback)(ref => {
+        setPopoverNode(ref);
+        if (ref) {
+            // Node is mounting - register in hierarchy
+            registerPopover(popoverId, ref, parentPopoverId);
+        }
+        else {
+            // Node is unmounting - unregister
+            unregisterPopover(popoverId);
+        }
+    }, [popoverId, parentPopoverId, setPopoverNode]);
     const renderTarget = (0, react_1.useCallback)(({ getRef, isShown }) => {
         const isTooltipInside = children && children.type === tooltip_1.Tooltip;
         const getTargetRef = ref => {
@@ -229,10 +289,12 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
     // If `props.isShown` is a boolean, popover is controlled manually, not via mouse events
     const shown = typeof props.isShown === 'boolean' ? props.isShown : isShown;
     const contentToRender = (0, react_1.useMemo)(() => {
-        return typeof content === 'function' ? content({ close }) : content;
-    }, [content, close]);
+        const resolvedContent = typeof content === 'function' ? content({ close }) : content;
+        // Wrap content with context so child popovers know their parent
+        return (react_1.default.createElement(PopoverParentContext.Provider, { value: popoverId }, resolvedContent));
+    }, [content, close, popoverId]);
     return (react_1.default.createElement(positioner_1.Positioner, { target: renderTarget, isShown: shown, position: position, animationDuration: animationDuration, onOpenComplete: handleOpenComplete, onCloseComplete: onCloseComplete }, ({ css, getRef, state, style }) => (react_1.default.createElement(PopoverStateless_1.default, Object.assign({ ref: ref => {
-            setPopoverNode(ref);
+            handlePopoverRef(ref);
             getRef(ref);
         }, "data-state": state, display: display, minWidth: minWidth, minHeight: minHeight }, statelessProps, css, { style: (0, lodash_merge_1.default)({}, style, statelessProps.style), className: statelessProps.className, onMouseLeave: handleCloseHover }), contentToRender))));
 }));

@@ -1,4 +1,15 @@
-import React, { memo, forwardRef, useRef, useState, useEffect, useImperativeHandle, useCallback, useMemo } from 'react'
+import React, {
+  createContext,
+  memo,
+  forwardRef,
+  useRef,
+  useState,
+  useEffect,
+  useImperativeHandle,
+  useCallback,
+  useMemo,
+  useContext
+} from 'react'
 import merge from 'lodash.merge'
 import PropTypes from 'prop-types'
 import { Position } from '../../constants'
@@ -9,6 +20,46 @@ import PopoverStateless from './PopoverStateless'
 
 const noop = () => {}
 const emptyProps = {}
+
+// Module-level registry for tracking open popovers and their parent-child relationships
+const popoverRegistry = new Map() // id -> { node, parentId }
+let popoverIdCounter = 0
+
+function generatePopoverId() {
+  return `popover-${++popoverIdCounter}`
+}
+
+function registerPopover(id, node, parentId) {
+  popoverRegistry.set(id, { node, parentId })
+}
+
+function unregisterPopover(id) {
+  popoverRegistry.delete(id)
+}
+
+function isDescendantOf(childId, ancestorId) {
+  let currentId = childId
+  while (currentId) {
+    const popover = popoverRegistry.get(currentId)
+    if (!popover) return false
+    if (popover.parentId === ancestorId) return true
+    currentId = popover.parentId
+  }
+  return false
+}
+
+function isClickInsideDescendant(myId, target) {
+  for (const [id, { node }] of popoverRegistry) {
+    if (isDescendantOf(id, myId) && node?.contains(target)) {
+      return true
+    }
+  }
+  return false
+}
+
+// React context for parent-child relationship tracking (flows through portals)
+const PopoverParentContext = createContext(null)
+PopoverParentContext.displayName = 'PopoverParentContext'
 
 const Popover = memo(
   forwardRef(function Popover(
@@ -39,6 +90,14 @@ const Popover = memo(
     const setPopoverNode = useMergedRef(popoverNode)
     const targetRef = useRef()
     const setTargetRef = useMergedRef(targetRef)
+
+    // Popover hierarchy tracking
+    const parentPopoverId = useContext(PopoverParentContext)
+    const popoverIdRef = useRef(null)
+    if (!popoverIdRef.current) {
+      popoverIdRef.current = generatePopoverId()
+    }
+    const popoverId = popoverIdRef.current
 
     /**
      * Methods borrowed from BlueprintJS
@@ -188,6 +247,11 @@ const Popover = memo(
           return
         }
 
+        // Ignore clicks inside any descendant popover (child popovers opened from within this one)
+        if (isClickInsideDescendant(popoverId, event.target)) {
+          return
+        }
+
         // Notify body click
         onBodyClick(event)
 
@@ -195,7 +259,7 @@ const Popover = memo(
           close()
         }
       },
-      [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current]
+      [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]
     )
 
     const handleOpenComplete = useCallback(() => {
@@ -216,7 +280,24 @@ const Popover = memo(
         document.body.removeEventListener('click', handleBodyClick, false)
         document.body.removeEventListener('keydown', onEsc, false)
       }
-    }, [isShown, handleBodyClick, onEsc])
+    }, [isShown, handleBodyClick, onEsc, popoverId])
+
+    // Handle popover node ref and registration
+    // We register in the ref callback (not useEffect) because the Positioner
+    // uses react-transition-group which delays DOM mounting
+    const handlePopoverRef = useCallback(
+      ref => {
+        setPopoverNode(ref)
+        if (ref) {
+          // Node is mounting - register in hierarchy
+          registerPopover(popoverId, ref, parentPopoverId)
+        } else {
+          // Node is unmounting - unregister
+          unregisterPopover(popoverId)
+        }
+      },
+      [popoverId, parentPopoverId, setPopoverNode]
+    )
 
     const renderTarget = useCallback(
       ({ getRef, isShown }) => {
@@ -281,8 +362,10 @@ const Popover = memo(
     const shown = typeof props.isShown === 'boolean' ? props.isShown : isShown
 
     const contentToRender = useMemo(() => {
-      return typeof content === 'function' ? content({ close }) : content
-    }, [content, close])
+      const resolvedContent = typeof content === 'function' ? content({ close }) : content
+      // Wrap content with context so child popovers know their parent
+      return <PopoverParentContext.Provider value={popoverId}>{resolvedContent}</PopoverParentContext.Provider>
+    }, [content, close, popoverId])
 
     return (
       <Positioner
@@ -296,7 +379,7 @@ const Popover = memo(
         {({ css, getRef, state, style }) => (
           <PopoverStateless
             ref={ref => {
-              setPopoverNode(ref)
+              handlePopoverRef(ref)
               getRef(ref)
             }}
             data-state={state}

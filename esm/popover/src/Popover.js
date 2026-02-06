@@ -1,14 +1,20 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 var _excluded = ["animationDuration", "bringFocusInside", "children", "content", "display", "minHeight", "minWidth", "onBodyClick", "onClose", "onCloseComplete", "onOpen", "onOpenComplete", "position", "shouldCloseOnExternalClick", "shouldCloseOnEscapePress", "statelessProps", "trigger"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-import React, { memo, forwardRef, useRef, useState, useEffect, useImperativeHandle, useCallback, useMemo } from 'react';
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+import React, { createContext, memo, forwardRef, useRef, useState, useEffect, useImperativeHandle, useCallback, useMemo, useContext } from 'react';
 import merge from 'lodash.merge';
 import PropTypes from 'prop-types';
 import { Position } from '../../constants';
@@ -19,7 +25,66 @@ import PopoverStateless from './PopoverStateless';
 
 var noop = function noop() {};
 
-var emptyProps = {};
+var emptyProps = {}; // Module-level registry for tracking open popovers and their parent-child relationships
+
+var popoverRegistry = new Map(); // id -> { node, parentId }
+
+var popoverIdCounter = 0;
+
+function generatePopoverId() {
+  return "popover-".concat(++popoverIdCounter);
+}
+
+function registerPopover(id, node, parentId) {
+  popoverRegistry.set(id, {
+    node: node,
+    parentId: parentId
+  });
+}
+
+function unregisterPopover(id) {
+  popoverRegistry["delete"](id);
+}
+
+function isDescendantOf(childId, ancestorId) {
+  var currentId = childId;
+
+  while (currentId) {
+    var popover = popoverRegistry.get(currentId);
+    if (!popover) return false;
+    if (popover.parentId === ancestorId) return true;
+    currentId = popover.parentId;
+  }
+
+  return false;
+}
+
+function isClickInsideDescendant(myId, target) {
+  var _iterator = _createForOfIteratorHelper(popoverRegistry),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _step$value = _slicedToArray(_step.value, 2),
+          id = _step$value[0],
+          node = _step$value[1].node;
+
+      if (isDescendantOf(id, myId) && node !== null && node !== void 0 && node.contains(target)) {
+        return true;
+      }
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return false;
+} // React context for parent-child relationship tracking (flows through portals)
+
+
+var PopoverParentContext = /*#__PURE__*/createContext(null);
+PopoverParentContext.displayName = 'PopoverParentContext';
 var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, forwardedRef) {
   var _ref$animationDuratio = _ref.animationDuration,
       animationDuration = _ref$animationDuratio === void 0 ? 300 : _ref$animationDuratio,
@@ -62,7 +127,16 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
   var popoverNode = useRef();
   var setPopoverNode = useMergedRef(popoverNode);
   var targetRef = useRef();
-  var setTargetRef = useMergedRef(targetRef);
+  var setTargetRef = useMergedRef(targetRef); // Popover hierarchy tracking
+
+  var parentPopoverId = useContext(PopoverParentContext);
+  var popoverIdRef = useRef(null);
+
+  if (!popoverIdRef.current) {
+    popoverIdRef.current = generatePopoverId();
+  }
+
+  var popoverId = popoverIdRef.current;
   /**
    * Methods borrowed from BlueprintJS
    * https://github.com/palantir/blueprint/blob/release/2.0.0/packages/core/src/components/overlay/overlay.tsx
@@ -183,6 +257,11 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
 
     if (popoverNode.current && popoverNode.current.contains(event.target)) {
       return;
+    } // Ignore clicks inside any descendant popover (child popovers opened from within this one)
+
+
+    if (isClickInsideDescendant(popoverId, event.target)) {
+      return;
     } // Notify body click
 
 
@@ -191,7 +270,7 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
     if (shouldCloseOnExternalClick !== false) {
       close();
     }
-  }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current]);
+  }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]);
   var handleOpenComplete = useCallback(function () {
     if (shouldBringFocusInside) bringFocusInside();
     onOpenComplete();
@@ -209,7 +288,21 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
       document.body.removeEventListener('click', handleBodyClick, false);
       document.body.removeEventListener('keydown', onEsc, false);
     };
-  }, [isShown, handleBodyClick, onEsc]);
+  }, [isShown, handleBodyClick, onEsc, popoverId]); // Handle popover node ref and registration
+  // We register in the ref callback (not useEffect) because the Positioner
+  // uses react-transition-group which delays DOM mounting
+
+  var handlePopoverRef = useCallback(function (ref) {
+    setPopoverNode(ref);
+
+    if (ref) {
+      // Node is mounting - register in hierarchy
+      registerPopover(popoverId, ref, parentPopoverId);
+    } else {
+      // Node is unmounting - unregister
+      unregisterPopover(popoverId);
+    }
+  }, [popoverId, parentPopoverId, setPopoverNode]);
   var renderTarget = useCallback(function (_ref2) {
     var getRef = _ref2.getRef,
         isShown = _ref2.isShown;
@@ -267,10 +360,14 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
 
   var shown = typeof props.isShown === 'boolean' ? props.isShown : isShown;
   var contentToRender = useMemo(function () {
-    return typeof content === 'function' ? content({
+    var resolvedContent = typeof content === 'function' ? content({
       close: close
-    }) : content;
-  }, [content, close]);
+    }) : content; // Wrap content with context so child popovers know their parent
+
+    return /*#__PURE__*/React.createElement(PopoverParentContext.Provider, {
+      value: popoverId
+    }, resolvedContent);
+  }, [content, close, popoverId]);
   return /*#__PURE__*/React.createElement(Positioner, {
     target: renderTarget,
     isShown: shown,
@@ -285,7 +382,7 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
         style = _ref3.style;
     return /*#__PURE__*/React.createElement(PopoverStateless, _extends({
       ref: function ref(_ref4) {
-        setPopoverNode(_ref4);
+        handlePopoverRef(_ref4);
         getRef(_ref4);
       },
       "data-state": state,
