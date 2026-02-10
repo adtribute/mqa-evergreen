@@ -89,6 +89,7 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
     const setPopoverNode = (0, hooks_1.useMergedRef)(popoverNode);
     const targetRef = (0, react_1.useRef)();
     const setTargetRef = (0, hooks_1.useMergedRef)(targetRef);
+    const pointerDownTarget = (0, react_1.useRef)(null);
     // Popover hierarchy tracking
     const parentPopoverId = (0, react_1.useContext)(PopoverParentContext);
     const popoverIdRef = (0, react_1.useRef)(null);
@@ -195,15 +196,18 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
         return event.key === 'Escape' && shouldCloseOnEscapePress ? close() : undefined;
     }, [shouldCloseOnEscapePress, close]);
     const handleBodyClick = (0, react_1.useCallback)(event => {
+        // Use the pointerdown target (captured before React re-renders) instead of event.target
+        const clickTarget = pointerDownTarget.current || event.target;
+        pointerDownTarget.current = null;
         // Ignore clicks on the popover or button
-        if (targetRef.current && targetRef.current.contains(event.target)) {
+        if (targetRef.current && targetRef.current.contains(clickTarget)) {
             return;
         }
-        if (popoverNode.current && popoverNode.current.contains(event.target)) {
+        if (popoverNode.current && popoverNode.current.contains(clickTarget)) {
             return;
         }
         // Ignore clicks inside any descendant popover (child popovers opened from within this one)
-        if (isClickInsideDescendant(popoverId, event.target)) {
+        if (isClickInsideDescendant(popoverId, clickTarget)) {
             return;
         }
         // Notify body click
@@ -219,17 +223,18 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
     }, [shouldBringFocusInside, bringFocusInside, onOpenComplete]);
     (0, react_1.useEffect)(() => {
         if (isShown) {
-            document.body.addEventListener('click', handleBodyClick, false);
-            document.body.addEventListener('keydown', onEsc, false);
+            const onPointerDown = e => {
+                pointerDownTarget.current = e.target;
+            };
+            document.addEventListener('pointerdown', onPointerDown, true);
+            document.addEventListener('click', handleBodyClick, true);
+            document.addEventListener('keydown', onEsc, true);
+            return () => {
+                document.removeEventListener('pointerdown', onPointerDown, true);
+                document.removeEventListener('click', handleBodyClick, true);
+                document.removeEventListener('keydown', onEsc, true);
+            };
         }
-        else {
-            document.body.removeEventListener('click', handleBodyClick, false);
-            document.body.removeEventListener('keydown', onEsc, false);
-        }
-        return () => {
-            document.body.removeEventListener('click', handleBodyClick, false);
-            document.body.removeEventListener('keydown', onEsc, false);
-        };
     }, [isShown, handleBodyClick, onEsc, popoverId]);
     // Handle popover node ref and registration
     // We register in the ref callback (not useEffect) because the Positioner
@@ -291,7 +296,7 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
     const contentToRender = (0, react_1.useMemo)(() => {
         const resolvedContent = typeof content === 'function' ? content({ close }) : content;
         // Wrap content with context so child popovers know their parent
-        return (react_1.default.createElement(PopoverParentContext.Provider, { value: popoverId }, resolvedContent));
+        return react_1.default.createElement(PopoverParentContext.Provider, { value: popoverId }, resolvedContent);
     }, [content, close, popoverId]);
     return (react_1.default.createElement(positioner_1.Positioner, { target: renderTarget, isShown: shown, position: position, animationDuration: animationDuration, onOpenComplete: handleOpenComplete, onCloseComplete: onCloseComplete }, ({ css, getRef, state, style }) => (react_1.default.createElement(PopoverStateless_1.default, Object.assign({ ref: ref => {
             handlePopoverRef(ref);

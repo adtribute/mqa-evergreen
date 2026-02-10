@@ -90,6 +90,7 @@ const Popover = memo(
     const setPopoverNode = useMergedRef(popoverNode)
     const targetRef = useRef()
     const setTargetRef = useMergedRef(targetRef)
+    const pointerDownTarget = useRef(null)
 
     // Popover hierarchy tracking
     const parentPopoverId = useContext(PopoverParentContext)
@@ -238,17 +239,21 @@ const Popover = memo(
 
     const handleBodyClick = useCallback(
       event => {
+        // Use the pointerdown target (captured before React re-renders) instead of event.target
+        const clickTarget = pointerDownTarget.current || event.target
+        pointerDownTarget.current = null
+
         // Ignore clicks on the popover or button
-        if (targetRef.current && targetRef.current.contains(event.target)) {
+        if (targetRef.current && targetRef.current.contains(clickTarget)) {
           return
         }
 
-        if (popoverNode.current && popoverNode.current.contains(event.target)) {
+        if (popoverNode.current && popoverNode.current.contains(clickTarget)) {
           return
         }
 
         // Ignore clicks inside any descendant popover (child popovers opened from within this one)
-        if (isClickInsideDescendant(popoverId, event.target)) {
+        if (isClickInsideDescendant(popoverId, clickTarget)) {
           return
         }
 
@@ -269,16 +274,19 @@ const Popover = memo(
 
     useEffect(() => {
       if (isShown) {
-        document.body.addEventListener('click', handleBodyClick, false)
-        document.body.addEventListener('keydown', onEsc, false)
-      } else {
-        document.body.removeEventListener('click', handleBodyClick, false)
-        document.body.removeEventListener('keydown', onEsc, false)
-      }
+        const onPointerDown = e => {
+          pointerDownTarget.current = e.target
+        }
 
-      return () => {
-        document.body.removeEventListener('click', handleBodyClick, false)
-        document.body.removeEventListener('keydown', onEsc, false)
+        document.addEventListener('pointerdown', onPointerDown, true)
+        document.addEventListener('click', handleBodyClick, true)
+        document.addEventListener('keydown', onEsc, true)
+
+        return () => {
+          document.removeEventListener('pointerdown', onPointerDown, true)
+          document.removeEventListener('click', handleBodyClick, true)
+          document.removeEventListener('keydown', onEsc, true)
+        }
       }
     }, [isShown, handleBodyClick, onEsc, popoverId])
 

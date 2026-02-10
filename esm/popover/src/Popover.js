@@ -127,7 +127,8 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
   var popoverNode = useRef();
   var setPopoverNode = useMergedRef(popoverNode);
   var targetRef = useRef();
-  var setTargetRef = useMergedRef(targetRef); // Popover hierarchy tracking
+  var setTargetRef = useMergedRef(targetRef);
+  var pointerDownTarget = useRef(null); // Popover hierarchy tracking
 
   var parentPopoverId = useContext(PopoverParentContext);
   var popoverIdRef = useRef(null);
@@ -250,17 +251,20 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
     return event.key === 'Escape' && shouldCloseOnEscapePress ? close() : undefined;
   }, [shouldCloseOnEscapePress, close]);
   var handleBodyClick = useCallback(function (event) {
-    // Ignore clicks on the popover or button
-    if (targetRef.current && targetRef.current.contains(event.target)) {
+    // Use the pointerdown target (captured before React re-renders) instead of event.target
+    var clickTarget = pointerDownTarget.current || event.target;
+    pointerDownTarget.current = null; // Ignore clicks on the popover or button
+
+    if (targetRef.current && targetRef.current.contains(clickTarget)) {
       return;
     }
 
-    if (popoverNode.current && popoverNode.current.contains(event.target)) {
+    if (popoverNode.current && popoverNode.current.contains(clickTarget)) {
       return;
     } // Ignore clicks inside any descendant popover (child popovers opened from within this one)
 
 
-    if (isClickInsideDescendant(popoverId, event.target)) {
+    if (isClickInsideDescendant(popoverId, clickTarget)) {
       return;
     } // Notify body click
 
@@ -277,17 +281,19 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
   }, [shouldBringFocusInside, bringFocusInside, onOpenComplete]);
   useEffect(function () {
     if (isShown) {
-      document.body.addEventListener('click', handleBodyClick, false);
-      document.body.addEventListener('keydown', onEsc, false);
-    } else {
-      document.body.removeEventListener('click', handleBodyClick, false);
-      document.body.removeEventListener('keydown', onEsc, false);
-    }
+      var onPointerDown = function onPointerDown(e) {
+        pointerDownTarget.current = e.target;
+      };
 
-    return function () {
-      document.body.removeEventListener('click', handleBodyClick, false);
-      document.body.removeEventListener('keydown', onEsc, false);
-    };
+      document.addEventListener('pointerdown', onPointerDown, true);
+      document.addEventListener('click', handleBodyClick, true);
+      document.addEventListener('keydown', onEsc, true);
+      return function () {
+        document.removeEventListener('pointerdown', onPointerDown, true);
+        document.removeEventListener('click', handleBodyClick, true);
+        document.removeEventListener('keydown', onEsc, true);
+      };
+    }
   }, [isShown, handleBodyClick, onEsc, popoverId]); // Handle popover node ref and registration
   // We register in the ref callback (not useEffect) because the Positioner
   // uses react-transition-group which delays DOM mounting
