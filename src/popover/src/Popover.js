@@ -264,7 +264,7 @@ const Popover = memo(
           close()
         }
       },
-      [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]
+      [onBodyClick, shouldCloseOnExternalClick, close, popoverId]
     )
 
     const handleOpenComplete = useCallback(() => {

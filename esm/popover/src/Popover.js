@@ -274,7 +274,7 @@ var Popover = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function Popover(_ref, 
     if (shouldCloseOnExternalClick !== false) {
       close();
     }
-  }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]);
+  }, [onBodyClick, shouldCloseOnExternalClick, close, popoverId]);
   var handleOpenComplete = useCallback(function () {
     if (shouldBringFocusInside) bringFocusInside();
     onOpenComplete();

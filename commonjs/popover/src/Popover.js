@@ -215,7 +215,7 @@ const Popover = (0, react_1.memo)((0, react_1.forwardRef)(function Popover(_a, f
         if (shouldCloseOnExternalClick !== false) {
             close();
         }
-    }, [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]);
+    }, [onBodyClick, shouldCloseOnExternalClick, close, popoverId]);
     const handleOpenComplete = (0, react_1.useCallback)(() => {
         if (shouldBringFocusInside)
             bringFocusInside();
