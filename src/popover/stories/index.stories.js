@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@maestroqa/ui-box'
 import { storiesOf } from '@storybook/react'
 import PropTypes from 'prop-types'
@@ -7,6 +7,7 @@ import { Button } from '../../buttons'
 import { Position } from '../../constants'
 import { CircleArrowDownIcon } from '../../icons'
 import { Pane } from '../../layers'
+import { SelectMenu } from '../../select-menu'
 import { TextInputField } from '../../text-input'
 import { Tooltip } from '../../tooltip'
 import { Heading, Paragraph, Text } from '../../typography'
@@ -33,6 +34,97 @@ const ClosablePopoverContent = ({ close }) => (
 
 ClosablePopoverContent.propTypes = {
   close: PropTypes.func
+}
+
+// Agent filter example: multiple rows, each with operator + agent dropdowns (only one open at a time)
+const OPERATOR_OPTIONS = [
+  { label: 'Contains Any', value: 'IN' },
+  { label: 'Does Not Include Any', value: 'NOT_IN' },
+  { label: 'Contains All', value: 'CONTAINS_ALL' },
+  { label: 'Is Not Empty', value: 'NOT_EMPTY' },
+  { label: 'Is Empty', value: 'EMPTY' }
+]
+
+const AGENT_OPTIONS = [
+  { label: 'Alice Smith', value: 'alice' },
+  { label: 'Bob Jones', value: 'bob' },
+  { label: 'Carol White', value: 'carol' },
+  { label: 'David Brown', value: 'david' },
+  { label: 'Eve Davis', value: 'eve' }
+]
+
+function AgentFilterExample() {
+  const [rows, setRows] = useState([
+    { operator: 'IN', agents: [] },
+    { operator: 'IN', agents: [] }
+  ])
+
+  const updateRow = (index, field, value) => {
+    setRows(prev => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)))
+  }
+
+  return (
+    <Pane minWidth={400} padding={12}>
+      <Text size={300} marginBottom={12} display="block">
+        Agent(s)
+      </Text>
+      {rows.map((row, index) => (
+        <Pane key={index} marginBottom={index > 0 ? 20 : 0}>
+          {index > 0 && (
+            <Text size={300} color="muted" marginY={8} display="block">
+              AND
+            </Text>
+          )}
+          <Pane display="flex" alignItems="center" gap={8} flexWrap="wrap">
+            <SelectMenu
+              width={160}
+              position={Position.BOTTOM_LEFT}
+              hasFilter
+              filterPlaceholder="Filter..."
+              options={OPERATOR_OPTIONS}
+              selected={row.operator}
+              onSelect={opt => updateRow(index, 'operator', opt.value)}
+              closeOnSelect
+            >
+              <Button appearance="default" width={160}>
+                {OPERATOR_OPTIONS.find(o => o.value === row.operator)?.label ?? 'Operator'}
+              </Button>
+            </SelectMenu>
+            <SelectMenu
+              width={220}
+              height={280}
+              position={Position.BOTTOM_LEFT}
+              isMultiSelect
+              hasFilter
+              filterPlaceholder="Filter..."
+              title={`Agents (${row.agents?.length ?? 0} selected)`}
+              options={AGENT_OPTIONS}
+              selected={row.agents ?? []}
+              onSelect={item => updateRow(index, 'agents', [...(row.agents ?? []), item.value])}
+              onDeselect={item =>
+                updateRow(
+                  index,
+                  'agents',
+                  (row.agents ?? []).filter(v => v !== item.value)
+                )
+              }
+            >
+              <Button appearance="default" width={220}>
+                {row.agents?.length ? `${row.agents.length} agent(s) selected` : 'Select agent(s)'}
+              </Button>
+            </SelectMenu>
+          </Pane>
+        </Pane>
+      ))}
+      <Button
+        marginTop={12}
+        appearance="minimal"
+        onClick={() => setRows(prev => [...prev, { operator: 'IN', agents: [] }])}
+      >
+        + Add Filter
+      </Button>
+    </Pane>
+  )
 }
 
 // Using it with a function for complete control
@@ -218,6 +310,20 @@ storiesOf('popover', module)
         >
           <Button>Tooltip + Popover</Button>
         </Tooltip>
+      </Popover>
+    </Box>
+  ))
+  .add('Agent filter (only one dropdown open)', () => (
+    <Box padding={40}>
+      {(() => {
+        document.body.style.margin = '0'
+        document.body.style.height = '100vh'
+      })()}
+      <Paragraph marginBottom={16}>
+        Open the filter panel, then open operator or agent dropdowns in any row. Only one dropdown stays open at a time.
+      </Paragraph>
+      <Popover position={Position.BOTTOM_LEFT} content={<AgentFilterExample />} minWidth={420} minHeight={200}>
+        <Button>Open filter panel</Button>
       </Popover>
     </Box>
   ))

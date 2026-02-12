@@ -57,6 +57,22 @@ function isClickInsideDescendant(myId, target) {
   return false
 }
 
+// Custom event name for "a popover just opened" - listeners close themselves if they're a sibling.
+// Using DOM events so sibling-closing works even when multiple copies of this module exist (e.g. bundles).
+const POPOVER_OPEN_EVENT = 'evergreen:popover-open'
+
+function dispatchPopoverOpen(popoverId, parentPopoverId) {
+  try {
+    window.dispatchEvent(
+      new CustomEvent(POPOVER_OPEN_EVENT, {
+        detail: { popoverId, parentPopoverId }
+      })
+    )
+  } catch (_) {
+    // ignore in environments without CustomEvent/window
+  }
+}
+
 // React context for parent-child relationship tracking (flows through portals)
 const PopoverParentContext = createContext(null)
 PopoverParentContext.displayName = 'PopoverParentContext'
@@ -146,7 +162,7 @@ const Popover = memo(
           }
         })
       },
-      [isShown, popoverNode.current]
+      [isShown]
     )
 
     const bringFocusBackToTarget = useCallback(() => {
@@ -166,16 +182,19 @@ const Popover = memo(
           targetRef.current.focus()
         }
       })
-    }, [popoverNode.current, targetRef.current])
+    }, [])
 
     const open = useCallback(() => {
       if (isShown) {
         return
       }
 
+      // Notify other popovers to close if they're siblings (works across bundles via DOM event)
+      dispatchPopoverOpen(popoverId, parentPopoverId)
+
       setIsShown(true)
       onOpen()
-    }, [setIsShown, onOpen, isShown])
+    }, [setIsShown, onOpen, isShown, parentPopoverId, popoverId])
 
     const close = useCallback(() => {
       if (!isShown) {
@@ -186,6 +205,25 @@ const Popover = memo(
       bringFocusBackToTarget()
       onClose()
     }, [setIsShown, bringFocusBackToTarget, onClose, isShown])
+
+    // Ref to current close so event listener can close without stale closure
+    const closeRef = useRef(close)
+    closeRef.current = close
+
+    // Listen for "another popover opened" and close if we're a sibling (same parent)
+    useEffect(() => {
+      const onPopoverOpen = e => {
+        const { parentPopoverId: openedParentId, popoverId: openedId } = e.detail || {}
+        if (openedId === popoverId) return
+        const isRoot = openedParentId === null
+        const weAreSibling = isRoot ? parentPopoverId === null : parentPopoverId === openedParentId
+        if (!weAreSibling) return
+        const fn = closeRef.current
+        if (typeof fn === 'function') fn()
+      }
+      window.addEventListener(POPOVER_OPEN_EVENT, onPopoverOpen)
+      return () => window.removeEventListener(POPOVER_OPEN_EVENT, onPopoverOpen)
+    }, [popoverId, parentPopoverId])
 
     useImperativeHandle(
       forwardedRef,
@@ -208,7 +246,7 @@ const Popover = memo(
       } else {
         close()
       }
-    }, [props.isShown, isShown])
+    }, [close, open, props.isShown, isShown])
 
     const toggle = useCallback(() => {
       return isShown ? close() : open()
@@ -231,7 +269,9 @@ const Popover = memo(
 
     const onEsc = useCallback(
       event => {
-        return event.key === 'Escape' && shouldCloseOnEscapePress ? close() : undefined
+        if (event.key === 'Escape' && shouldCloseOnEscapePress) {
+          return close()
+        }
       },
       [shouldCloseOnEscapePress, close]
     )
@@ -259,7 +299,7 @@ const Popover = memo(
           close()
         }
       },
-      [onBodyClick, shouldCloseOnExternalClick, close, targetRef.current, popoverNode.current, popoverId]
+      [close, onBodyClick, popoverId, shouldCloseOnExternalClick]
     )
 
     const handleOpenComplete = useCallback(() => {
@@ -267,17 +307,18 @@ const Popover = memo(
       onOpenComplete()
     }, [shouldBringFocusInside, bringFocusInside, onOpenComplete])
 
+    // Use capture phase so we see clicks before stopPropagation in app (e.g. filter panel)
     useEffect(() => {
       if (isShown) {
-        document.body.addEventListener('click', handleBodyClick, false)
+        document.body.addEventListener('click', handleBodyClick, true)
         document.body.addEventListener('keydown', onEsc, false)
       } else {
-        document.body.removeEventListener('click', handleBodyClick, false)
+        document.body.removeEventListener('click', handleBodyClick, true)
         document.body.removeEventListener('keydown', onEsc, false)
       }
 
       return () => {
-        document.body.removeEventListener('click', handleBodyClick, false)
+        document.body.removeEventListener('click', handleBodyClick, true)
         document.body.removeEventListener('keydown', onEsc, false)
       }
     }, [isShown, handleBodyClick, onEsc, popoverId])
