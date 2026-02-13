@@ -12,5 +12,4 @@ coverage
 /storybook-static/
 .eslintcache
 /codemods/dist
-/types/
 .claude/settings.local.json
