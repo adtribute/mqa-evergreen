@@ -21,14 +21,11 @@
   "license": "MIT",
   "main": "commonjs/index.js",
   "module": "esm/index.js",
-  "unpkg": "umd/evergreen.min.js",
   "types": "index.d.ts",
   "files": [
     "commonjs",
     "esm",
-    "umd",
     "index.d.ts",
-    "codemods/dist",
     "types"
   ],
   "sideEffects": false,
@@ -36,7 +33,7 @@
     ".": "./commonjs/index.js"
   },
   "scripts": {
-    "build": "yarn generate-icons && concurrently --names 'commonjs,esm,umd,codemods,types' 'yarn build-commonjs' 'yarn build-esm' 'yarn build-umd' 'yarn build-codemods' 'yarn build-types'",
+    "build": "yarn generate-icons && concurrently --names 'commonjs,esm,types' 'yarn build-commonjs' 'yarn build-esm' 'yarn build-types'",
     "build-codemods": "cd codemods && yarn build",
     "build-commonjs": "tsc --project tsconfig.commonjs.json",
     "build-esm": "BABEL_ENV=esm babel src --out-dir esm --ignore '**/stories','**/test','**/__tests__','**/types' --extensions '.js,.ts,.tsx'",
@@ -53,7 +50,7 @@
     "lint": "eslint \"src/**/*.{js,ts,tsx}\" --cache",
     "postpublish": "branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); if [[ $branch == \"master\" ]]; then yarn update-docs || yarn deploy-docs; else echo \"not on main branch, skipping docs deploy\"; fi;",
     "prebuild": "yarn typecheck",
-    "prepublishOnly": "rm -rf esm commonjs umd types && yarn build",
+    "prepublishOnly": "rm -rf esm commonjs types && yarn build",
     "release": "np",
     "size": "size-limit",
     "test": "yarn lint && yarn tsd && yarn jest",
@@ -212,11 +209,6 @@
     {
       "path": "commonjs/index.js",
       "limit": "305 KB",
-      "running": false
-    },
-    {
-      "path": "umd/evergreen.min.js",
-      "limit": "275 KB",
       "running": false
     },
     {

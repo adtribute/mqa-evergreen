@@ -23,12 +23,20 @@ yarn install
 
 This will install all the dependencies required to run the project but errors will be thrown. Even though errors are thrown, the project will still run.
 
-## Making Changes
+## Releasing a New Version
 
-The app is linked to this repositories application version (current version can be found in the package.json file). Making changes to the app will require a new version to be released (along side with your changes). When you've committed your changes to your branch and are ready to merge into master, you will need to release a new version. To do this, run:
+The app (`analytics` repo) is linked to this repository's published version (current version can be found in `package.json`). Making changes to the app will require a new version of this package to be released alongside your changes.
+
+Once your changes are committed and ready to merge into master:
 
 ```bash
-yarn release
+yarn build
+git add -A
+git commit -m "Build"
+npm version [major | minor | patch]
+git push --tags
 ```
 
-After the release command is run, the app will be built and the new version will be released. It can now be merged into master. Dependabot from the app should pickup the new version and automatically make a PR to update the app.
+Choose `major`, `minor`, or `patch` based on the scope of your changes. The `npm version` command will bump the version in `package.json` and create a git tag.
+
+After pushing, merge your branch into master. Dependabot from the app should pick up the new version and automatically create a PR to update it.
