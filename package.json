@@ -30,7 +30,10 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": "./commonjs/index.js"
+    ".": {
+      "require": "./commonjs/index.js",
+      "import": "./esm/index.js"
+    }
   },
   "scripts": {
     "build": "yarn generate-icons && concurrently --names 'commonjs,esm,types' 'yarn build-commonjs' 'yarn build-esm' 'yarn build-types'",
