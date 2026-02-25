@@ -1,6 +1,6 @@
 {
   "name": "evergreen-ui",
-  "version": "7.5.0",
+  "version": "7.6.0",
   "description": "🌲 React UI Kit by Segment 🌲",
   "contributors": [
     "Jeroen Ransijn (https://jssr.design/)",
@@ -30,7 +30,10 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": "./commonjs/index.js"
+    ".": {
+      "require": "./commonjs/index.js",
+      "import": "./esm/index.js"
+    }
   },
   "scripts": {
     "build": "yarn generate-icons && concurrently --names 'commonjs,esm,types' 'yarn build-commonjs' 'yarn build-esm' 'yarn build-types'",
