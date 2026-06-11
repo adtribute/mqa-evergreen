@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "@maestroqa/ui-box": "^5.7.0",
+    "@maestroqa/ui-box": "^5.8.0",
     "@segment/react-tiny-virtual-list": "^2.2.1",
     "@types/react-transition-group": "^4.4.0",
     "arrify": "^1.0.1",
