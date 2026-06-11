@@ -1,2 +1,2 @@
 export default TableWithLinkExample;
-declare function TableWithLinkExample(): JSX.Element;
+declare function TableWithLinkExample(): React.ReactElement;

@@ -1,2 +1,2 @@
 export default PopoverWithTextInputChild;
-declare function PopoverWithTextInputChild(props: any): JSX.Element;
+declare function PopoverWithTextInputChild(props: any): React.ReactElement;

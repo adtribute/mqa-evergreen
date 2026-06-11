@@ -526,7 +526,7 @@ interface OptionProps extends TableRowOwnProps {
 }
 
 export interface AutocompleteItemProps extends OptionProps {
-  children?: JSX.Element | null
+  children?: React.ReactElement | null
 }
 
 export declare const AutocompleteItem: ForwardRefComponent<AutocompleteItemProps>
@@ -536,7 +536,7 @@ export interface AutocompleteProps extends Omit<DownshiftProps<any>, 'children'>
   title?: React.ReactNode
   items: any[]
   allowOtherValues?: boolean
-  renderItem?: (i: AutocompleteItemProps) => JSX.Element | null
+  renderItem?: (i: AutocompleteItemProps) => React.ReactElement | null
   itemsFilter?: (items: string[], input: string) => string[]
   children: (props: {
     toggle: () => void
@@ -618,11 +618,11 @@ export interface ButtonOwnProps {
   /**
    * Sets an icon before the text. Can be any icon from Evergreen or a custom icon library.
    */
-  iconBefore?: React.ElementType | JSX.Element | null | false
+  iconBefore?: React.ElementType | React.ReactElement | null | false
   /**
    * Sets an icon after the text. Can be any icon from Evergreen or a custom icon library.
    */
-  iconAfter?: React.ElementType | JSX.Element | null | false
+  iconAfter?: React.ElementType | React.ReactElement | null | false
   /**
    * When true, the button is disabled.
    * isLoading also sets the button to disabled.
@@ -1318,7 +1318,7 @@ export type HeadingProps = PolymorphicBoxProps<'h2', HeadingOwnProps>
 export declare const Heading: BoxComponent<HeadingOwnProps, 'h2'>
 
 export type IconOwnProps = IconProps & {
-  icon: React.ElementType | JSX.Element
+  icon: React.ElementType | React.ReactElement
 }
 
 export declare const Icon: ForwardRefComponent<IconOwnProps>
@@ -1327,7 +1327,7 @@ export interface IconButtonOwnProps extends ButtonOwnProps {
   /**
    * Name of a Blueprint UI icon, or an icon element, to render.
    */
-  icon?: React.ElementType | JSX.Element | null | false
+  icon?: React.ElementType | React.ReactElement | null | false
   /**
    * Specifies an explicit icon size instead of the default value.
    */
@@ -1419,7 +1419,7 @@ export interface ListItemOwnProps extends TextOwnProps {
    * When passed, adds a icon before the list item.
    * See Evergreen `Icon` for documentation.
    */
-  icon?: React.ElementType | JSX.Element | null | false
+  icon?: React.ElementType | React.ReactElement | null | false
   /**
    * The color of the icon.
    */
@@ -1436,8 +1436,8 @@ export interface MenuProps {
 
 export interface MenuItemOwnProps extends PaneOwnProps {
   onSelect?: (event: React.SyntheticEvent) => void
-  icon?: React.ElementType | JSX.Element | null | false
-  secondaryText?: JSX.Element | string
+  icon?: React.ElementType | React.ReactElement | null | false
+  secondaryText?: React.ReactElement | string
   appearance?: DefaultAppearance
   intent?: IntentTypes
   disabled?: boolean
@@ -1454,8 +1454,8 @@ export interface MenuOptionProps {
   id?: string
   onSelect?: () => void
   isSelected?: boolean
-  children?: JSX.Element
-  secondaryText?: JSX.Element
+  children?: React.ReactElement
+  secondaryText?: React.ReactElement
   appearance?: DefaultAppearance
 }
 
@@ -1815,9 +1815,9 @@ export interface OptionsListProps extends PaneOwnProps {
     isSelected: boolean
     disabled: SelectMenuOption['disabled']
     tabIndex: number
-  }) => JSX.Element
+  }) => React.ReactElement
   filterPlaceholder?: string
-  filterIcon?: React.ElementType | JSX.Element
+  filterIcon?: React.ElementType | React.ReactElement
   optionsFilter?: (
     value: SelectMenuOption['label'][],
     filter: NonNullable<OptionsListProps['defaultSearchValue']>
@@ -1859,7 +1859,7 @@ export interface SearchTableHeaderCellOwnProps extends TableHeaderCellOwnProps {
   /**
    * Icon to display in the input.
    */
-  icon?: React.ElementType | JSX.Element | null | false
+  icon?: React.ElementType | React.ReactElement | null | false
 }
 
 export type SearchTableHeaderCellProps = PolymorphicBoxProps<'div', SearchTableHeaderCellOwnProps>
@@ -2033,7 +2033,7 @@ export interface SelectMenuProps extends Omit<PopoverProps, 'position' | 'conten
   /**
    * The icon of the search filter.
    */
-  filterIcon?: React.ElementType | JSX.Element
+  filterIcon?: React.ElementType | React.ReactElement
   /*
    * When true, menu closes on option selection.
    */
@@ -2052,7 +2052,7 @@ export interface SelectMenuProps extends Omit<PopoverProps, 'position' | 'conten
     isSelectable: boolean
     isSelected: boolean
     disabled: SelectMenuOption['disabled']
-  }) => React.ElementType | JSX.Element
+  }) => React.ElementType | React.ReactElement
   /**
    * The height of the items in the select menu list (default is 33px)
    */
@@ -2227,10 +2227,10 @@ export interface TableCellOwnProps extends PaneOwnProps {
    * A string will be used as a selector.
    */
   arrowKeysOverrides?: {
-    up: string | JSX.Element | false | (() => React.ReactNode)
-    down: string | JSX.Element | false | (() => React.ReactNode)
-    left: string | JSX.Element | false | (() => React.ReactNode)
-    right: string | JSX.Element | false | (() => React.ReactNode)
+    up: string | React.ReactElement | false | (() => React.ReactNode)
+    down: string | React.ReactElement | false | (() => React.ReactNode)
+    left: string | React.ReactElement | false | (() => React.ReactNode)
+    right: string | React.ReactElement | false | (() => React.ReactNode)
   }
   /**
    * Class name passed to the table cell.
@@ -2539,7 +2539,7 @@ export interface TextDropdownButtonOwnProps {
   /**
    * An Evergreen icon or custom icon node. By default it uses CaretDownIcon
    */
-  icon?: React.ElementType | JSX.Element | null | false
+  icon?: React.ElementType | React.ReactElement | null | false
   /**
    * Class name passed to the button.
    */
@@ -2737,7 +2737,7 @@ export interface UnorderedListOwnProps {
    * When passed, adds a icon before each list item in the list
    * You can override this on a individual list item.
    */
-  icon?: React.ElementType | JSX.Element
+  icon?: React.ElementType | React.ReactElement
   /**
    * The color of the icon in each list item in the list.
    */
@@ -2758,7 +2758,7 @@ export function extractStyles(options?: { nonce?: React.ScriptHTMLAttributes<'sc
     uiBoxCache: ReturnType<typeof boxExtractStyles>['cache']
     glamorIds: string[]
   }
-  hydrationScript: JSX.Element
+  hydrationScript: React.ReactElement
 }
 
 /**
@@ -2852,7 +2852,7 @@ export const toaster: {
 
 export interface OverlayProps
   extends Pick<TransitionProps, 'onExit' | 'onExiting' | 'onExited' | 'onEnter' | 'onEntering' | 'onEntered'> {
-  children: React.ReactNode | ((props: { state: TransitionStatus; close: () => void }) => JSX.Element)
+  children: React.ReactNode | ((props: { state: TransitionStatus; close: () => void }) => React.ReactElement)
 
   /**
    * Show the component; triggers the enter or exit states.

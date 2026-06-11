@@ -1,2 +1,2 @@
 export default TableWithActionExample;
-declare function TableWithActionExample(): JSX.Element;
+declare function TableWithActionExample(): React.ReactElement;

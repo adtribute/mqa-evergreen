@@ -1,2 +1,2 @@
 export default BasicWithLinkExample;
-declare function BasicWithLinkExample(): JSX.Element;
+declare function BasicWithLinkExample(): React.ReactElement;

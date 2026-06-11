@@ -5,7 +5,7 @@ export default withTheme;
  */
 declare function withTheme(WrappedComponent: React.Component): {
     new (props: any): {
-        render(): JSX.Element;
+        render(): React.ReactElement;
         context: any;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
@@ -30,7 +30,7 @@ declare function withTheme(WrappedComponent: React.Component): {
         UNSAFE_componentWillUpdate?(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): void;
     };
     new (props: any, context: any): {
-        render(): JSX.Element;
+        render(): React.ReactElement;
         context: any;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;

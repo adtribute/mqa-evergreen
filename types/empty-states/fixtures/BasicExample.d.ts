@@ -1,2 +1,2 @@
 export default BasicExample;
-declare function BasicExample(): JSX.Element;
+declare function BasicExample(): React.ReactElement;

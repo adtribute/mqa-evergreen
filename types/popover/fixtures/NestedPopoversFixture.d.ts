@@ -12,4 +12,4 @@ declare function NestedPopoversFixture({ onChildAClose, onChildBClose, onGrandch
     onChildBClose: any;
     onGrandchildClose: any;
     onParentClose: any;
-}): JSX.Element;
+}): React.ReactElement;

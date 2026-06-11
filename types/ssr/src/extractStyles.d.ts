@@ -3,5 +3,5 @@ export default function extractStyles(options?: {}): {
     cache: {
         uiBoxCache: [string, string][];
     };
-    hydrationScript: JSX.Element;
+    hydrationScript: React.ReactElement;
 };
