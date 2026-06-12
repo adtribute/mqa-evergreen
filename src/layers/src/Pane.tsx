@@ -98,6 +98,7 @@ const _Pane = <T extends React.ElementType = 'div'>(props: PaneProps<T>, ref: Fo
     internalStyles
   )
 
+  // @ts-expect-error TS(2322): Type '{ selectors: SelectorMap | undefined; style:... Remove this comment to see the full error message
   return <Box ref={ref} className={className} {...themedProps} {...restProps} />
 }
 

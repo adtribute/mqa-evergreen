@@ -42,7 +42,8 @@ var _Pane = function _Pane(props, ref) {
     borderBottom: borderBottom,
     borderLeft: borderLeft,
     className: className
-  }, pseudoSelectors, internalStyles);
+  }, pseudoSelectors, internalStyles); // @ts-expect-error TS(2322): Type '{ selectors: SelectorMap | undefined; style:... Remove this comment to see the full error message
+
   return /*#__PURE__*/React.createElement(Box, _extends({
     ref: ref,
     className: className

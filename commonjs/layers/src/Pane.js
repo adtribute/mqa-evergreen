@@ -63,6 +63,7 @@ const _Pane = (props, ref) => {
         borderLeft,
         className
     }, pseudoSelectors, internalStyles);
+    // @ts-expect-error TS(2322): Type '{ selectors: SelectorMap | undefined; style:... Remove this comment to see the full error message
     return react_1.default.createElement(ui_box_1.default, Object.assign({ ref: ref, className: className }, themedProps, restProps));
 };
 const Pane = (0, react_1.memo)((0, react_1.forwardRef)(_Pane));

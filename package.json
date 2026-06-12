@@ -168,6 +168,7 @@
     "yarnhook": "^0.5.1"
   },
   "resolutions": {
+    "@types/react": "^18.3.0",
     "ansi-regex": "5.0.1"
   },
   "prettier": {

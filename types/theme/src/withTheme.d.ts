@@ -7,12 +7,10 @@ declare function withTheme(WrappedComponent: React.Component): {
     new (props: any): {
         /** @returns {React.ReactElement} */
         render(): React.ReactElement;
-        context: any;
+        context: unknown;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        readonly props: Readonly<any> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<any>;
         state: Readonly<any>;
         refs: {
             [key: string]: React.ReactInstance;
@@ -33,12 +31,10 @@ declare function withTheme(WrappedComponent: React.Component): {
     new (props: any, context: any): {
         /** @returns {React.ReactElement} */
         render(): React.ReactElement;
-        context: any;
+        context: unknown;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        readonly props: Readonly<any> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<any>;
         state: Readonly<any>;
         refs: {
             [key: string]: React.ReactInstance;
