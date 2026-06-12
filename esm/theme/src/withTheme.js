@@ -34,7 +34,9 @@ function withTheme(WrappedComponent) {
 
     _createClass(_class, [{
       key: "render",
-      value: function render() {
+      value:
+      /** @returns {React.ReactElement} */
+      function render() {
         var _this = this;
 
         return /*#__PURE__*/React.createElement(ThemeConsumer, null, function (theme) {

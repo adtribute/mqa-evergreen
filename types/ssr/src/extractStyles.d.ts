@@ -1,3 +1,6 @@
+/**
+ * @returns {{ css: string, cache: { uiBoxCache: [string, string][] }, hydrationScript: React.ReactElement }}
+ */
 export default function extractStyles(options?: {}): {
     css: string;
     cache: {
@@ -5,3 +8,4 @@ export default function extractStyles(options?: {}): {
     };
     hydrationScript: React.ReactElement;
 };
+import React from "react";

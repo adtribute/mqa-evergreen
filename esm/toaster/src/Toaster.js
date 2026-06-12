@@ -98,7 +98,13 @@ var Toaster = function Toaster() {
       var root = createRoot(container);
       root.render(toastManager());
     } catch (e) {
-      ReactDOM.render(toastManager(), container);
+      // ReactDOM.render was removed in React 19, so it only exists as a
+      // fallback for React 18 environments where react-dom/client can't be required
+      if (typeof ReactDOM.render === 'function') {
+        ReactDOM.render(toastManager(), container);
+      } else {
+        throw e;
+      }
     }
 
     return;

@@ -5,6 +5,7 @@ import { majorScale } from '../../scales';
 import { Table } from '../../table';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+/** @returns {React.ReactElement} */
 
 var TableWithLinkExample = function TableWithLinkExample() {
   var _useTheme = useTheme(),

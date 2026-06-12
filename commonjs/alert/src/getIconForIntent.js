@@ -10,6 +10,7 @@ const icons_1 = require("../../icons");
 /**
  * Get the properties for an icon based on the intent.
  * @param {Intent} intent
+ * @returns {React.ReactElement}
  */
 const getIconForIntent = (intent, props = {}) => {
     switch (intent) {

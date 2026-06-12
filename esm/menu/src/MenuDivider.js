@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pane } from '../../layers';
+/** @returns {React.ReactElement} */
 
 var MenuDivider = function MenuDivider() {
   return /*#__PURE__*/React.createElement(Pane, {

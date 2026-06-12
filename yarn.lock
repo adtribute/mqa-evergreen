@@ -1409,10 +1409,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
 
-"@emotion/hash@^0.7.1":
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.4.tgz#f14932887422c9056b15a8d222a9074a7dfa2831"
-  integrity sha512-fxfMSBMX3tlIbKUdtGKxqB1fyrH6gVrX39Gsv3y8lRYKUqlgDt3UMqQyGnR1bQMa2B8aGnhLZokZgg8vT0Le+A==
+"@emotion/hash@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.9.2.tgz#ff9221b9f58b4dfe61e619a7788734bd63f6898b"
+  integrity sha512-MyqliTZGuOm3+5ZRSaaBGP3USLw6+EGykkwZns2EPC5g8jJ4z9OrdZY9apkl3+UP9+sdz76YYkwCKP5gh8iY3g==
 
 "@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.6":
   version "0.8.8"
@@ -1704,12 +1704,12 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@maestroqa/ui-box@^5.7.0":
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/@maestroqa/ui-box/-/ui-box-5.7.0.tgz#f79ca6a18a098b5583930f168139aedb3d6f3f2c"
-  integrity sha512-c9FJYV7YaI/KRx+pDig1YX6aqTsX3taXxXTxNwDMww/WC1if6/J9sYosr+Se3u8Xig23SEbfERwZmo6tF6DW9g==
+"@maestroqa/ui-box@^5.8.0":
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/@maestroqa/ui-box/-/ui-box-5.8.0.tgz#42d10a1fa9e3ca110a92cdd0c8194ceb99710c0e"
+  integrity sha512-BYZkVlJF5EVPb8FjVOYL1LShKRXmrbgt1piUIg/XkWCTOEanRXhUaPeQkdwjfpswDD5o/Jyc5oMKY1++dpkMiQ==
   dependencies:
-    "@emotion/hash" "^0.7.1"
+    "@emotion/hash" "^0.9.2"
     inline-style-prefixer "^5.0.4"
     prop-types "^15.7.2"
 
