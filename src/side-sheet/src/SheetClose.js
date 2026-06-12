@@ -119,6 +119,7 @@ export default class SheetClose extends PureComponent {
     position: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]).isRequired
   }
 
+  /** @returns {React.ReactElement} */
   render() {
     const { isClosing, position, ...props } = this.props
     return (

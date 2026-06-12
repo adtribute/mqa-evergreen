@@ -11,6 +11,7 @@ import { Text } from '../../typography'
  *     ├── Child Popover A (StringMenu)
  *     │     └── Grandchild Popover (SubMenu)
  *     └── Child Popover B (NumberMenu) - sibling to A
+ * @returns {React.ReactElement}
  */
 function NestedPopoversFixture({ onChildAClose, onChildBClose, onGrandchildClose, onParentClose } = {}) {
   return (

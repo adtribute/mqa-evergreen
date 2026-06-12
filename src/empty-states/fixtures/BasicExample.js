@@ -4,6 +4,7 @@ import { Pane } from '../../layers'
 import { useTheme } from '../../theme'
 import EmptyState from '../src/EmptyState'
 
+/** @returns {React.ReactElement} */
 const BasicExample = () => {
   const { colors } = useTheme()
 
