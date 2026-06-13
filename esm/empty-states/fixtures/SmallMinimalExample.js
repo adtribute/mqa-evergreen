@@ -8,6 +8,7 @@ import { Popover } from '../../popover';
 import { majorScale } from '../../scales';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+/** @returns {React.ReactElement} */
 
 var SmallMinimalExample = function SmallMinimalExample(props) {
   var _useTheme = useTheme(),

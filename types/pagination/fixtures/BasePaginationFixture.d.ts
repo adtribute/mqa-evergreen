@@ -1,2 +1,4 @@
 export default BasePaginationFixture;
-declare function BasePaginationFixture(): JSX.Element;
+/** @returns {React.ReactElement} */
+declare function BasePaginationFixture(): React.ReactElement;
+import React from "react";

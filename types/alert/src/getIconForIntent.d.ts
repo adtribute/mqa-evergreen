@@ -3,4 +3,5 @@ export function getIconForIntent(intent: {
     SUCCESS: string;
     WARNING: string;
     DANGER: string;
-}, props?: {}): JSX.Element;
+}, props?: {}): React.ReactElement;
+import React from "react";

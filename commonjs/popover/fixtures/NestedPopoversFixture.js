@@ -15,6 +15,7 @@ const typography_1 = require("../../typography");
  *     ├── Child Popover A (StringMenu)
  *     │     └── Grandchild Popover (SubMenu)
  *     └── Child Popover B (NumberMenu) - sibling to A
+ * @returns {React.ReactElement}
  */
 function NestedPopoversFixture({ onChildAClose, onChildBClose, onGrandchildClose, onParentClose } = {}) {
     return (react_1.default.createElement(__1.Popover, { onClose: onParentClose, content: react_1.default.createElement(layers_1.Pane, { "data-testid": "parent-popover-content", padding: 16, width: 300 },

@@ -8,6 +8,7 @@ import { majorScale } from '../../scales'
 import { useTheme } from '../../theme'
 import EmptyState from '../src/EmptyState'
 
+/** @returns {React.ReactElement} */
 const SmallExample = props => {
   const { colors } = useTheme()
 

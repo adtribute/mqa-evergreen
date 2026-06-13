@@ -1,6 +1,9 @@
 import React from 'react'
 import { extractStyles as boxExtractStyles } from '@maestroqa/ui-box'
 
+/**
+ * @returns {{ css: string, cache: { uiBoxCache: [string, string][] }, hydrationScript: React.ReactElement }}
+ */
 export default function extractStyles(options = {}) {
   const { cache, styles } = boxExtractStyles()
 

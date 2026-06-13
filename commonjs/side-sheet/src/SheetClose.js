@@ -108,6 +108,7 @@ const sheetCloseStyles = {
     })))
 };
 class SheetClose extends react_1.PureComponent {
+    /** @returns {React.ReactElement} */
     render() {
         const _a = this.props, { isClosing, position } = _a, props = __rest(_a, ["isClosing", "position"]);
         return (react_1.default.createElement(ui_box_1.default, Object.assign({ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }, sheetCloseStyles[position], sharedStyles, props),

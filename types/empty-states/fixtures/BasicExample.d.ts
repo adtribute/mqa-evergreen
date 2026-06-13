@@ -1,2 +1,4 @@
 export default BasicExample;
-declare function BasicExample(): JSX.Element;
+/** @returns {React.ReactElement} */
+declare function BasicExample(): React.ReactElement;
+import React from "react";

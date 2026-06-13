@@ -1,2 +1,4 @@
 export default TableWithActionExample;
-declare function TableWithActionExample(): JSX.Element;
+/** @returns {React.ReactElement} */
+declare function TableWithActionExample(): React.ReactElement;
+import React from "react";

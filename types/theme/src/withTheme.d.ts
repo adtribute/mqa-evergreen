@@ -5,13 +5,12 @@ export default withTheme;
  */
 declare function withTheme(WrappedComponent: React.Component): {
     new (props: any): {
-        render(): JSX.Element;
-        context: any;
+        /** @returns {React.ReactElement} */
+        render(): React.ReactElement;
+        context: unknown;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        readonly props: Readonly<any> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<any>;
         state: Readonly<any>;
         refs: {
             [key: string]: React.ReactInstance;
@@ -30,13 +29,12 @@ declare function withTheme(WrappedComponent: React.Component): {
         UNSAFE_componentWillUpdate?(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): void;
     };
     new (props: any, context: any): {
-        render(): JSX.Element;
-        context: any;
+        /** @returns {React.ReactElement} */
+        render(): React.ReactElement;
+        context: unknown;
         setState<K extends string | number | symbol>(state: any, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        readonly props: Readonly<any> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<any>;
         state: Readonly<any>;
         refs: {
             [key: string]: React.ReactInstance;

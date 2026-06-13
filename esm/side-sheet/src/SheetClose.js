@@ -153,7 +153,9 @@ var SheetClose = /*#__PURE__*/function (_PureComponent) {
 
   _createClass(SheetClose, [{
     key: "render",
-    value: function render() {
+    value:
+    /** @returns {React.ReactElement} */
+    function render() {
       var _this$props = this.props,
           isClosing = _this$props.isClosing,
           position = _this$props.position,

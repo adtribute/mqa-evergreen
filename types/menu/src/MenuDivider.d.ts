@@ -1,2 +1,4 @@
 export default MenuDivider;
-declare function MenuDivider(): JSX.Element;
+/** @returns {React.ReactElement} */
+declare function MenuDivider(): React.ReactElement;
+import React from "react";

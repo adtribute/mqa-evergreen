@@ -1,2 +1,4 @@
 export default TableWithLinkExample;
-declare function TableWithLinkExample(): JSX.Element;
+/** @returns {React.ReactElement} */
+declare function TableWithLinkExample(): React.ReactElement;
+import React from "react";

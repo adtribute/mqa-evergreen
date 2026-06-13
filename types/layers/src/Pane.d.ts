@@ -41,5 +41,5 @@ export interface PaneOwnProps {
 }
 export type PaneProps<T extends React.ElementType = 'div'> = PolymorphicBoxProps<T, PaneOwnProps>;
 type Elevation = 0 | 1 | 2 | 3 | 4;
-declare const Pane: <T extends React.ElementType<any> = "div">(props: PaneProps<T>) => JSX.Element;
+declare const Pane: <T extends React.ElementType<any, keyof React.JSX.IntrinsicElements> = "div">(props: PaneProps<T>) => React.ReactElement;
 export default Pane;

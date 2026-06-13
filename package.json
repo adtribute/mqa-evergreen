@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "@maestroqa/ui-box": "^5.7.0",
+    "@maestroqa/ui-box": "^5.8.0",
     "@segment/react-tiny-virtual-list": "^2.2.1",
     "@types/react-transition-group": "^4.4.0",
     "arrify": "^1.0.1",
@@ -85,9 +85,9 @@
     "react-transition-group": "^4.4.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-is": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-is": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -168,6 +168,7 @@
     "yarnhook": "^0.5.1"
   },
   "resolutions": {
+    "@types/react": "^18.3.0",
     "ansi-regex": "5.0.1"
   },
   "prettier": {
