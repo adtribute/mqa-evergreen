@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import Box from '@maestroqa/ui-box'
 import PropTypes from 'prop-types'
 import { StackingOrder } from '../../constants'
@@ -10,22 +10,31 @@ const ToastManager = memo(function ToastManager(props) {
   const { bindCloseAll, bindGetToasts, bindNotify, bindRemove } = props
 
   const [toasts, setToasts] = useState([])
-  const [idCounter, setIdCounter] = useState(0)
+  // Kept in a ref so several toasts created before the next render still get unique ids
+  const idCounter = useRef(0)
 
   const getToasts = () => toasts
 
+  // Every update below is applied to the latest state rather than the `toasts` captured at render time:
+  // React batches toaster calls made in the same tick, so a closure over `toasts` would drop all but the last one.
   const closeAll = () => {
-    setToasts(toasts.map(toast => ({ ...toast, isShown: false })))
+    setToasts(currentToasts => currentToasts.map(toast => ({ ...toast, isShown: false })))
   }
 
   /**
    * This will set isShown on the Toast which will close the toast.
    * It won't remove the toast until onExited triggers onRemove.
    */
-  const closeToast = id => {
-    setToasts(
-      toasts.map(toast => {
-        if (toast.id === id) {
+  const safeCloseToast = id => {
+    setToasts(currentToasts => {
+      const toastToRemove = currentToasts.find(toast => String(toast.id).startsWith(id))
+
+      if (!toastToRemove) {
+        return currentToasts
+      }
+
+      return currentToasts.map(toast => {
+        if (toast.id === toastToRemove.id) {
           return {
             ...toast,
             isShown: false
@@ -34,26 +43,18 @@ const ToastManager = memo(function ToastManager(props) {
 
         return toast
       })
-    )
+    })
   }
 
-  const safeCloseToast = id => {
-    const toastToRemove = toasts.find(toast => String(toast.id).startsWith(id))
-
-    if (toastToRemove) {
-      closeToast(toastToRemove.id)
-    }
-  }
+  const withoutToast = (currentToasts, id) => currentToasts.filter(toast => !String(toast.id).startsWith(id))
 
   const removeToast = id => {
-    const updatedToasts = toasts.filter(toast => !String(toast.id).startsWith(id))
-    setToasts(updatedToasts)
-    return updatedToasts
+    setToasts(currentToasts => withoutToast(currentToasts, id))
   }
 
   const createToastInstance = (title, settings) => {
-    const uniqueId = idCounter
-    setIdCounter(idCounter + 1)
+    const uniqueId = idCounter.current
+    idCounter.current += 1
     const id = hasCustomId(settings) ? `${settings.id}-${uniqueId}` : uniqueId
 
     return {
@@ -68,13 +69,12 @@ const ToastManager = memo(function ToastManager(props) {
   }
 
   const notify = (title, settings) => {
-    let tempToasts = toasts
-    if (hasCustomId(settings)) {
-      tempToasts = removeToast(settings.id)
-    }
-
     const instance = createToastInstance(title, settings)
-    setToasts([instance, ...tempToasts])
+
+    setToasts(currentToasts => {
+      const otherToasts = hasCustomId(settings) ? withoutToast(currentToasts, settings.id) : currentToasts
+      return [instance, ...otherToasts]
+    })
   }
 
   bindNotify(notify)
