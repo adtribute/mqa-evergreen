@@ -11,8 +11,8 @@
   "dependencies": {
     "evergreen-ui": "latest",
     "next": "^14.2.25",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "xo": false
 }

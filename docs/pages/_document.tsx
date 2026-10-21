@@ -5,7 +5,7 @@ import { extractStyles } from 'evergreen-ui'
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }: DocumentContext) {
-    const page = renderPage()
+    const page = await renderPage()
     // `css` is a string with css from both glamor and ui-box.
     // No need to get the glamor css manually if you are using it elsewhere in your app.
     //

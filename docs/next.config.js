@@ -1,5 +1,8 @@
 var debug = process.env.NODE_ENV !== 'production'
 module.exports = {
+  // `next export` was removed in Next 14. Static HTML is emitted to `out/` on `next build`.
+  output: 'export',
+
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
