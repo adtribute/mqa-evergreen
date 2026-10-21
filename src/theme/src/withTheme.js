@@ -11,6 +11,7 @@ function withTheme(WrappedComponent) {
   return class extends React.Component {
     static displayName = `withTheme(${displayName})`
 
+    /** @returns {React.ReactElement} */
     render() {
       return <ThemeConsumer>{theme => <WrappedComponent theme={theme} {...this.props} />}</ThemeConsumer>
     }

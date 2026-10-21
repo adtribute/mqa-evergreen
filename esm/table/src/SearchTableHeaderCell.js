@@ -14,16 +14,7 @@ import { Text } from '../../typography';
 import TableHeaderCell from './TableHeaderCell';
 
 var noop = function noop() {};
-/**
- * This prop is non-standard, macOS specific and unsupported by ui-box. We probably don't need it,
- * but retaining it for backwards compatibility
- * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
- */
 
-
-var style = {
-  '-webkit-font-smoothing': 'antialiased'
-};
 var SearchTableHeaderCell = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function SearchTableHeaderCell(props, ref) {
   var value = props.value,
       children = props.children,
@@ -54,7 +45,6 @@ var SearchTableHeaderCell = /*#__PURE__*/memo( /*#__PURE__*/forwardRef(function 
     border: "none",
     backgroundColor: "transparent",
     appearance: "none",
-    style: style,
     selectors: {
       '&:focus': {
         outline: 'none'

@@ -6,6 +6,7 @@ import { Table } from '../../table'
 import { useTheme } from '../../theme'
 import EmptyState from '../src/EmptyState'
 
+/** @returns {React.ReactElement} */
 const TableWithActionExample = () => {
   const { colors } = useTheme()
 

@@ -4,6 +4,7 @@ import { Popover } from '../';
 import { Button } from '../../buttons';
 import { Pane } from '../../layers';
 import { TextInput } from '../../text-input';
+/** @returns {React.ReactElement} */
 
 function PopoverWithTextInputChild(props) {
   return /*#__PURE__*/React.createElement(Popover, _extends({

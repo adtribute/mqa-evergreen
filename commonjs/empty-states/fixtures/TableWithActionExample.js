@@ -10,6 +10,7 @@ const scales_1 = require("../../scales");
 const table_1 = require("../../table");
 const theme_1 = require("../../theme");
 const EmptyState_1 = __importDefault(require("../src/EmptyState"));
+/** @returns {React.ReactElement} */
 const TableWithActionExample = () => {
     const { colors } = (0, theme_1.useTheme)();
     return (react_1.default.createElement(layers_1.Pane, { marginBottom: (0, scales_1.majorScale)(8) },

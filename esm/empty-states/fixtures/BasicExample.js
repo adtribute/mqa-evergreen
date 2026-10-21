@@ -3,6 +3,7 @@ import { LockIcon } from '../../icons';
 import { Pane } from '../../layers';
 import { useTheme } from '../../theme';
 import EmptyState from '../src/EmptyState';
+/** @returns {React.ReactElement} */
 
 var BasicExample = function BasicExample() {
   var _useTheme = useTheme(),

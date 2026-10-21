@@ -13,6 +13,7 @@ function withTheme(WrappedComponent) {
     var _a;
     const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     return _a = class extends react_1.default.Component {
+            /** @returns {React.ReactElement} */
             render() {
                 return react_1.default.createElement(ThemeContext_1.ThemeConsumer, null, theme => react_1.default.createElement(WrappedComponent, Object.assign({ theme: theme }, this.props)));
             }

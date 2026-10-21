@@ -44,20 +44,12 @@ const IconWrapper_1 = require("../../icons/src/IconWrapper");
 const typography_1 = require("../../typography");
 const TableHeaderCell_1 = __importDefault(require("./TableHeaderCell"));
 const noop = () => { };
-/**
- * This prop is non-standard, macOS specific and unsupported by ui-box. We probably don't need it,
- * but retaining it for backwards compatibility
- * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
- */
-const style = {
-    '-webkit-font-smoothing': 'antialiased'
-};
 const SearchTableHeaderCell = (0, react_1.memo)((0, react_1.forwardRef)(function SearchTableHeaderCell(props, ref) {
     const { value, children, onChange = noop, autoFocus, spellCheck = true, placeholder = 'Filter...', icon = icons_1.SearchIcon } = props, rest = __rest(props, ["value", "children", "onChange", "autoFocus", "spellCheck", "placeholder", "icon"]);
     const handleChange = (0, react_1.useCallback)(e => onChange(e.target.value), [onChange]);
     return (react_1.default.createElement(TableHeaderCell_1.default, Object.assign({}, rest),
         react_1.default.createElement(IconWrapper_1.IconWrapper, { icon: icon, color: "muted", marginLeft: 2, marginRight: 10, size: 12 }),
-        react_1.default.createElement(typography_1.Text, { is: "input", size: 300, flex: "1", border: "none", backgroundColor: "transparent", appearance: "none", style: style, selectors: {
+        react_1.default.createElement(typography_1.Text, { is: "input", size: 300, flex: "1", border: "none", backgroundColor: "transparent", appearance: "none", selectors: {
                 '&:focus': {
                     outline: 'none'
                 },

@@ -2,7 +2,6 @@
 node_modules
 .DS_Store
 coverage
-/esm/
 /umd/
 /.out/
 .cache
@@ -12,4 +11,4 @@ coverage
 /storybook-static/
 .eslintcache
 /codemods/dist
-/types/
+.claude/settings.local.json

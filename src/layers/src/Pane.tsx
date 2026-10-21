@@ -63,7 +63,7 @@ const pseudoSelectors = {
 
 const internalStyles = {}
 
-const _Pane = <T extends React.ElementType = 'div'>(props: PaneProps<T>, ref: ForwardedRef<T>) => {
+const _Pane = (props: PaneProps<'div'>, ref: ForwardedRef<HTMLDivElement>) => {
   const {
     // Pulled out of props because we'll get them from the style hook
     activeElevation,
@@ -98,11 +98,10 @@ const _Pane = <T extends React.ElementType = 'div'>(props: PaneProps<T>, ref: Fo
     internalStyles
   )
 
-  // @ts-expect-error TS(2322): Type '{ selectors: SelectorMap | undefined; style:... Remove this comment to see the full error message
   return <Box ref={ref} className={className} {...themedProps} {...restProps} />
 }
 
-const Pane = memo(forwardRef(_Pane)) as <T extends React.ElementType = 'div'>(props: PaneProps<T>) => JSX.Element
+const Pane = memo(forwardRef(_Pane)) as <T extends React.ElementType = 'div'>(props: PaneProps<T>) => React.ReactElement
 
 // @ts-expect-error TS(2339): Property 'propTypes' does not exist on type '<E ex... Remove this comment to see the full error message
 Pane.propTypes = {

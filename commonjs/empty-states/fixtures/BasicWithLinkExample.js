@@ -8,6 +8,7 @@ const icons_1 = require("../../icons");
 const layers_1 = require("../../layers");
 const theme_1 = require("../../theme");
 const EmptyState_1 = __importDefault(require("../src/EmptyState"));
+/** @returns {React.ReactElement} */
 const BasicWithLinkExample = () => {
     const { colors } = (0, theme_1.useTheme)();
     return (react_1.default.createElement(layers_1.Pane, { maxWidth: 1152 },

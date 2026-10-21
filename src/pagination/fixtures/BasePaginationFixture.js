@@ -1,6 +1,7 @@
 import React from 'react'
 import { Pagination, usePaginationBehavior } from '../'
 
+/** @returns {React.ReactElement} */
 const BasePaginationFixture = () => {
   const { onNextPage, onPageChange, onPreviousPage, page } = usePaginationBehavior({ page: 1 })
 
