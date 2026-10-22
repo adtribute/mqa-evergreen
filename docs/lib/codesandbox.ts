@@ -75,7 +75,7 @@ const getComponentList = (source: string): string =>
     new Set(
       (
         source.match(/<((\w+))|toaster|minorScale|majorScale|mergeTheme|defaultTheme|(((\w+)Icon))|Position/g) || []
-      ).map((component: string) => component.replace('<', ''))
+      ).map((component: string) => component.replace(/</g, ''))
     )
   ).join(', ')
 
