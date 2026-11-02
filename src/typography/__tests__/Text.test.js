@@ -74,7 +74,7 @@ describe('Sizing', () => {
 
 describe('Props', () => {
   it('should forward `className` prop', () => {
-    const expected = faker.random.word().toLowerCase()
+    const expected = faker.word.sample().toLowerCase()
     const component = (
       <Text data-testid="text" className={expected}>
         Testing

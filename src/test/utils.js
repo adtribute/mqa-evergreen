@@ -10,7 +10,7 @@ export const buildFile = (overrides = {}) => {
   const maxSizeInBytes = 10 * 1024 ** 2
   const {
     name = faker.system.fileName(),
-    size = faker.datatype.number({ min: 1024, max: 1024 * 3 }),
+    size = faker.number.int({ min: 1024, max: 1024 * 3 }),
     type = MimeType.gif
   } = overrides
 
@@ -43,8 +43,8 @@ export const buildFiles = (count = 2, overrides = {}) => {
  */
 export const buildFileRejection = file => ({
   file,
-  reason: faker.random.arrayElement(Object.values(FileRejectionReason)),
-  message: faker.random.words()
+  reason: faker.helpers.arrayElement(Object.values(FileRejectionReason)),
+  message: faker.word.words()
 })
 
 /**

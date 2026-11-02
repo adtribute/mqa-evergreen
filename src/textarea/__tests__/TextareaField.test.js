@@ -14,14 +14,14 @@ describe('TextareaField', () => {
 
   describe('FormField props', () => {
     test('Should render label when provided', () => {
-      const expected = faker.random.alphaNumeric()
+      const expected = faker.string.alphanumeric()
       render(makeTextareaFieldFixture({ label: expected }))
 
       expect(screen.getByLabelText(expected)).toBeInTheDocument()
     })
 
     test('Should render asterisk when required is true', () => {
-      const label = faker.random.alphaNumeric()
+      const label = faker.string.alphanumeric()
       const expected = `${label} *`
       render(makeTextareaFieldFixture({ label, required: true }))
 
@@ -29,28 +29,28 @@ describe('TextareaField', () => {
     })
 
     test('Should render hint when provided', () => {
-      const expected = faker.random.alphaNumeric()
+      const expected = faker.string.alphanumeric()
       render(makeTextareaFieldFixture({ hint: expected }))
 
       expect(screen.getByText(expected)).toBeInTheDocument()
     })
 
     test('Should render description when provided', () => {
-      const expected = faker.random.alphaNumeric()
+      const expected = faker.string.alphanumeric()
       render(makeTextareaFieldFixture({ description: expected }))
 
       expect(screen.getByText(expected)).toBeInTheDocument()
     })
 
     test('Should render validationMessage when provided', () => {
-      const expected = faker.random.alphaNumeric()
+      const expected = faker.string.alphanumeric()
       render(makeTextareaFieldFixture({ validationMessage: expected }))
 
       expect(screen.getByText(expected)).toBeInTheDocument()
     })
 
     test('Should render label with `for` attribute for accessibility', () => {
-      const { container } = render(makeTextareaFieldFixture({ label: faker.random.alphaNumeric() }))
+      const { container } = render(makeTextareaFieldFixture({ label: faker.string.alphanumeric() }))
 
       const textarea = container.querySelector('textarea')
       const label = container.querySelector('label')
@@ -88,7 +88,7 @@ describe('TextareaField', () => {
     })
 
     it('Should render with placeholder when placeholder provided', () => {
-      const expected = faker.random.alphaNumeric()
+      const expected = faker.string.alphanumeric()
       const { container } = render(makeTextareaFieldFixture({ placeholder: expected }))
 
       const textarea = container.querySelector('textarea')
@@ -120,7 +120,7 @@ describe('TextareaField', () => {
     })
 
     it('Should pass through `inputWidth` prop to textarea', () => {
-      const expected = faker.datatype.number({ min: 10, max: 100 })
+      const expected = faker.number.int({ min: 10, max: 100 })
       const { container } = render(makeTextareaFieldFixture({ inputWidth: expected }))
 
       const textarea = container.querySelector('textarea')
@@ -128,7 +128,7 @@ describe('TextareaField', () => {
     })
 
     it('Should pass through `inputHeight` prop to textarea', () => {
-      const expected = faker.datatype.number({ min: 10, max: 100 })
+      const expected = faker.number.int({ min: 10, max: 100 })
       const { container } = render(makeTextareaFieldFixture({ inputHeight: expected }))
 
       const textarea = container.querySelector('textarea')
