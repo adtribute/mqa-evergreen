@@ -1723,10 +1723,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@maestroqa/ui-box@^5.9.0":
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/@maestroqa/ui-box/-/ui-box-5.9.0.tgz#af7f1eacf30a4eeece4ed11282a3bbb7c3207744"
-  integrity sha512-kWUGbpy9sTjGxImyzzRtUu/83cXuQu8uEzKEOBjQgslkhkgWUowsUOJ61hLlC69GGbarOEP77vGtcod5QJQliw==
+"@maestroqa/ui-box@^5.9.1":
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/@maestroqa/ui-box/-/ui-box-5.9.1.tgz#4413385b56d013c4538d8f214423b3dfde5d9179"
+  integrity sha512-vk6fPViOuXahxgLwOz2m9uulm3NAt8BSLpKNowtlRxvygN72x8WUhu35nSmdxMsJlGUkfpmPlYEJAkxDNzTABA==
   dependencies:
     "@emotion/hash" "^0.9.2"
     inline-style-prefixer "^5.0.4"
