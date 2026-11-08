@@ -38,7 +38,7 @@ const baseStyle = {
 
 # No more classicTheme {#classic-theme}
 
-The `classicTheme` was maintained in v6 to allow consumers to upgrade without forcing an entirely new look-and-feel. However, there were some missed components ([#1511](https://github.com/segmentio/evergreen/issues/1511)), and new components like the [`FileUploader`](/components/file-uploader) were not retrofitted for the old visual style.
+The `classicTheme` was maintained in v6 to allow consumers to upgrade without forcing an entirely new look-and-feel. However, there were some missed components ([#1511](https://github.com/segmentio/evergreen/issues/1511)), and new components like the [`FileUploader`](../../components/file-uploader.mdx) were not retrofitted for the old visual style.
 
 Taking into account the refactoring effort for the `selectors` object and v6 being out for close to 2 years now, we think it's time to sunset the classic theme in favor of our modern visual design.
 
@@ -106,7 +106,7 @@ Similar to the `classicTheme`, we are no longer exporting the `deprecatedDefault
 
 # Nudge has been replaced with Pulsar {#nudge}
 
-The `Nudge` component has been replaced with a simpler component named [`Pulsar`](/components/pulsar). This component has a similar look, but does not wrap children or include the tooltip functionality that was previously available.
+The `Nudge` component has been replaced with a simpler component named [`Pulsar`](../../components/pulsar.mdx). This component has a similar look, but does not wrap children or include the tooltip functionality that was previously available.
 
 ```diff readonly
 import React from 'react'
@@ -122,7 +122,7 @@ import React from 'react'
 +</Pane>
 ```
 
-`Nudge` components leveraging the `tooltipContent` prop will need to be updated to render a [`Tooltip`](/components/tooltip) or [`Popover`](/components/popver) similar to this:
+`Nudge` components leveraging the `tooltipContent` prop will need to be updated to render a [`Tooltip`](../../components/tooltip.mdx) or [`Popover`](../../components/popover.mdx) similar to this:
 
 ```diff readonly
 import React from 'react'
@@ -175,7 +175,7 @@ import React from 'react'
 
 # No more SegmentedControl {#segmented-control}
 
-The `SegmentedControl` component has been removed. The same visual style can be achieved by rendering a group of components ([`Button`](/components/buttons), [`TextInput`](/components/text-input), etc) in a [`Group`](/components/group).
+The `SegmentedControl` component has been removed. The same visual style can be achieved by rendering a group of components ([`Button`](../../components/buttons.mdx), [`TextInput`](../../components/text-input.mdx), etc) in a [`Group`](../../components/group.mdx).
 
 Click event and active state management now needs to be handled manually - the `Group` component only manages the border/size styling as well as the `role="group"` attribute.
 
