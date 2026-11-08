@@ -66,7 +66,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
+    "@babel/runtime": "^7.29.7",
     "@maestroqa/ui-box": "^5.9.1",
     "@segment/react-tiny-virtual-list": "^2.2.1",
     "@types/react-transition-group": "^4.4.0",
@@ -78,7 +78,7 @@
     "lodash.differencewith": "^4.5.0",
     "lodash.isempty": "^4.4.0",
     "lodash.merge": "^4.6.2",
-    "lodash.omit": "^4.5.0",
+    "lodash.omit": "^4.18.0",
     "lodash.uniqby": "^4.7.0",
     "prop-types": "^15.6.2",
     "react-fast-compare": "^3.2.0",
