@@ -31,23 +31,3 @@ updates:
       codemods-babel:
         applies-to: security-updates
         patterns: ['@babel/*']
-
-  - package-ecosystem: npm
-    directory: /docs
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 0
-    groups:
-      docs-next:
-        applies-to: security-updates
-        patterns: ['next', '@next/*']
-
-  - package-ecosystem: npm
-    directory: /examples/ssr-next
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 0
-    groups:
-      ssr-example-next:
-        applies-to: security-updates
-        patterns: ['next', '@next/*']
