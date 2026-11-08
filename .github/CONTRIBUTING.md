@@ -32,20 +32,7 @@ Now go to `http://localhost:6006` in your browser.
 
 Now you can start developing! All of the components are under the `src` directory and associated code changes will automatically be reflected in StoryBook.
 
-If necessary, we encourage you to update the documentation so Evergreen users will be aware of your new features/changes.
-
-In order to run the documentation page locally, run these commands in your terminal:
-
-```
-$ yarn build
-$ cd docs
-$ yarn install
-$ yarn dev
-```
-
-Now you can visit `http://localhost:3000/` in your browser.
-
-Documentation code is under the `docs` directory. A big portion of these docs are written in MDX, if you've never used MDX before, check out these [docs](https://mdxjs.com/getting-started).
+Add or update the Storybook story in the component’s `stories/` directory when its behavior changes. The [archived guides](../docs/README.md) cover earlier Evergreen components and migrations.
 
 ### 🏆 Step 4. Making your pull request
 
