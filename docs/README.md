@@ -1,27 +1,11 @@
-# Evergreen Docs
+# Evergreen documentation
 
-The following gives some information about getting the Evergreen docs site up and running locally.
+Browse the [Storybook](https://adtribute.github.io/mqa-evergreen/) for examples from this fork. To run the stories locally, use `yarn dev` from the repository root.
 
-# Spinning up the dev server
+## Archived guides
 
-To get started locally, run the following commands:
+The former documentation site’s MDX source includes [component guides](./documentation/components/), [foundations](./documentation/foundations/), [design patterns](./documentation/patterns/), and [migration notes](./documentation/introduction/migrations/). The guides describe the upstream versions they were written for. You can read the prose and code samples in GitHub’s source view. The [table examples](./documentation/components/table.mdx) use these [sample profiles](./fixtures/profiles.json).
 
-```
-$ (docs): yarn install
-$ (docs): yarn dev
-```
+## Server-side rendering
 
-Then, navigate to your browser and go to: `localhost:3000`.
-
-# Adding a new documentation page
-
-Add an entry under the corresponding header in `IA.ts` - you can think of this as the "database" for all status relating to Evergreen components and documentation.
-
-From there, the directory structure in `docs/documentation/` contains the `.mdx` files which mirror the route structure for the docs site.
-
-Any thumbnail images or static assets should be added in the `public/` directory, as they'll be picked up by Next.js.
-
-# A note about hot-reloading / fast-refresh
-
-Changes made to any of the UI components that make up `docs/` (i.e. anything with a `ts` or `tsx` extension) will be picked up by Next.js automatically.
-However, if you make changes to any `.mdx`, you should refresh the page that you're looking at.
+After rendering the page on the server, call `extractStyles()` from `evergreen-ui`. Include the returned `css` in a style element in the page head and the returned `hydrationScript` before the client scripts. The [SSR tests](../src/ssr/__tests__/) exercise style extraction and hydration. The [historical Next.js example](https://github.com/adtribute/mqa-evergreen/blob/v7.7.3/examples/ssr-next/pages/_document.js) shows how the two fit into a Pages Router document.
