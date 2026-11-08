@@ -5,7 +5,7 @@ Internal fork of [evergreen-ui](https://github.com/segmentio/evergreen) by Segme
 ## Setup
 
 ```bash
-nvm use          # Node 14.18 (.nvmrc)
+nvm use          # Build with the Node version in .nvmrc
 yarn install     # Errors are expected but harmless
 ```
 
