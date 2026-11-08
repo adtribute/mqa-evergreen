@@ -1,6 +1,6 @@
 {
   "name": "evergreen-ui",
-  "version": "7.7.2",
+  "version": "7.7.3",
   "description": "🌲 React UI Kit by Segment 🌲",
   "contributors": [
     "Jeroen Ransijn (https://jssr.design/)",
@@ -47,11 +47,9 @@
     "clean": "git clean -Xdf",
     "create-package": "./tools/create-package.js",
     "create-package:components": "./tools/create-package-components.js",
-    "deploy-docs": "cd docs && yarn install && yarn deploy",
     "dev": "start-storybook -p 6006",
     "generate-icons": "./tools/generate-icons.js",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\" --cache",
-    "postpublish": "branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); if [[ $branch == \"master\" ]]; then yarn update-docs || yarn deploy-docs; else echo \"not on main branch, skipping docs deploy\"; fi;",
     "prebuild": "yarn typecheck",
     "prepublishOnly": "rm -rf esm commonjs types && yarn build",
     "release": "np",
@@ -59,8 +57,7 @@
     "test": "yarn lint && yarn tsd && yarn jest",
     "test:coverage": "yarn jest --coverage",
     "test:watch": "yarn jest --watch",
-    "typecheck": "tsc --noEmit",
-    "update-docs": "cd docs && yarn add evergreen-ui@latest --exact && git add package.json yarn.lock && git show-branch --no-name HEAD | grep -E 'v[0-9]+.[0-9]+.[0-9]+' && git commit --amend --no-edit || git commit -m \"Updated doc site evergreen version\""
+    "typecheck": "tsc --noEmit"
   },
   "engines": {
     "node": ">=14"
@@ -131,7 +128,7 @@
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.4",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "camelcase": "^5.0.0",
     "chromatic": "^5.1.0",
@@ -164,7 +161,7 @@
     "tsd": "^0.19.1",
     "typescript": "4.9.4",
     "url-loader": "^1.1.2",
-    "webpack": "^4.43.0",
+    "webpack": "^4.47.0",
     "yarnhook": "^0.5.1"
   },
   "resolutions": {
@@ -186,12 +183,9 @@
     "arrowParens": "avoid"
   },
   "lint-staged": {
-    "!(codemods|docs|esm|commonjs)/**/*.{js,ts,tsx}": [
+    "!(codemods|esm|commonjs)/**/*.{js,ts,tsx}": [
       "yarn lint --fix",
       "prettier --write"
-    ],
-    "docs/**/*.{js,ts,tsx}": [
-      "yarn --cwd ./docs run lint"
     ],
     "*.{json,md}": [
       "prettier --write"
@@ -202,7 +196,6 @@
       "./tools/test-setup-after-env"
     ],
     "modulePathIgnorePatterns": [
-      "<rootDir>/docs/",
       "<rootDir>/codemods/",
       "<rootDir>/esm/",
       "<rootDir>/commonjs/"
