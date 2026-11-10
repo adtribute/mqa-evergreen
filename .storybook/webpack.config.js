@@ -21,6 +21,17 @@ module.exports = ({ config: storybookBaseConfig }) => {
         {
           test: /\.(blob)/,
           loader: 'file-loader'
+        },
+        {
+          // Faker 10 is ESM and uses syntax Webpack 4 cannot parse.
+          test: /\.js$/,
+          include: /node_modules\/@faker-js\/faker/,
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            configFile: false,
+            presets: [['@babel/preset-env', { modules: false, targets: { chrome: '63' } }]]
+          }
         }
       ]
     }

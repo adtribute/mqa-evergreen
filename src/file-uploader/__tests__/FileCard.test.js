@@ -26,7 +26,7 @@ describe('FileCard', () => {
 
     describe('description', () => {
       it('should render description when non-empty', () => {
-        const description = faker.random.words()
+        const description = faker.lorem.words()
         renderWithProps({ description })
 
         expect(screen.getByText(description)).toBeInTheDocument()
@@ -123,7 +123,7 @@ describe('FileCard', () => {
 
     describe('sizeInBytes', () => {
       it('should render humanized size', () => {
-        const sizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 * 1024 })
+        const sizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 * 1024 })
 
         renderWithProps({ sizeInBytes })
 
@@ -136,7 +136,7 @@ describe('FileCard', () => {
         it.each([MimeType.css, MimeType.doc, MimeType.mp3, MimeType.mp4])(
           'should not render <img /> when type is %p',
           type => {
-            const src = faker.image.animals()
+            const src = faker.image.url()
 
             renderWithProps({ src, type })
             const fileCard = screen.getByTestId(testId)
@@ -146,7 +146,7 @@ describe('FileCard', () => {
         )
 
         it.each([MimeType.png, MimeType.gif, MimeType.jpeg])('should render <img /> when type is %p', type => {
-          const src = faker.image.animals()
+          const src = faker.image.url()
 
           renderWithProps({ src, type })
           const fileCard = screen.getByTestId(testId)
@@ -166,7 +166,7 @@ describe('FileCard', () => {
 
     describe('validationMessage', () => {
       it('should render validationMessage', () => {
-        const validationMessage = faker.random.words()
+        const validationMessage = faker.lorem.words()
 
         renderWithProps({ validationMessage })
 
