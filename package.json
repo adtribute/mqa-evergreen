@@ -43,7 +43,6 @@
     "build-storybook": "build-storybook",
     "build-types": "tsc --project tsconfig.types.json",
     "build-umd": "rollup -c",
-    "chromatic": "npx chromatic",
     "clean": "git clean -Xdf",
     "create-package": "./tools/create-package.js",
     "create-package:components": "./tools/create-package-components.js",
@@ -104,7 +103,8 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-replace": "^2.3.3",
     "@rollup/plugin-typescript": "^10.0.1",
-    "@size-limit/preset-big-lib": "^4.5.4",
+    "@size-limit/file": "4.12.0",
+    "@size-limit/webpack": "4.12.0",
     "@storybook/addon-essentials": "^6.0.21",
     "@storybook/addon-options": "^5.3.21",
     "@storybook/addons": "^6.0.21",
@@ -131,7 +131,6 @@
     "babel-loader": "^8.2.4",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "camelcase": "^5.0.0",
-    "chromatic": "^5.1.0",
     "concurrently": "^4.0.1",
     "eslint": "6.2.2",
     "eslint-config-prettier": "^6.11.0",
@@ -156,7 +155,7 @@
     "rollup": "^2.28.2",
     "rollup-plugin-terser": "^5.2.0",
     "sinon": "^8.1.0",
-    "size-limit": "^4.5.0",
+    "size-limit": "4.12.0",
     "starwars-names": "^1.6.0",
     "tsd": "^0.19.1",
     "typescript": "4.9.4",
@@ -171,7 +170,8 @@
     "**/react-dev-utils/loader-utils": "^2.0.4",
     "**/react-dev-utils/shell-quote": "^1.12.0",
     "**/@mdx-js/loader/loader-utils": "^2.0.4",
-    "**/request/form-data": "^2.5.6"
+    "**/request/form-data": "^2.5.6",
+    "**/terser-webpack-plugin/cacache/tar": "^7.5.22"
   },
   "prettier": {
     "semi": false,
@@ -210,14 +210,12 @@
   "size-limit": [
     {
       "path": "commonjs/index.js",
-      "limit": "305 KB",
-      "running": false
+      "limit": "305 KB"
     },
     {
       "path": "esm/index.js",
       "import": "{ Pane, Text, majorScale, SelectMenu, Menu, AddIcon, RemoveIcon }",
-      "limit": "65 KB",
-      "running": false
+      "limit": "65 KB"
     }
   ],
   "husky": {
