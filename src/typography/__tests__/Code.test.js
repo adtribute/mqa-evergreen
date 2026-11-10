@@ -50,7 +50,7 @@ describe('Code', () => {
   })
 
   it('should pass through `className` prop', () => {
-    const expected = faker.random.word().toLowerCase()
+    const expected = faker.word.sample().toLowerCase()
     const component = (
       <Code data-testid="code" className={expected}>
         Testing
