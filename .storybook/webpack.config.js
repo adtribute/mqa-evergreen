@@ -1,6 +1,9 @@
 const webpack = require('webpack')
+const preserveCssLoaderDefaults = require('./css-loader-defaults')
 
 module.exports = ({ config: storybookBaseConfig }) => {
+  preserveCssLoaderDefaults(storybookBaseConfig)
+
   // Return the altered config
   return {
     ...storybookBaseConfig,
