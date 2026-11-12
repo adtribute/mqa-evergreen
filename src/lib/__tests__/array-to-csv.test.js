@@ -9,7 +9,7 @@ describe('arrayToCsv', () => {
   })
 
   it('should return comma separated string of values', () => {
-    const values = faker.random.words(10).split(' ')
+    const values = faker.lorem.words(10).split(' ')
 
     const result = arrayToCsv(values)
 

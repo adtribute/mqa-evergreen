@@ -23,7 +23,7 @@ const users = range(100).map(index => {
 
   return {
     id: index,
-    name: faker.name.findName(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
     options,
     notes: '',
