@@ -20,7 +20,7 @@ describe('FileUploader', () => {
   describe('props', () => {
     describe('acceptedMimeTypes', () => {
       it('should forward csv string to file input', () => {
-        const acceptedMimeTypes = faker.random.arrayElements(Object.values(MimeType))
+        const acceptedMimeTypes = faker.helpers.arrayElements(Object.values(MimeType))
 
         renderWithProps({ acceptedMimeTypes })
         const fileUploader = screen.getByTestId(testId)
@@ -63,7 +63,7 @@ describe('FileUploader', () => {
 
     describe('description', () => {
       it('should render description', () => {
-        const description = faker.random.words()
+        const description = faker.lorem.words()
 
         renderWithProps({ description })
 
@@ -110,7 +110,7 @@ describe('FileUploader', () => {
 
     describe('hint', () => {
       it('should render hint', () => {
-        const hint = faker.random.words()
+        const hint = faker.lorem.words()
 
         renderWithProps({ hint })
 
@@ -120,7 +120,7 @@ describe('FileUploader', () => {
 
     describe('label', () => {
       it('should render label', () => {
-        const label = faker.random.words()
+        const label = faker.lorem.words()
 
         renderWithProps({ label })
 
@@ -182,7 +182,7 @@ describe('FileUploader', () => {
       describe('when files should be rejected', () => {
         it('should not fire', () => {
           const onAccepted = jest.fn()
-          const maxSizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 })
+          const maxSizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 })
           const files = buildFiles(3, { size: maxSizeInBytes + 1 })
 
           renderWithProps({ maxSizeInBytes, onAccepted })
@@ -221,7 +221,7 @@ describe('FileUploader', () => {
 
       it('should include both accepted and rejected files in callback ', () => {
         const onChange = jest.fn()
-        const maxSizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 })
+        const maxSizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 })
         const acceptedFiles = buildFiles(3, { size: maxSizeInBytes - 1 })
         const rejectedFiles = buildFiles(3, { size: maxSizeInBytes + 1 })
         const expected = [...acceptedFiles, ...rejectedFiles]
@@ -276,7 +276,7 @@ describe('FileUploader', () => {
       describe('when files should be accepted', () => {
         it('should not fire', () => {
           const onRejected = jest.fn()
-          const maxSizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 })
+          const maxSizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 })
           const files = buildFiles(3, { size: maxSizeInBytes - 1 })
 
           renderWithProps({ maxSizeInBytes, onRejected })
@@ -291,7 +291,7 @@ describe('FileUploader', () => {
       describe('when files should be rejected', () => {
         it('should fire on drop', () => {
           const onRejected = jest.fn()
-          const maxSizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 })
+          const maxSizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 })
           const files = buildFiles(3, { size: maxSizeInBytes + 1 })
           const expected = expect.arrayContaining(files.map(file => expect.objectContaining({ file })))
 
@@ -304,7 +304,7 @@ describe('FileUploader', () => {
 
         it('should fire when file input receives files', () => {
           const onRejected = jest.fn()
-          const maxSizeInBytes = faker.datatype.number({ min: 1024, max: 10 * 1024 })
+          const maxSizeInBytes = faker.number.int({ min: 1024, max: 10 * 1024 })
           const files = buildFiles(3, { size: maxSizeInBytes + 1 })
           const expected = expect.arrayContaining(files.map(file => expect.objectContaining({ file })))
 
@@ -331,7 +331,7 @@ describe('FileUploader', () => {
 
     describe('validationMessage', () => {
       it('should render validationMessage', () => {
-        const validationMessage = faker.random.words()
+        const validationMessage = faker.lorem.words()
 
         renderWithProps({ validationMessage })
 
@@ -339,7 +339,7 @@ describe('FileUploader', () => {
       })
 
       it('should not render validationMessage when dragging invalid number of files', () => {
-        const validationMessage = faker.random.words()
+        const validationMessage = faker.lorem.words()
         const maxFiles = 2
 
         const { rerender } = renderWithProps({ maxFiles, validationMessage })

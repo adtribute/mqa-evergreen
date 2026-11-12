@@ -39,7 +39,7 @@ describe('Textarea', () => {
   })
 
   it('Should render with placeholder when placeholder provided', () => {
-    const expected = faker.random.alphaNumeric()
+    const expected = faker.string.alphanumeric()
     const { container } = render(makeTextareaFixture({ placeholder: expected }))
 
     const textarea = container.querySelector('textarea')
@@ -71,7 +71,7 @@ describe('Textarea', () => {
   })
 
   it('Should pass through `width` prop to textarea', () => {
-    const expected = faker.datatype.number({ min: 10, max: 100 })
+    const expected = faker.number.int({ min: 10, max: 100 })
     const { container } = render(makeTextareaFixture({ width: expected }))
 
     const textarea = container.querySelector('textarea')
@@ -79,7 +79,7 @@ describe('Textarea', () => {
   })
 
   it('Should pass through `height` prop to textarea', () => {
-    const expected = faker.datatype.number({ min: 10, max: 100 })
+    const expected = faker.number.int({ min: 10, max: 100 })
     const { container } = render(makeTextareaFixture({ height: expected }))
 
     const textarea = container.querySelector('textarea')

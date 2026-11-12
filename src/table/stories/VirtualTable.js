@@ -20,16 +20,16 @@ faker.seed(1000)
 const users = range(1000)
   .map((user, index) => ({
     id: index,
-    name: faker.name.findName(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
-    height: faker.random.arrayElement([32, 40, 56, 'auto'])
+    height: faker.helpers.arrayElement([32, 40, 56, 'auto'])
   }))
   .map(item => {
     // When height is auto, use a variable length piece of content to render.
     if (item.height === 'auto') {
       return {
         ...item,
-        content: faker.random.arrayElement(randomLengthContent)
+        content: faker.helpers.arrayElement(randomLengthContent)
       }
     }
 
