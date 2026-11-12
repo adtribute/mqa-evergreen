@@ -164,6 +164,7 @@
     "yarnhook": "^0.5.1"
   },
   "resolutions": {
+    "**/react-syntax-highlighter/**/prismjs": "^1.30.0",
     "@types/react": "^18.3.0",
     "ansi-regex": "5.0.1",
     "**/react-dev-utils/immer": "^9.0.21",
