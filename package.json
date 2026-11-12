@@ -163,6 +163,10 @@
     "yarnhook": "^0.5.1"
   },
   "resolutions": {
+    "**/webpack/micromatch": "file:tools/webpack-micromatch",
+    "micromatch": "4.0.8",
+    "chokidar": "3.6.0",
+    "@nicolo-ribaudo/chokidar-2": "npm:chokidar@3.6.0",
     "**/react-syntax-highlighter/**/prismjs": "^1.30.0",
     "@types/react": "^18.3.0",
     "ansi-regex": "5.0.1",

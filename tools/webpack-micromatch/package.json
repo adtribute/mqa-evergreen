@@ -1,0 +1,10 @@
+{
+  "name": "@maestroqa/webpack-micromatch",
+  "version": "1.0.1",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "micromatch-v4": "npm:micromatch@4.0.8",
+    "is-glob": "4.0.3"
+  }
+}
