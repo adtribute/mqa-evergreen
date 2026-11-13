@@ -186,7 +186,8 @@
     "flatted": "3.4.4",
     "markdown-to-jsx": "7.4.0",
     "telejson": "6.0.8",
-    "**/external-editor/tmp": "^0.2.7"
+    "**/external-editor/tmp": "^0.2.7",
+    "@babel/core": "7.29.6"
   },
   "prettier": {
     "semi": false,
